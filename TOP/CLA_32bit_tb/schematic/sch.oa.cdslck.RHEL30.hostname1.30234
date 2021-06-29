@@ -1,0 +1,16 @@
+#
+# Edit Lock-Stake file. CAUTION: Please do not change.
+#
+# Information about current Edit Lock Owner.
+#
+LockStakeVersion               1.1
+LoginName                      root
+HostName                       hostname1
+ProcessIdentifier              30234
+ProcessCreationTime_UTC        1435061092
+ProcessCreationTime_Readable   Tue 23 Jun 2015 07:04:52 PM ICT ICT
+AppIdentifier                  OA File System Design Manager
+OSType                         unix
+ReasonForPlacingEditLock       OpenAccess edit lock
+FilePathUsedToEditLock         /root/Desktop/FinalVLSI/TOP/CLA_32bit_tb/schematic/sch.oa.cdslck
+TimeEditLocked                 Tue 23 Jun 2015 07:04:56 PM ICT ICT
