@@ -1,0 +1,16 @@
+<config.xml version="1" >
+    <top_cell_view>
+        <lib>logic_lib</lib>
+        <cell>and_tb</cell>
+        <view>schematic</view>
+    </top_cell_view>
+    <stop_list>symbol</stop_list>
+    <view_search_list>schematic hspice symbol</view_search_list>
+    <view_name_groups/>
+    <library_search_list></library_search_list>
+    <lib_open_list></lib_open_list>
+    <cell_open_list></cell_open_list>
+    <property_binding_name></property_binding_name>
+    <ignore_name_list>nlAction</ignore_name_list>
+    <remove_name_list></remove_name_list>
+</config.xml>
