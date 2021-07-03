@@ -13,4 +13,11 @@
     <property_binding_name></property_binding_name>
     <ignore_name_list>nlAction</ignore_name_list>
     <remove_name_list></remove_name_list>
+    <instance_data>
+        <lib>logic_lib</lib>
+        <cell>and_tb</cell>
+        <view>schematic</view>
+        <instance_type>I0</instance_type>
+        <selection_rule_type>starrc</selection_rule_type>
+    </instance_data>
 </config.xml>
