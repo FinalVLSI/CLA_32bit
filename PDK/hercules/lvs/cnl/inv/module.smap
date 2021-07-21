@@ -1,0 +1,33 @@
+<module name="vsl: inv inv schematic vl: auCdl schematic symbol" >
+<scope name="Instance" >
+<forward>
+<mapping src="M0" dst="MM0" />
+<mapping src="M1" dst="MM1" />
+</forward>
+<reverse>
+<mapping src="MM0" dst="M0" />
+<mapping src="MM1" dst="M1" />
+</reverse>
+</scope>
+<scope name="Net" >
+<forward/>
+<reverse/>
+</scope>
+<scope name="Terminal" >
+<forward>
+<mapping src="&lt;termOrder>" dst="in out" />
+<mapping src="&lt;unmappedTermOrder>" dst="in out" />
+</forward>
+<reverse>
+<mapping src="in out" dst="&lt;unmappedTermOrder>" />
+</reverse>
+</scope>
+<master_instances>
+<instance_header master="n_4t" >
+<instance name="M1" />
+</instance_header>
+<instance_header master="p_4t" >
+<instance name="M0" />
+</instance_header>
+</master_instances>
+</module>

@@ -1,0 +1,2800 @@
+/*##############################################################################
+# Copyright (c), 2009-2010 Synopsys, Inc. All rights reserved.
+# This LVS deck and the associated documentation are confidential 
+# and proprietary to Synopsys, Inc. 
+# 
+#
+# DISCLAIMER
+# The information contained herein is provided by Synopsys, Inc. on 
+# an "AS IS" basis without any warranty, and Synopsys has no obligation 
+# to support or otherwise maintain the information.
+#
+# Synopsys, Inc. disclaims any representation that the information 
+# does not infringe any intellectual property rights or proprietary
+# rights of any third parties. There are no other warranties given by
+# Synopsys, whether express, implied or statutory, including, without
+# limitation, implied warranties of merchantability and fitness for a
+# particular purpose.
+#
+# Synopsys, Inc. reserves the right to make changes to the information 
+# at any time and without notice.
+#
+###############################################################################
+#	23 March 09 - Added Initial Version.
+#
+#
+###############################################################################
+
+
+###############################################################################
+#
+# Synopsys 90 nm Demo LVS runset
+# This is for a fictional process and just shows how things can be done 
+# Synopsys accepts no responsibility for any use of this runset. 
+#
+###############################################################################
+#
+# VARIABLE SETTING
+#
+# Only 2 numbers can be set, other numbers are not allowed.
+# 
+# RES_3TERM is a variable set only when resistor 3 terminals are used
+# When set to '0' run will not be for 3 terminal resistors.
+#
+##############################################################################*/
+
+ENVIRONMENT DOUBLE RES_3TERM defaults to 0;
+ENVIRONMENT DOUBLE CAP_3TERM defaults to 0;
+ENVIRONMENT DOUBLE DRAWCBM defaults to 1;
+
+/* # DRAWCBM = 1 if CBM is present else set to 0 */
+/* Set CBM = 1 , for generic90RF */
+
+
+
+HEADER {
+	FORMAT = OPENACCESS
+	OUTPUT_FORMAT = GDSII
+	INLIB = QA
+	OUTLIB = EV_OUT
+	BLOCK = QA
+	SCHEMATIC = test.spi
+	SCHEMATIC_FORMAT = spice
+}
+
+
+OPTIONS {
+	IGNORE_CASE = FALSE
+	RESOLUTION = 0.001
+	NETTRAN_OPTIONS = "-sp /remote/dept-seg-cae2/FTK/agarwals/PERFORCE/IPL/reference/90nm/hercules/lvs/empty.subckt -cdl-a -cdl-p -mprop -slash"
+	NET_PREFIX = N_
+	GDSIN_OPTIONS = "-nl -b"
+	LAYOUT_POWER  = { VDD VCC }
+	LAYOUT_GROUND = { GND VSS }
+	SCHEMATIC_POWER  = { VDD VCC }
+	SCHEMATIC_GROUND = { GND VSS }
+	CREATE_VUE_OUTPUT = TRUE
+}
+
+
+TEXT_OPTIONS {
+	USE_COLON_TEXT = TRUE
+	TRUNCATE_FLAG = FALSE
+	REMOVE_TEXT_FROM_SHORT = TRUE
+	USE_EXPLODED_TEXT = TRUE
+	CONNECT_BY_NAME = MIXED_MODE
+	ATTACH_TEXT = ALL
+}
+
+OPENACCESS_OPTIONS {
+        LIBRARY_MAPPING_FILE = ./lib.defs
+        LAYER_MAPPING_FILE =  /remote/dept-seg-cae2/FTK/agarwals/PERFORCE/IPL/reference/90nm/techfiles/reference90RF_layer.map
+}
+
+ASSIGN {
+	NWELL		(1)               /* Nwell layer */
+	DIFN		(2)               /* Diffusion : Active layer */
+	POLS 		(3)     text(41;0)  /* polysilicon layer */
+	POLYPIN         (41;0)  
+	PPS 		(4)               /* P+ implant layer */
+	NPS		(5)               /* N+ implant layer */
+	SAB		(6)               /* Silicide blockage layer */
+	CONTS		(7)               /* polysilicon and diffusion to metal contact */
+
+	M1S		(8)     text(9;0)    /* Metal 1 */
+        M1PIN           (9;0)
+	M2S		(10)    text(11;0)  /* Metal 2 */
+	M2PIN           (11;0)   
+	M3S		(12)    text(13;0)  /* Metal 3 */
+	M3PIN           (13;0)  
+	M4S		(14)    text(15;0)  /* Metal 4 */
+	M4PIN           (15;0) 
+	V1S		(16)              /* Via 1 */
+	V2S		(17)              /* Via 2 */
+	V3S		(18)              /* Via 3 */
+	CAP_MIMS	(20)              /* Capacitor top plate */
+	CBM		(21)		  /* Capacitor Bottom Plate */ 
+        DNWELL          (22)              /* Deep nwell */
+	NWDMY		(23)              /* Nwell resistor marking layer */
+	RMARKER		(28)              /* Resistor marking layer */
+	DIODE		(25)              /* Diode marking layer */
+	NAT		(26)              /* Native devices layer */
+	DIFF25		(27)              /* 2.5V thick gate oxide layer */
+        HRPOLY          (29)              /* high resistance implantation layer*/
+        DUM_INDS	(30)              /* inductor marking layer */
+	VARMARKER       (31)              /* Varactor marking layer */
+	RMDMY           (32)              /* Metal Resistor Marking Layer */
+        BJTDMY          (49)              /* BJT Marker Layer */
+        M1SLOT          (8;1)             /* Metal1 Slot */
+        DIFF18          (35)              /* Diff 18*/
+        DIFF33          (36)              /* Diff 33*/
+	LOWVTN		(37)		  /* LowVTN */
+	HIGHVTN		(39)		  /* HighVTN */
+	MEDVTN		(33)		  /* Medium VTN */
+	LOWVTP		(38)		  /* LowVTP */
+	HIGHVTP		(40)		  /* HighVTP */
+	MEDVTP		(34)		  /* Medium VTP */
+	MOMDMY1  	(68;1)		  /* dummy layer for MOM metal1 covered. */
+	MOMDMY2  	(68;2)		  /* dummy layer for MOM metal2 covered. */
+	MOMDMY3  	(68;3)		  /* dummy layer for MOM metal3 covered. */
+	MOMDMY4  	(68;4)		  /* dummy layer for MOM metal4 covered. */
+        RFDMY		(69)		  /* RF Dummy */
+	PINDMY		(65)
+	RTERMARKER	(66)          	  /* Terminal Marker for Serp Resistors */
+
+	M5S		(70)    text(70;0)  /* Metal 4 */
+	M5PIN           (71;0) 
+
+	M6S		(72)    text(18;0)  /* Metal 4 */
+	M6PIN           (73;0) 
+
+	M7S		(74)    text(20;0)  /* Metal 4 */
+	M7PIN           (75;0) 
+
+	M8S		(76)    text(22;0)  /* Metal 4 */
+	M8PIN           (77;0) 
+
+	M9S		(78)    text(24;0)  /* Metal 4 */
+	M9PIN           (79;0) 
+
+	V4S		(80)              /* Via 4 */
+	V5S		(81)              /* Via 5 */
+	V6S		(82)              /* Via 6 */
+	V7S		(83)              /* Via 7 */
+	V8S		(84)              /* Via 8 */
+
+}
+
+
+COPY M9S	TEMP = top_met
+COPY V8S	TEMP = top_via_poss
+BOOLEAN CAP_MIMS AND top_via_poss TEMP = cap_top_via
+BOOLEAN V8S NOT cap_top_via TEMP = top_via 
+
+COPY V7S	TEMP = sec_top_via
+COPY V6S	TEMP = third_top_via
+COPY V5S	TEMP = fourth_top_via
+COPY V4S	TEMP = fifth_top_via
+COPY V3S	TEMP = sixth_top_via
+COPY V2S	TEMP = seventh_top_via
+
+COPY M8S	TEMP = sec_top_met
+COPY M7S	TEMP = third_top_met
+COPY M6S	TEMP = fourth_top_met
+COPY M5S	TEMP = fifth_top_met
+COPY M4S	TEMP = sixth_top_met
+COPY M3S	TEMP = seventh_top_met
+COPY M2S	TEMP = eighth_top_met
+
+COPY M1S	TEMP = metal1
+COPY M2S        TEMP = metal2
+COPY M3S        TEMP = metal3
+COPY M4S        TEMP = metal4
+COPY M5S        TEMP = metal5
+COPY M6S        TEMP = metal6
+COPY M7S        TEMP = metal7
+COPY M8S        TEMP = metal8
+COPY M9S        TEMP = metal9
+
+
+CELL_EXTENT { CELL_LIST = { * } } temp=BULK
+
+BOOLEAN POLS AND RMARKER { } temp=rpolywo1
+SELECT rpolywo1 INTERACT SAB { } temp=rpolywo2
+SELECT RMARKER INTERACT DIFN { } temp=drdum
+BOOLEAN RMARKER NOT drdum { } temp=rp1
+SELECT rp1 INTERACT POLS { } temp=p1rdum /* poly1 resistor dummy */
+SELECT rpolywo2 INTERACT p1rdum { } temp=rpolywo
+BOOLEAN POLS NOT rpolywo { } temp=poly1
+BOOLEAN POLS AND p1rdum { } temp=rpoly1
+SELECT rpoly1 INTERACT SAB { } temp=TT1
+BOOLEAN rpoly1 NOT TT1	{ } temp=rpoly
+BOOLEAN poly1 NOT rpoly { } temp=poly /* POLY interconnect */
+BOOLEAN DIFN AND RMARKER { } temp=rodwo1
+BOOLEAN rodwo1 AND SAB { } temp=rodwo2
+SELECT RMARKER INTERACT DIFN { } temp=drdum /* diff resistor dummy */
+SELECT rodwo2 INTERACT drdum { } temp=rodwo
+BOOLEAN DIFN NOT rodwo { } temp=mdiff1
+BOOLEAN DIFN AND drdum { } temp=rod1
+SELECT rod1 INTERACT SAB { } temp=TT2
+BOOLEAN rod1 NOT TT2	{ } temp=rod
+BOOLEAN mdiff1 NOT rod { } temp=mdiff
+BOOLEAN poly AND mdiff { } temp=gate
+BOOLEAN NWELL NOT NWDMY { } temp=nxwell /* define N_well region */
+BOOLEAN gate NOT nxwell { } temp=gatennw /* gate not inside nwell */
+BOOLEAN gatennw AND NPS { } temp=ngate
+BOOLEAN poly NOT gate {} temp = poly
+BOOLEAN mdiff AND NPS { } temp=nthin /* define N+ thin oxide */
+BOOLEAN nthin NOT gate { } temp=tndiff /* define N+ diffusion region */
+
+BUILDSUB NWELL { } temp=psub /* define total p_sub region */
+
+BOOLEAN gate AND nxwell { } temp=gatenw /* gate inside nwell */
+BOOLEAN gatenw AND PPS { } temp=pgate
+BOOLEAN mdiff AND PPS { } temp=pthin /* define P+ thin oxide */
+BOOLEAN pthin NOT gate { } temp=tpdiff /* define P+ diffusion region */
+
+BOOLEAN ngate AND DIFF25 AND NAT NOT VARMARKER { } temp = natgate25
+BOOLEAN ngate AND DIFF18 AND NAT NOT VARMARKER { } temp = natgate18
+BOOLEAN ngate AND DIFF33 AND NAT NOT VARMARKER { } temp = natgate33
+BOOLEAN ngate AND DIFF25 NOT NAT NOT VARMARKER NOT DNWELL NOT MEDVTN { } temp = ngate25
+BOOLEAN ngate AND DIFF18 NOT NAT NOT VARMARKER NOT DNWELL { } temp = ngate18
+BOOLEAN ngate AND DIFF33 NOT NAT NOT VARMARKER NOT DNWELL { } temp = ngate33
+BOOLEAN ngate AND NAT NOT DIFF25 NOT DIFF18 NOT DIFF33 NOT VARMARKER  { } temp = natgate
+BOOLEAN ngate AND DNWELL AND DIFF25 { } temp = ngate_dnwell25
+BOOLEAN ngate AND DIFF25 AND MEDVTN { } temp = mngate25
+BOOLEAN ngate NOT NAT NOT DIFF25 NOT VARMARKER { } temp = ngate
+BOOLEAN ngate AND LOWVTN { } temp = lngate
+BOOLEAN ngate AND HIGHVTN { } temp = hngate
+BOOLEAN ngate AND MEDVTN NOT DIFF25 { } temp = mngate
+BOOLEAN ngate AND DNWELL { } TEMP = ngate_dnwell
+
+SELECT tndiff INTERACT ngate_dnwell { } TEMP = tndiff_dnwell
+BOOLEAN tndiff_dnwell NOT gate { } TEMP = tndiff_dnwell
+SELECT tndiff INTERACT ngate_dnwell25 { } TEMP = tndiff_dnwell25
+BOOLEAN tndiff_dnwell25 NOT gate { } TEMP = tndiff_dnwell25
+
+BOOLEAN (tndiff NOT tndiff_dnwell) NOT tndiff_dnwell25 { } TEMP = tndiff
+BOOLEAN (tndiff NOT tndiff_dnwell) NOT tndiff_dnwell25 AND DIFF18{ } TEMP = tndiff18
+BOOLEAN (tndiff NOT tndiff_dnwell) NOT tndiff_dnwell25 AND DIFF33{ } TEMP = tndiff33
+
+
+BOOLEAN ngate NOT DNWELL NOT DIFF18 NOT DIFF33 NOT LOWVTN NOT HIGHVTN NOT MEDVTN { } TEMP = ngate
+
+BOOLEAN tpdiff AND DNWELL { } TEMP = tpdiff_dnwell
+BOOLEAN tpdiff NOT DNWELL { } TEMP = tpdiff
+BOOLEAN pgate AND LOWVTP { } temp = lpgate
+BOOLEAN pgate AND MEDVTP { } temp = mpgate
+BOOLEAN pgate AND HIGHVTP { } temp = hpgate
+BOOLEAN pgate AND DIFF33 NOT VARMARKER NOT DIFF18 NOT DIFF25 { } temp = pgate33
+BOOLEAN pgate AND DIFF18 NOT VARMARKER NOT DIFF33 NOT DIFF25 { } temp = pgate18
+BOOLEAN pgate AND DIFF25 NOT VARMARKER NOT DIFF33 NOT DIFF18 { } temp = pgate25
+BOOLEAN pgate NOT DIFF25 NOT VARMARKER NOT DIFF33 NOT DIFF18 NOT lpgate NOT hpgate NOT mpgate { } temp = pgate
+
+
+BOOLEAN (DIFN AND SAB) AND NPS AND RMARKER { } temp =rdiff_res
+BOOLEAN (DIFN NOT SAB) AND NPS AND RMARKER { } temp =rdiff_res_nS
+
+BOOLEAN NWDMY AND NWELL { } temp=trwell /* N-well resistor layer */
+BOOLEAN DIFN AND SAB { } temp=drpo
+BOOLEAN trwell AND drpo { } temp=nwdiff_r /* NWDMY*NWELL*RPO*diff --> nwdiff */
+BOOLEAN trwell NOT drpo { } temp=nwsti_r /* NWDMY*NWELL-RPO-diff --> nwsti */
+BOOLEAN rpolywo AND PPS { } temp=rppolywo_r_ /* P+POLY resistor w/o silicide */
+BOOLEAN rppolywo_r_ AND SAB { } temp=rppolywo_r  /* P+POLY resistor w/o silicide */
+
+
+BOOLEAN rpolywo AND NPS { } temp=rnpolywo_r_ /* N+POLY resistor w/o silicide */
+BOOLEAN rnpolywo_r_ AND SAB { } temp=rnpolywo_r /* N+POLY resistor w/o silicide */
+SELECT DIFN INTERACT RMARKER { } temp=pos_resdiff
+BOOLEAN pos_resdiff NOT SAB AND NPS { } temp=resndiff
+
+BOOLEAN pos_resdiff AND NPS NOT RMARKER NOT SAB { } temp=resndiff_nS
+
+BOOLEAN DIFN NOT POLS { } temp=tiod1
+BOOLEAN tiod1 NOT SAB { } temp=tiod2
+BOOLEAN tiod2 NOT (RMARKER OR BJTDMY ){ } temp=tiod3
+BOOLEAN tiod3 NOT NWDMY { } temp=tiod4
+BOOLEAN tiod4 NOT VARMARKER { } temp=tiod /* RPO, RMARKER, NWDMY cut ti-od */
+BOOLEAN tiod AND NPS { } temp=nodcon
+BOOLEAN tiod AND PPS { } temp=podcon
+BOOLEAN podcon AND psub { } temp = subtie
+BOOLEAN DIFN AND RMARKER AND PPS { } TEMP = rpdiff_nS
+BOOLEAN rpdiff_nS AND SAB { } TEMP = rpdiff
+
+
+/* RTMOM */
+BOOLEAN M1S AND MOMDMY1 {} TEMP=MOM_field1
+BOOLEAN M2S AND MOMDMY2 {} TEMP=MOM_field2
+BOOLEAN M3S AND MOMDMY3 {} TEMP=MOM_field3
+BOOLEAN M4S AND MOMDMY4 {} TEMP=MOM_field4
+
+
+SELECT MOMDMY1 INTERACT MOM_field1 {} temp=mom1
+SELECT mom1 INTERACT MOM_field2 {} temp=mom12
+SELECT mom12 INTERACT MOM_field3 {} temp=mom_cap_123_ 
+SELECT mom_cap_123_ OUTSIDE MOM_field4 {LINE_TOUCH=FALSE POINT_TOUCH=FALSE} temp=mom_cap_123_body  
+
+SELECT mom_cap_123_ INTERACT MOM_field4 {} temp=mom_cap_1234_body
+				
+SELECT MOMDMY2 INTERACT MOM_field2 {} TEMP = mom2
+SELECT mom2 INTERACT MOM_field3 {} temp=mom23
+SELECT mom23 INTERACT MOM_field4 {} temp=mom_cap_234_
+SELECT mom_cap_234_ OUTSIDE MOM_field1 {LINE_TOUCH=FALSE POINT_TOUCH=FALSE} temp=mom_cap_234_body  
+
+BOOLEAN M4S NOT mom_cap_1234_body TEMP = mom_cap_1234_term_
+SELECT mom_cap_1234_term_ INTERACT mom_cap_1234_body TEMP =  mom_cap_1234_term
+
+BOOLEAN M3S NOT mom_cap_123_body TEMP = mom_cap_123_term_
+SELECT mom_cap_123_term_ INTERACT mom_cap_123_body TEMP = mom_cap_123_term
+
+SELECT mom_cap_1234_term_ INTERACT mom_cap_234_body TEMP =  mom_cap_234_term
+
+EXTERNAL MOM_field1 {
+	SPACING < 0.41
+	PARALLEL_POINT_PROJECTION=FALSE
+	SET_CORNERS_TO_SPACING=FALSE
+} TEMP=F_reg1
+
+EXTERNAL MOM_field2 {
+	SPACING < 0.41
+	PARALLEL_POINT_PROJECTION=FALSE
+	SET_CORNERS_TO_SPACING=FALSE
+} TEMP=F_reg2
+
+
+
+/*BOOLEAN rpdiff_nS NOT SAB { } TEMP = rpdiff_nS*/
+SELECT rpdiff_nS OUTSIDE SAB { } TEMP = rpdiff_nS
+
+SELECT DIFN INTERACT rpdiff { } TEMP = OD_rpdiff
+BOOLEAN OD_rpdiff NOT rpdiff TEMP = rpdiff_term
+
+SELECT DIFN INTERACT rpdiff_nS { } TEMP = OD_rpdiff_nS
+BOOLEAN OD_rpdiff_nS NOT rpdiff_nS TEMP = rpdiff_term_nS
+
+
+BOOLEAN (subtie NOT rpdiff_term) NOT rpdiff_term_nS { } TEMP = subtie
+
+BOOLEAN POLS AND SAB AND HRPOLY TEMP = hrpoly_res
+SELECT hrpoly_res INTERACT NPS TEMP = hrpoly_t
+BOOLEAN hrpoly_t NOT NPS TEMP = hrpoly
+
+SELECT hrpoly_res INTERACT PPS TEMP = hrppoly_t
+BOOLEAN hrppoly_t NOT PPS TEMP = hrppoly
+SELECT POLS INTERACT hrpoly TEMP = PO_hrpoly_res
+BOOLEAN PO_hrpoly_res NOT hrpoly TEMP = hrpoly_term_NP
+SELECT POLS INTERACT hrppoly TEMP = PO_hrppoly_res
+BOOLEAN PO_hrppoly_res NOT hrppoly TEMP = hrpoly_term_PP
+
+
+
+
+/**** Diode ********/
+
+SELECT NWELL INTERACT DNWELL TEMP = nwell_dnw
+SELECT nwell_dnw INSIDE_HOLE { INNER_HOLE_ONLY } TEMP = nwell_dnw_hole
+BOOLEAN tpdiff AND NWELL{ } temp = pactive
+SELECT pactive OUTSIDE POLS { LINE_TOUCH=FALSE POINT_TOUCH=FALSE } temp = pdiod
+BOOLEAN DIFF18 OR DIFF25 OR DIFF33 { } temp = hvdiff 
+BOOLEAN HIGHVTN OR LOWVTN OR HIGHVTP OR LOWVTP { } temp = vtLay
+
+BOOLEAN pdiod AND DIODE NOT hvdiff  NOT vtLay NOT NAT { } temp = pdiode
+BOOLEAN pdiod AND RFDMY NOT hvdiff NOT vtLay NOT NAT { } temp = pvardio
+
+
+BOOLEAN pdiod AND DIODE AND LOWVTP NOT hvdiff NOT NAT { } temp = pdio_lvt
+BOOLEAN pdiod AND DIODE AND HIGHVTP NOT hvdiff NOT NAT { } temp = pdio_hvt
+
+BOOLEAN tndiff AND psub { } temp = nactive
+SELECT nactive OUTSIDE POLS { LINE_TOUCH=FALSE POINT_TOUCH=FALSE } temp = ndiod
+BOOLEAN ndiod AND DIODE NOT NWELL NOT hvdiff NOT vtLay NOT nwell_dnw_hole  NOT NAT { } temp = ndiode
+BOOLEAN ndiod AND DIODE AND NAT NOT NWELL NOT hvdiff NOT vtLay NOT nwell_dnw_hole { } temp = ndio_na_dio
+
+BOOLEAN ndiod AND DIODE AND LOWVTN NOT NWELL NOT hvdiff NOT nwell_dnw_hole  NOT NAT { } temp = ndio_lvt
+BOOLEAN ndiod AND DIODE AND HIGHVTN NOT NWELL NOT hvdiff NOT nwell_dnw_hole  NOT NAT { } temp = ndio_hvt
+
+BOOLEAN tpdiff AND DIFF18 AND DIODE NOT vtLay NOT NAT temp = pn18v_dio
+BOOLEAN tpdiff AND DIFF25 AND DIODE NOT vtLay NOT NAT temp = pn25v_dio
+BOOLEAN tpdiff AND DIFF33 AND DIODE NOT vtLay NOT NAT temp = pn33v_dio
+BOOLEAN tndiff AND DIFF18 AND DIODE NOT vtLay NOT NAT NOT NWELL temp = np18v_dio
+BOOLEAN tndiff AND DIFF25 AND DIODE NOT vtLay NOT NAT NOT NWELL temp = np25v_dio
+BOOLEAN tndiff AND DIFF33 AND DIODE NOT vtLay NOT NAT NOT NWELL temp = np33v_dio
+
+BOOLEAN tndiff AND DIFF18 AND DIODE AND NAT NOT vtLay NOT NWELL temp = ndio_na18v_dio
+BOOLEAN tndiff AND DIFF25 AND DIODE AND NAT NOT vtLay NOT NWELL temp = ndio_na25v_dio
+BOOLEAN tndiff AND DIFF33 AND DIODE AND NAT NOT vtLay NOT NWELL temp = ndio_na33v_dio
+
+SELECT DIODE OUTSIDE tpdiff { } temp = dionw
+BOOLEAN NWELL AND dionw NOT hvdiff NOT nwell_dnw temp = nwdiode_dio
+BOOLEAN NWELL AND dionw AND DIFF18 NOT nwell_dnw temp = nwdiode18_dio
+BOOLEAN NWELL AND dionw AND DIFF25 NOT nwell_dnw temp = nwdiode25_dio
+BOOLEAN NWELL AND dionw AND DIFF33 NOT nwell_dnw temp = nwdiode33_dio
+
+BOOLEAN nodcon AND NWELL { } temp = welltie
+
+/************* Deep Nwell Diode Data Creation **********/
+BOOLEAN nwell_dnw_hole AND DIODE { } TEMP = dnwdiode_pwell
+SELECT DNWELL ENCLOSING dnwdiode_pwell TEMP = dnwdiode_pwell1
+
+SELECT nwell_dnw INTERACT DIODE { } TEMP = dnwdiode_nwell
+
+
+/************* Deep Nwell BJT Data Creation **********/
+BOOLEAN nwell_dnw_hole NOT dnwdiode_pwell { } TEMP = emit_dnw_pnp
+BOOLEAN nwell_dnw NOT dnwdiode_nwell { } TEMP = base_dnw_pnp_poss
+BOOLEAN base_dnw_pnp_poss OR emit_dnw_pnp { } TEMP = base_dnw_pnp
+SIZE base_dnw_pnp { OVERSIZE = 0.1 } TEMP = coll_dnw_pnp
+
+BOOLEAN base_dnw_pnp AND CONTS NOT emit_dnw_pnp TEMP = base_dnw_pnp_cont
+BOOLEAN emit_dnw_pnp AND CONTS AND PPS TEMP = emit_dnw_pnp_cont
+
+/**** Capacitor ********/
+
+IF (DRAWCBM == 0) {
+BOOLEAN CAP_MIMS AND M8S {} TEMP=RCTM
+} ELSE {
+BOOLEAN CAP_MIMS AND CBM {} TEMP=RCTM
+}
+BOOLEAN RCTM AND V8S {} TEMP=CTM_VIA
+
+BOOLEAN sec_top_met and RCTM { } temp = m8cap
+BOOLEAN sec_top_met not m8cap { } temp = sec_top_met
+BOOLEAN CAP_MIMS AND M8S {} TEMP=mim_top_2
+SELECT mim_top2 INTERACT V7S {} TEMP=RCTM_2
+BOOLEAN M1S OR M2S {} TEMP=shield_
+SELECT shield_ INTERACT RCTM { } TEMP = shield
+BOOLEAN shield OR PINDMY {} TEMP=pinshield  
+SELECT CBM INTERACT RCTM {} TEMP=RCBM
+BOOLEAN RCBM NOT RCTM {} TEMP=OCBM
+BOOLEAN OCBM AND V8S {} TEMP=CBM_VIA
+
+/**** Inductor ********/
+SIZE DUM_INDS { UNDERSIZE =  44.95 } temp = inddmy_usize
+BOOLEAN DUM_INDS NOT inddmy_usize { } temp = ovlp_inddmy
+BOOLEAN sec_top_met AND ovlp_inddmy { } temp = met_ovlp_inddmy
+SELECT DUM_INDS INTERACT met_ovlp_inddmy { } temp = inddmy_std
+SELECT inddmy_usize INTERACT inddmy_std { } temp = ind_std_dmy
+BOOLEAN top_met AND ind_std_dmy { } temp = std_ind1
+SIZE std_ind1 { OVER_UNDER =  3 } temp = std_ind2
+SELECT std_ind2 INSIDE_HOLE {  } temp = std_hole
+SELECT std_ind1 INTERACT std_hole { } temp = std_ind4
+BOOLEAN std_ind1 NOT std_ind4 { } temp = ind_met
+BOOLEAN ind_met AND inddmy_usize { } temp = ind_met1
+SELECT ind_met INTERACT ind_met1 { } temp = std_ind5
+/* Body for standard inductor */
+BOOLEAN std_ind4 OR std_ind5 { } temp = ind_octagon
+
+SELECT inddmy_usize INTERACT ind_octagon	{ } temp = all_stdind_dumy
+/* Dummy for all symmetric inductors */
+BOOLEAN inddmy_usize NOT all_stdind_dumy	{ } temp = sym_all_dmy
+
+BOOLEAN sec_top_met AND DUM_INDS { } temp = indpin
+BOOLEAN top_met AND sym_all_dmy { } temp = sym_all_ind1
+BOOLEAN sym_all_ind1 OR indpin { } temp = sym_all_ind2
+SIZE sym_all_ind2 { OVER_UNDER =  5 } temp = sz_sym_ind
+SELECT sz_sym_ind INSIDE_HOLE {  } temp = sym_hole
+SELECT sz_sym_ind INTERACT sym_hole { } temp = sym_all_ind3
+/* body for all symmetric inductors */
+SELECT sym_all_ind2 INTERACT sym_all_ind3 { } temp = sym_all_ind
+
+BOOLEAN third_top_met AND sym_all_dmy	{ } temp = met_induc
+SELECT sym_all_dmy INTERACT met_induc	{ } temp = ind_ct_dmy 
+BOOLEAN sym_all_dmy NOT ind_ct_dmy	{ } temp = ind_sym_dmy 
+/* body for symmetric inductor without center tap */
+BOOLEAN sym_all_ind AND ind_sym_dmy	{ } temp = ind_oct_sym
+
+
+/* body for symmetric inductor with center tap */
+BOOLEAN sym_all_ind AND ind_ct_dmy	{ } temp = ind_oct_symct
+
+BOOLEAN sec_top_met AND ind_oct_symct	{ } temp = sec_top_metindct
+SELECT ind_oct_symct INSIDE_HOLE { } temp = ind_oct_symct_hole
+EXTERNAL ind_oct_symct { 
+	SPACING < 45
+	CHECK_SAME_POLYGON 
+	PARALLEL } temp = space_ind_symct1
+BOOLEAN space_ind_symct1 AND ind_oct_symct_hole { } temp = space_ind_symct
+SIZE ind_oct_symct { OVER_UNDER = 3 } temp = ind_oct_symct_ou
+SELECT ind_oct_symct_ou INSIDE_HOLE { EMPTY_HOLE_ONLY } temp = ind_oct_symct_radhole1
+/* To calculate radius using device command for 3  term device */
+SIZE ind_oct_symct_radhole1 { UNDER_OVER = 30 } temp = ind_oct_symct_radhole	
+
+/* all inductor body */
+BOOLEAN ind_octagon OR sym_all_ind 	{ } temp = induct_body
+
+/*********************************************************************************/
+
+BOOLEAN tndiff NOT DIFF25 AND VARMARKER {} TEMP = varndiff
+BOOLEAN tpdiff NOT DIFF25 AND VARMARKER {} TEMP = varpdiff
+BOOLEAN gate NOT DIFF25 AND NPS AND VARMARKER {} TEMP = varngate
+BOOLEAN gate NOT DIFF25 AND PPS AND VARMARKER {} TEMP = varpgate
+boolean poly and NPS and VARMARKER {} temp = varnpoly
+boolean poly and PPS and VARMARKER {} temp = varppoly
+boolean NWELL and NPS and VARMARKER {} temp = varnwell
+
+BOOLEAN tndiff AND DIFF25 AND VARMARKER {} TEMP = varndiff25
+BOOLEAN tpdiff AND DIFF25 AND VARMARKER {} TEMP = varpdiff25
+BOOLEAN gate AND DIFF25 AND NPS AND VARMARKER {} TEMP = varngate25
+BOOLEAN gate AND DIFF25 AND PPS AND VARMARKER {} TEMP = varpgate25
+
+/*********************************************************************************/
+
+SELECT nxwell INTERACT nwdiode_dio temp = nxwell_NWDIODE
+SELECT nxwell INTERACT nwdiode18_dio temp = nxwell_NWDIODE18
+SELECT nxwell INTERACT nwdiode25_dio temp = nxwell_NWDIODE25
+SELECT nxwell INTERACT nwdiode33_dio temp = nxwell_NWDIODE33
+BOOLEAN nxwell NOT nxwell_NWDIODE temp = nxwell
+
+/*********************************************************************************/
+
+SELECT DNWELL INTERACT ngate_dnwell { } TEMP = DNWELL_NDNW
+SELECT DNWELL INTERACT ngate_dnwell25 { } TEMP = DNWELL_NDNW_25
+SELECT nxwell INTERACT DNWELL { } TEMP = nxwell_DNWELL
+BOOLEAN nxwell NOT nxwell_DNWELL { } TEMP = nxwell
+
+/*********************************************************************************/
+SELECT resndiff INTERACT SAB TEMP = resndiff
+
+
+/************* Metal Resistors Data Creation ***********************************/
+
+BOOLEAN metal1 AND RMDMY { } TEMP = rm1_body
+SIZE rm1_body { OVERSIZE = 0.01 } TEMP = rm1_term_poss
+BOOLEAN rm1_term_poss AND metal1 NOT rm1_body  { } TEMP = rm1_term
+
+BOOLEAN metal2 AND RMDMY { } TEMP = rm2_body
+SIZE rm2_body { OVERSIZE = 0.01 } TEMP = rm2_term_poss
+BOOLEAN rm2_term_poss AND metal2 NOT rm2_body  { } TEMP = rm2_term
+
+BOOLEAN metal3 AND RMDMY { } TEMP = rm3_body
+SIZE rm3_body { OVERSIZE = 0.01 } TEMP = rm3_term_poss
+BOOLEAN rm3_term_poss AND metal3 NOT rm3_body { } TEMP = rm3_term
+
+BOOLEAN metal4 AND RMDMY { } TEMP = rm4_body
+SIZE rm4_body { OVERSIZE = 0.01 } TEMP = rm4_term_poss
+BOOLEAN rm4_term_poss AND metal4 NOT rm4_body { } TEMP = rm4_term
+
+BOOLEAN metal5 AND RMDMY { } TEMP = rm5_body
+SIZE rm5_body { OVERSIZE = 0.01 } TEMP = rm5_term_poss
+BOOLEAN rm5_term_poss AND metal5 NOT rm5_body { } TEMP = rm5_term
+
+BOOLEAN metal6 AND RMDMY { } TEMP = rm6_body
+SIZE rm6_body { OVERSIZE = 0.01 } TEMP = rm6_term_poss
+BOOLEAN rm6_term_poss AND metal6 NOT rm6_body { } TEMP = rm6_term
+
+BOOLEAN metal7 AND RMDMY { } TEMP = rm7_body
+SIZE rm7_body { OVERSIZE = 0.01 } TEMP = rm7_term_poss
+BOOLEAN rm7_term_poss AND metal7 NOT rm7_body { } TEMP = rm7_term
+
+BOOLEAN metal8 AND RMDMY { } TEMP = rm8_body
+SIZE rm8_body { OVERSIZE = 0.01 } TEMP = rm8_term_poss
+BOOLEAN rm8_term_poss AND metal8 NOT rm8_body { } TEMP = rm8_term
+
+BOOLEAN metal9 AND RMDMY { } TEMP = rm9_body
+SIZE rm9_body { OVERSIZE = 0.01 } TEMP = rm9_term_poss
+BOOLEAN rm9_term_poss AND metal9 NOT rm9_body { } TEMP = rm9_term
+
+
+
+
+
+
+/************* BJT Data Creation Section****************/
+/*Vertical PNP Derivation*/
+SELECT nxwell INSIDE_HOLE { INNER_HOLE_ONLY } TEMP = nwell_hole
+SELECT nxwell_DNWELL INSIDE_HOLE { INNER_HOLE_ONLY } TEMP = dnwell_hole
+SELECT SAB INSIDE_HOLE { INNER_HOLE_ONLY } TEMP = sab_hole
+
+BOOLEAN nwell_hole OR sab_hole {} TEMP = nwell_hole_sab
+
+SELECT BJTDMY INTERACT DIFN { } TEMP=T_E_M_P_4444
+SELECT T_E_M_P_4444 OUTSIDE sab_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=T_E_M_P_4
+
+BOOLEAN DIFN AND T_E_M_P_4 { } TEMP=DIFN_BIP
+BOOLEAN psub AND T_E_M_P_4 { } TEMP=ALL_BJT_COLL
+BOOLEAN psub NOT ALL_BJT_COLL TEMP = psub
+BOOLEAN NWELL AND BJTDMY { } TEMP=_T_E_M_P_43
+BOOLEAN _T_E_M_P_43 NOT DIFF25 { } TEMP=1_0V_BJT_BASE_poss
+BOOLEAN DIFN_BIP AND PPS { } TEMP=_T_E_M_P_44
+
+BOOLEAN ALL_BJT_COLL NOT DIFF25 { } TEMP=1_0V_BJT_COLL_poss
+SELECT 1_0V_BJT_COLL_poss OUTSIDE nwell_hole_sab { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=1_0V_BJT_COLL
+SELECT 1_0V_BJT_BASE_poss OUTSIDE nwell_hole_sab { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=1_0V_BJT_BASE
+BOOLEAN _T_E_M_P_44 AND 1_0V_BJT_BASE { } TEMP=1_0V_BJT_EMIT
+
+BOOLEAN nxwell AND BJTDMY { } TEMP=_T_E_M_P_45
+BOOLEAN _T_E_M_P_45 AND DIFF25 { } TEMP=2_5V_BJT_BASE_poss
+
+BOOLEAN ALL_BJT_COLL AND DIFF25 { } TEMP=2_5V_BJT_COLL_poss
+SELECT 2_5V_BJT_COLL_poss OUTSIDE nwell_hole_sab { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=2_5V_BJT_COLL
+SELECT 2_5V_BJT_BASE_poss OUTSIDE nwell_hole_sab { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=2_5V_BJT_BASE
+BOOLEAN _T_E_M_P_44 AND 2_5V_BJT_BASE { } TEMP=2_5V_BJT_EMIT
+/*Vertical NPN 1.8V*/
+BOOLEAN T_E_M_P_4 NOT DIFF25 { } TEMP=1_0V_BJT_COLL_NPN_poss
+SELECT 1_0V_BJT_COLL_NPN_poss INTERACT nwell_hole TEMP = 1_0V_BJT_COLL_NPN_poss1
+SELECT 1_0V_BJT_COLL_NPN_poss1 OUTSIDE sab_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=1_0V_BJT_COLL_NPN
+BOOLEAN 1_0V_BJT_COLL_NPN NOT DIFF25 NOT nxwell AND nwell_hole { } TEMP=1_0V_BJT_BASE_NPN
+BOOLEAN ((DIFN_BIP NOT DIFF25) AND NPS) NOT nxwell AND nwell_hole { } TEMP=1_0V_BJT_EMIT_NPN
+
+/*Vertical NPN 3.3V*/
+BOOLEAN T_E_M_P_4 AND DIFF25 { } TEMP=2_5V_BJT_COLL_NPN_poss
+SELECT 2_5V_BJT_COLL_NPN_poss INTERACT nwell_hole TEMP = 2_5V_BJT_COLL_NPN_poss1
+SELECT 2_5V_BJT_COLL_NPN_poss1 OUTSIDE sab_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=2_5V_BJT_COLL_NPN
+BOOLEAN 2_5V_BJT_COLL_NPN AND DIFF25 NOT nxwell AND nwell_hole { } TEMP=2_5V_BJT_BASE_NPN
+BOOLEAN ((DIFN_BIP AND DIFF25) AND NPS) NOT nxwell AND nwell_hole { } TEMP=2_5V_BJT_EMIT_NPN
+
+BOOLEAN CONTS AND BJTDMY TEMP = CONTSB
+BOOLEAN CONTS NOT CONTSB TEMP = CONTS
+
+
+/*Contacts for Vertical PNP*/
+BOOLEAN 1_0V_BJT_COLL NOT nxwell  AND CONTSB TEMP = 1_0V_BJT_COLL_cont
+BOOLEAN 1_0V_BJT_BASE AND CONTSB AND NPS TEMP = 1_0V_BJT_BASE_cont
+BOOLEAN 1_0V_BJT_EMIT AND CONTSB TEMP = 1_0V_BJT_EMIT_cont
+
+BOOLEAN 2_5V_BJT_COLL NOT nxwell AND CONTSB TEMP = 2_5V_BJT_COLL_cont
+BOOLEAN 2_5V_BJT_BASE AND CONTSB AND NPS TEMP = 2_5V_BJT_BASE_cont
+BOOLEAN 2_5V_BJT_EMIT AND CONTSB TEMP = 2_5V_BJT_EMIT_cont
+
+/*Contacts for Vertical NPN*/
+BOOLEAN 1_0V_BJT_COLL_NPN AND nxwell AND CONTSB TEMP = 1_0V_BJT_COLL_cont_NPN
+BOOLEAN 1_0V_BJT_BASE_NPN  AND CONTSB NOT NPS TEMP = 1_0V_BJT_BASE_cont_NPN
+BOOLEAN 1_0V_BJT_EMIT_NPN AND CONTSB TEMP = 1_0V_BJT_EMIT_cont_NPN
+
+BOOLEAN 2_5V_BJT_COLL_NPN AND nxwell AND CONTSB TEMP = 2_5V_BJT_COLL_cont_NPN
+BOOLEAN 2_5V_BJT_BASE_NPN AND CONTSB NOT NPS TEMP = 2_5V_BJT_BASE_cont_NPN
+BOOLEAN 2_5V_BJT_EMIT_NPN AND CONTSB TEMP = 2_5V_BJT_EMIT_cont_NPN
+
+/************************************ Lateral PNP Derivation ***************************/
+/*Lateral PNP 1.8V*/
+
+
+SELECT BJTDMY INTERACT DIFN { } TEMP=_T_E_M_P_4444L
+SELECT _T_E_M_P_4444L INTERACT sab_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=T_E_M_P_4L
+BOOLEAN DIFN AND T_E_M_P_4L { } TEMP=DIFN_BIPL
+
+BOOLEAN DIFN_BIPL AND PPS { } TEMP=TEMP_EC 
+
+BOOLEAN NWELL AND T_E_M_P_4L { } TEMP=_T_E_M_P_43L
+
+SELECT _T_E_M_P_43L INTERACT nwell_hole TEMP = nwell_ring
+BOOLEAN nwell_ring OR nwell_hole TEMP = all_nwell_hole
+
+BOOLEAN psub NOT _T_E_M_P_43L TEMP = psub
+BOOLEAN _T_E_M_P_43L NOT DIFF25 { } TEMP=1_0V_BJT_BASE_possL
+BOOLEAN DIFN_BIPL AND PPS { } TEMP=_T_E_M_P_44L
+
+SELECT 1_0V_BJT_BASE_possL OUTSIDE nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=1_0V_BJT_BASEL
+
+SELECT PPS INTERACT sab_hole TEMP = 1_0V_BJT_EMIT_possL
+SELECT 1_0V_BJT_EMIT_possL OUTSIDE nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=1_0V_BJT_EMITL_pos
+BOOLEAN 1_0V_BJT_EMITL_pos NOT DIFF25 TEMP = 1_0V_BJT_EMITL
+BOOLEAN (PPS NOT 1_0V_BJT_EMIT_possL) AND DIFN_BIPL NOT DIFF25 NOT nwell_ring AND _T_E_M_P_43L{ } TEMP=1_0V_BJT_COLL_possL
+SELECT 1_0V_BJT_COLL_possL OUTSIDE nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=1_0V_BJT_COLLL
+
+
+/*Lateral PNP 3.3V*/
+BOOLEAN nxwell AND BJTDMY { } TEMP=_T_E_M_P_45L
+BOOLEAN _T_E_M_P_45L AND DIFF25 { } TEMP=2_5V_BJT_BASE_possL
+
+BOOLEAN (PPS NOT 1_0V_BJT_EMIT_possL) AND DIFN_BIPL NOT nwell_ring AND DIFF25 AND _T_E_M_P_43L { } TEMP=2_5V_BJT_COLL_possL
+SELECT 2_5V_BJT_COLL_possL OUTSIDE nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=2_5V_BJT_COLLL
+
+BOOLEAN _T_E_M_P_43L AND DIFF25 { } TEMP=2_5V_BJT_BASE_possL25
+SELECT 2_5V_BJT_BASE_possL25 OUTSIDE nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=2_5V_BJT_BASEL
+BOOLEAN 1_0V_BJT_EMIT_possL AND DIFF25 { } TEMP=1_0V_BJT_EMIT_possL25
+SELECT 1_0V_BJT_EMIT_possL25 OUTSIDE nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=2_5V_BJT_EMITL
+
+
+/*Lateral NPN 1.8V*/
+SELECT NPS INTERACT sab_hole TEMP = 1_0V_BJT_EMIT_possL
+BOOLEAN (NPS NOT 1_0V_BJT_EMIT_possL) AND DIFN_BIPL  { } TEMP=1_0V_BJT_COLL_NPNL_poss1
+BOOLEAN 1_0V_BJT_COLL_NPNL_poss1 NOT DIFF25 TEMP = 1_0V_BJT_COLL_NPNL_possL1
+BOOLEAN T_E_M_P_4L NOT DIFF25 AND all_nwell_hole { } TEMP=1_0V_BJT_BASE_NPNL_possL1
+BOOLEAN 1_0V_BJT_EMIT_possL NOT DIFF25{ } TEMP=1_0V_BJT_EMIT_NPNL_possL1
+
+SELECT 1_0V_BJT_EMIT_NPNL_possL1 INTERACT nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=1_0V_BJT_EMIT_NPNL
+SELECT 1_0V_BJT_BASE_NPNL_possL1 INTERACT nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=1_0V_BJT_BASE_NPNL
+SELECT 1_0V_BJT_COLL_NPNL_possL1 INTERACT nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=1_0V_BJT_COLL_NPNL
+
+
+/*Lateral NPN 3.3V*/
+
+BOOLEAN 1_0V_BJT_COLL_NPNL_poss1 AND DIFF25 TEMP = 2_5V_BJT_COLL_NPNL_possL1
+BOOLEAN T_E_M_P_4L AND DIFF25 AND all_nwell_hole { } TEMP=2_5V_BJT_BASE_NPNL_possL1
+BOOLEAN 1_0V_BJT_EMIT_possL AND DIFF25{ } TEMP=2_5V_BJT_EMIT_NPNL_possL1
+
+SELECT 2_5V_BJT_EMIT_NPNL_possL1 INTERACT nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=2_5V_BJT_EMIT_NPNL
+SELECT 2_5V_BJT_BASE_NPNL_possL1 INTERACT nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=2_5V_BJT_BASE_NPNL
+SELECT 2_5V_BJT_COLL_NPNL_possL1 INTERACT nwell_hole { LINE_TOUCH = FALSE POINT_TOUCH = FALSE } TEMP=2_5V_BJT_COLL_NPNL
+
+
+/*Contacts for Lateral PNP*/
+
+/*BOOLEAN 1_0V_BJT_COLL NOT nxwell  AND CONTSB TEMP = 1_0V_BJT_COLL_cont
+BOOLEAN 1_0V_BJT_BASE AND CONTSB AND NPS TEMP = 1_0V_BJT_BASE_cont
+BOOLEAN 1_0V_BJT_EMIT AND CONTSB TEMP = 1_0V_BJT_EMIT_cont*/
+
+BOOLEAN 1_0V_BJT_COLLL AND CONTSB TEMP = 1_0V_BJT_COLL_contL
+BOOLEAN 1_0V_BJT_BASEL AND CONTSB AND NPS TEMP = 1_0V_BJT_BASE_contL
+BOOLEAN 1_0V_BJT_EMITL AND CONTSB AND sab_hole TEMP = 1_0V_BJT_EMIT_contL
+
+BOOLEAN 2_5V_BJT_COLLL AND CONTSB TEMP = 2_5V_BJT_COLL_contL
+BOOLEAN 2_5V_BJT_BASEL AND CONTSB AND NPS TEMP = 2_5V_BJT_BASE_contL
+BOOLEAN 2_5V_BJT_EMITL AND CONTSB AND sab_hole TEMP = 2_5V_BJT_EMIT_contL
+
+/*Contacts for Lateral NPN*/
+BOOLEAN 1_0V_BJT_COLL_NPNL AND nwell_hole AND CONTSB TEMP = 1_0V_BJT_COLL_cont_NPNL
+BOOLEAN 1_0V_BJT_BASE_NPNL AND CONTSB NOT NPS TEMP = 1_0V_BJT_BASE_cont_NPNL
+BOOLEAN 1_0V_BJT_EMIT_NPNL AND CONTSB TEMP = 1_0V_BJT_EMIT_cont_NPNL
+
+BOOLEAN 2_5V_BJT_COLL_NPNL AND nwell_hole AND CONTSB TEMP = 2_5V_BJT_COLL_cont_NPNL
+BOOLEAN 2_5V_BJT_BASE_NPNL AND CONTSB NOT NPS TEMP = 2_5V_BJT_BASE_cont_NPNL
+BOOLEAN 2_5V_BJT_EMIT_NPNL AND CONTSB TEMP = 2_5V_BJT_EMIT_cont_NPNL
+
+BOOLEAN CONTS AND poly {} temp = polyCont
+BOOLEAN CONTS NOT poly {} temp = diffCont
+BOOLEAN dnwell_hole AND CONTS AND DNWELL NOT emit_dnw_pnp_cont { } temp = dnwCont
+BOOLEAN diffCont NOT dnwCont temp = diffCont
+
+
+
+
+
+
+
+
+
+
+/**************************************************************************/
+
+/* Remove marker from metals */
+BOOLEAN metal1 NOT RMDMY { } TEMP = metal1  
+
+
+/*************CONNECT SECTION FOR BJTS************************************/
+CONNECT { 1_0V_BJT_COLL metal1 BY 1_0V_BJT_COLL_cont }
+CONNECT { 2_5V_BJT_COLL metal1 BY 2_5V_BJT_COLL_cont }
+CONNECT { 1_0V_BJT_EMIT metal1 BY 1_0V_BJT_EMIT_cont
+          2_5V_BJT_EMIT metal1 BY 2_5V_BJT_EMIT_cont }
+CONNECT { 1_0V_BJT_BASE metal1 BY 1_0V_BJT_BASE_cont
+          2_5V_BJT_BASE metal1 BY 2_5V_BJT_BASE_cont }
+
+CONNECT { 1_0V_BJT_COLL_NPN metal1 BY 1_0V_BJT_COLL_cont_NPN }
+CONNECT { 1_0V_BJT_EMIT_NPN metal1 BY 1_0V_BJT_EMIT_cont_NPN }
+CONNECT { 1_0V_BJT_BASE_NPN metal1 BY 1_0V_BJT_BASE_cont_NPN }
+
+CONNECT { 2_5V_BJT_COLL_NPN metal1 BY 2_5V_BJT_COLL_cont_NPN }
+CONNECT { 2_5V_BJT_EMIT_NPN metal1 BY 2_5V_BJT_EMIT_cont_NPN }
+CONNECT { 2_5V_BJT_BASE_NPN metal1 BY 2_5V_BJT_BASE_cont_NPN }
+
+CONNECT { 1_0V_BJT_COLLL metal1 BY 1_0V_BJT_COLL_contL }
+CONNECT { 1_0V_BJT_BASEL metal1 BY 1_0V_BJT_BASE_contL }
+CONNECT { 1_0V_BJT_EMITL metal1 BY 1_0V_BJT_EMIT_contL }
+CONNECT { 2_5V_BJT_COLLL metal1 BY 2_5V_BJT_COLL_contL }
+CONNECT { 2_5V_BJT_BASEL metal1 BY 2_5V_BJT_BASE_contL }
+CONNECT { 2_5V_BJT_EMITL metal1 BY 2_5V_BJT_EMIT_contL }
+
+CONNECT { 1_0V_BJT_COLL_NPNL metal1 BY 1_0V_BJT_COLL_cont_NPNL }
+CONNECT { 1_0V_BJT_EMIT_NPNL metal1 BY 1_0V_BJT_EMIT_cont_NPNL }
+CONNECT { 1_0V_BJT_BASE_NPNL metal1 BY 1_0V_BJT_BASE_cont_NPNL }
+
+CONNECT { 2_5V_BJT_COLL_NPNL metal1 BY 2_5V_BJT_COLL_cont_NPNL }
+CONNECT { 2_5V_BJT_EMIT_NPNL metal1 BY 2_5V_BJT_EMIT_cont_NPNL }
+CONNECT { 2_5V_BJT_BASE_NPNL metal1 BY 2_5V_BJT_BASE_cont_NPNL }
+
+CONNECT { base_dnw_pnp metal1 BY base_dnw_pnp_cont }
+CONNECT { emit_dnw_pnp metal1 BY emit_dnw_pnp_cont }
+
+BOOLEAN subtie NOT NWELL {} TEMP = subtie
+
+
+/**************************************************************************/
+
+CONNECT {
+	coll_dnw_pnp BY psub
+	coll_dnw_pnp BY subtie
+        dnwdiode_pwell BY subtie  
+	dnwdiode_nwell BY welltie
+	tiod tndiff tndiff18 tndiff33 BY [ OVERLAP TOUCH ] nodcon
+	pvardio tiod tpdiff BY [ OVERLAP TOUCH ] podcon
+	metal1 subtie varndiff varndiff25 tndiff tndiff18 tndiff33 BY [ OVERLAP TOUCH ] diffCont
+	metal1 poly BY [ OVERLAP TOUCH ] polyCont
+	metal1 welltie tpdiff varpdiff varpdiff25 BY [ OVERLAP TOUCH ] diffCont
+	tndiff_dnwell tndiff_dnwell25 tpdiff_dnwell metal1 BY [ OVERLAP TOUCH ] dnwCont
+	ngate hngate mngate lngate mngate25 ngate25 ngate18 ngate33 natgate natgate25 natgate18 natgate33 varngate varnpoly varngate25 ngate_dnwell ngate_dnwell25 BY [ OVERLAP TOUCH ] poly
+	pgate hpgate lpgate mpgate pgate25 pgate18 pgate33 varpgate varppoly varpgate25 BY [ OVERLAP TOUCH ] poly
+        rpdiff_term resndiff metal1 BY [ OVERLAP TOUCH ] diffCont
+        rpdiff_term_nS resndiff_nS metal1 BY [ OVERLAP TOUCH ] diffCont
+        hrpoly_term_NP hrpoly_term_PP metal1 BY [ OVERLAP TOUCH ] polyCont
+        mom_cap_123_term BY M3S
+	mom_cap_1234_term BY M4S
+	mom_cap_234_term BY M4S
+	varnwell BY [OVERLAP TOUCH] NWELL
+	RTERMARKER by polyCont
+}
+
+/*
+C_THRU welltie INSIDE nxwell_NWDIODE { SCON_MODE=TRUE } TEMP = nxwell_NWDIODE_scon
+C_THRU welltie INSIDE nxwell_NWDIODE18 { SCON_MODE=TRUE } TEMP = nxwell_NWDIODE18_scon
+C_THRU welltie INSIDE nxwell_NWDIODE25 { SCON_MODE=TRUE } TEMP = nxwell_NWDIODE25_scon
+C_THRU welltie INSIDE nxwell_NWDIODE33 { SCON_MODE=TRUE } TEMP = nxwell_NWDIODE33_scon
+
+CONNECT{
+      welltie nxwell_NWDIODE BY nxwell_NWDIODE_scon
+	nxwell BY welltie
+       }
+CONNECT{
+      welltie nxwell_NWDIODE18 BY nxwell_NWDIODE18_scon
+	nxwell BY welltie
+       }
+
+CONNECT{
+      welltie nxwell_NWDIODE25 BY nxwell_NWDIODE25_scon
+	nxwell BY welltie
+       }
+CONNECT{
+      welltie nxwell_NWDIODE33 BY nxwell_NWDIODE33_scon
+	nxwell BY welltie
+       }
+*/
+
+SELECT welltie INTERACT  nxwell_NWDIODE TEMP = welltie_NWDIODE
+SELECT welltie INTERACT  nxwell_NWDIODE18 TEMP = welltie_NWDIODE18
+SELECT welltie INTERACT  nxwell_NWDIODE25 TEMP = welltie_NWDIODE25
+SELECT welltie INTERACT  nxwell_NWDIODE33 TEMP = welltie_NWDIODE33
+
+COPY welltie TEMP = nxwell_scon
+COPY welltie_NWDIODE TEMP = nxwell_NWDIODE_scon
+COPY welltie_NWDIODE18 TEMP = nxwell_NWDIODE18_scon
+COPY welltie_NWDIODE25 TEMP = nxwell_NWDIODE25_scon
+COPY welltie_NWDIODE33 TEMP = nxwell_NWDIODE33_scon
+  
+CONNECT {
+      welltie nxwell BY nxwell_scon
+      welltie nxwell_NWDIODE BY nxwell_NWDIODE_scon
+      welltie nxwell_NWDIODE18 BY nxwell_NWDIODE18_scon
+      welltie nxwell_NWDIODE25 BY nxwell_NWDIODE25_scon
+      welltie nxwell_NWDIODE33 BY nxwell_NWDIODE33_scon
+	}
+
+COPY subtie TEMP = subtie_scon
+
+CONNECT {
+	subtie psub BY subtie_scon
+	}
+
+
+BOOLEAN top_met NOT induct_body		{ } temp = top_metex
+BOOLEAN top_metex NOT RMDMY             { } temp = top_metex
+BOOLEAN sec_top_met   NOT RMDMY         { } temp = sec_top_met
+BOOLEAN third_top_met NOT RMDMY         { } temp = third_top_met
+BOOLEAN fourth_top_met NOT RMDMY         { } temp = fourth_top_met
+BOOLEAN fifth_top_met NOT RMDMY         { } temp = fifth_top_met
+BOOLEAN sixth_top_met NOT RMDMY         { } temp = sixth_top_met
+BOOLEAN seventh_top_met NOT RMDMY         { } temp = seventh_top_met
+BOOLEAN eighth_top_met NOT RMDMY         { } temp = eighth_top_met
+
+CONNECT {
+        metal1 metal2 BY [ OVERLAP TOUCH ] V1S
+        metal2 metal3 BY [ OVERLAP TOUCH ] V2S
+        metal3 metal4 BY [ OVERLAP TOUCH ] V3S
+        metal4 metal5 BY [ OVERLAP TOUCH ] V4S
+        metal5 metal6 BY [ OVERLAP TOUCH ] V5S
+        metal6 metal7 BY [ OVERLAP TOUCH ] V6S
+        metal1 eighth_top_met BY [ OVERLAP TOUCH ] V1S
+        sec_top_met third_top_met BY [ OVERLAP TOUCH ] sec_top_via
+        third_top_met fourth_top_met BY [ OVERLAP TOUCH ] third_top_via
+        fourth_top_met fifth_top_met BY [ OVERLAP TOUCH ] fourth_top_via
+        fifth_top_met sixth_top_met BY [ OVERLAP TOUCH ] fifth_top_via
+        sixth_top_met seventh_top_met BY [ OVERLAP TOUCH ] sixth_top_via
+        seventh_top_met eighth_top_met BY [ OVERLAP TOUCH ] seventh_top_via
+        }
+
+CONNECT { 
+        top_metex sec_top_met BY [ OVERLAP TOUCH ] top_via
+        top_metex CAP_MIMS BY cap_top_via
+        }
+
+CONNECT { top_metex  CAP_MIMS BY CTM_VIA }
+CONNECT { top_metex  CBM BY CBM_VIA }
+CONNECT { pinshield BY M1S }
+
+
+
+/********* Device Extraction ************/
+
+NMOS N ngate tndiff tndiff psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+NMOS N25 ngate25 tndiff tndiff psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+NMOS NM25 mngate25 tndiff tndiff psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+
+NMOS NL lngate tndiff tndiff psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+NMOS NH hngate tndiff tndiff psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+NMOS NM mngate tndiff tndiff psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+NMOS N18 ngate18 tndiff18 tndiff18 psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+NMOS N33 ngate33 tndiff33 tndiff33 psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+
+NMOS NDN ngate_dnwell tndiff_dnwell tndiff_dnwell emit_dnw_pnp {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+NMOS NDN25 ngate_dnwell25 tndiff_dnwell25 tndiff_dnwell25 emit_dnw_pnp {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+NMOS NA natgate tndiff tndiff psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+NMOS NA25 natgate25 tndiff tndiff psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+NMOS NA18 natgate18 tndiff tndiff psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+NMOS NA33 natgate33 tndiff tndiff psub {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp =  mos_dev
+
+PMOS P pgate tpdiff tpdiff nxwell {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp = mos_dev
+
+PMOS PL lpgate tpdiff tpdiff nxwell {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp = mos_dev
+
+PMOS PM mpgate tpdiff tpdiff nxwell {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp = mos_dev
+
+
+PMOS PH hpgate tpdiff tpdiff nxwell {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp = mos_dev
+
+PMOS P25 pgate25 tpdiff tpdiff nxwell {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp = mos_dev
+
+PMOS P18 pgate18 tpdiff tpdiff nxwell {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp = mos_dev
+
+PMOS P33 pgate33 tpdiff tpdiff nxwell {
+	EV_WIDTH = (EV_W1+EV_W2) / 2.0;
+	EV_LENGTH = EV_GAREA / EV_WIDTH;
+	mos_multiterm_extract=TRUE 
+} temp = mos_dev
+
+
+
+
+/********** RESISTOR EXTRACTION **********/
+SELECT rpolywo1 OUTSIDE SAB { } temp=rpolywo_nS
+SELECT rpolywo_nS INTERACT p1rdum { } temp=rpolywo_nS_b
+BOOLEAN (rpolywo_nS_b AND NPS) NOT SAB { } temp=rnpolywo_nS 
+BOOLEAN (rpolywo_nS_b AND PPS) NOT SAB { } temp=rppolywo_nS 
+/* SECTION FOR selecting psub and nwell body */
+SELECT hrpoly INTERACT nxwell {} TEMP = hrpoly_nxwell
+SELECT hrpoly OUTSIDE nxwell {} TEMP = hrpoly_psub
+SELECT hrppoly INTERACT nxwell {} TEMP = hrppoly_nxwell
+SELECT hrppoly OUTSIDE nxwell {} TEMP = hrppoly_psub
+SELECT rppolywo_nS INTERACT nxwell {} TEMP = rppolywo_nS_nxwell
+SELECT rppolywo_nS OUTSIDE nxwell {} TEMP = rppolywo_nS_psub
+SELECT rppolywo_r INTERACT nxwell {} TEMP = rppolywo_r_nxwell
+SELECT rppolywo_r OUTSIDE nxwell {} TEMP = rppolywo_r_psub
+SELECT rnpolywo_r INTERACT nxwell {} TEMP = rnpolywo_r_nxwell
+SELECT rnpolywo_r OUTSIDE nxwell {} TEMP = rnpolywo_r_psub
+SELECT rnpolywo_nS INTERACT nxwell {} TEMP = rnpolywo_nS_nxwell
+SELECT rnpolywo_nS OUTSIDE nxwell {} TEMP = rnpolywo_nS_psub
+/*********************************************/
+
+
+
+/********** Serpentine Data Creation **********/
+/* rpoly */ 
+BOOLEAN POLS AND RMARKER {} temp = rpolywo1
+BOOLEAN rpolywo1 NOT HRPOLY temp = pres_2
+SELECT pres_2 OUTSIDE SAB {} temp = pres_1
+BOOLEAN pres_1 NOT RTERMARKER {}  temp = pres
+BOOLEAN pres NOT RFDMY {} temp = pres_norf
+
+
+/* rpolyh */
+BOOLEAN POLS AND HRPOLY NOT SAB { } TEMP=presh_1
+
+BOOLEAN presh_1 NOT PPS { } TEMP=presh
+BOOLEAN presh NOT RFDMY { } TEMP=presh_norf
+
+BOOLEAN presh_1 AND PPS { } TEMP=preshterm
+
+
+/* rpolyrf */
+SELECT RFDMY ENCLOSING pres { } TEMP=pres_rf_device
+
+
+/* rpolyhrf */
+BOOLEAN presh NOT RFDMY { } TEMP=presh_norf
+SELECT RFDMY ENCLOSING presh { } TEMP=presh_rf_device
+
+/* rpolyc - 3 terminal rpoly Serp res */
+BOOLEAN pres_norf AND PINDMY { } TEMP = pres_norf_subdef
+
+/* rpolyhc - 3 term rpolyh resistor */
+BOOLEAN presh_norf AND PINDMY { } TEMP = presh_norf_subdef
+
+/*********************************************/
+
+CONNECT { preshterm by polyCont }
+
+RES rm1 rm1_body metal1 metal1 {
+	EV_RESVAL = 0.115;
+        DEVICE_PREFIX=X
+} temp = res_dev	
+
+
+RES rm2 rm2_body eighth_top_met eighth_top_met {
+	EV_RESVAl = 0.086;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES rm3 rm3_body seventh_top_met seventh_top_met  {
+	EV_RESVAl = 0.086;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES rm4 rm4_body sixth_top_met sixth_top_met {
+	EV_RESVAl = 0.086;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES rm5 rm5_body fifth_top_met fifth_top_met {
+	EV_RESVAl = 0.086;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+
+RES rm6 rm6_body fourth_top_met fourth_top_met {
+	EV_RESVAl = 0.086;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+
+RES rm7 rm7_body third_top_met third_top_met {
+	EV_RESVAl = 0.086;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+
+RES rm8 rm8_body sec_top_met sec_top_met {
+	EV_RESVAl = 0.086;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+
+RES rm9 rm9_body top_metex top_metex {
+	EV_RESVAl = 0.04;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+
+
+IF ( RES_3TERM == 1) {
+/* COPY poly (100) */
+SELECT POLS INTERACT  rnpolywo_r_psub { } TEMP = rnpoly3t_poly_
+BOOLEAN rnpoly3t_poly_ NOT rnpolywo_r_psub { } TEMP = rnpoly3t_poly
+CONNECT { metal1 rnpoly3t_poly BY [ OVERLAP TOUCH ] polyCont }
+
+RES rnpoly_3t_psub rnpolywo_r_psub rnpoly3t_poly rnpoly3t_poly psub {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rnpolywo_r_psub,rnpoly3t_poly)/2.0;
+	L = AREA(rnpolywo_r_psub)/W;
+	/*EV_RESVAL = 402.10;*/
+} temp = res_dev
+
+RES rnpolyS_3t_psub rnpolywo_nS_psub poly poly psub {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rnpolywo_nS_psub,poly)/2.0;
+	L = AREA(rnpolywo_nS_psub)/W;
+	/*EV_RESVAL = 20;*/
+} temp = res_dev
+
+SELECT POLS INTERACT  rppolywo_r_psub { } TEMP = rppoly3t_poly_
+BOOLEAN rppoly3t_poly_ NOT rppolywo_r_psub { } TEMP = rppoly3t_poly
+CONNECT { metal1 rppoly3t_poly BY [ OVERLAP TOUCH ] polyCont }
+
+RES rppoly_3t_psub rppolywo_r_psub rppoly3t_poly rppoly3t_poly psub {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rppolywo_r_psub,rppoly3t_poly)/2.0;
+	L = AREA(rppolywo_r_psub)/W;
+	/*EV_RESVAL = 390;*/
+} temp = res_dev
+
+RES rppolyS_3t_psub rppolywo_nS_psub poly poly psub {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rppolywo_nS_psub,poly)/2.0;
+	L = AREA(rppolywo_nS_psub)/W;
+	/*EV_RESVAL = 15;*/
+} temp = res_dev
+
+RES hrnpoly_3t_psub hrpoly_psub hrpoly_term_NP hrpoly_term_NP psub { 
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(hrpoly_psub,hrpoly_term_NP)/2.0;
+	L = AREA(hrpoly_psub)/W;
+	/*EV_RESVAL = 700;*/
+} temp = res_dev
+
+RES hrppoly_3t_psub hrppoly_psub hrpoly_term_PP hrpoly_term_PP psub { 
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(hrppoly_psub,hrpoly_term_PP)/2.0;
+	L = AREA(hrppoly_psub)/W;
+	/*EV_RESVAL = 800;*/
+} temp = res_dev
+
+RES rnpoly_3t_nw rnpolywo_r_nxwell poly poly nxwell {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rnpolywo_r_nxwell,poly)/2.0;
+	L = AREA(rnpolywo_r_nxwell)/W;
+	/*EV_RESVAL = 402.10;*/
+} temp = res_dev
+
+RES rnpolyS_3t_nw rnpolywo_nS_nxwell poly poly nxwell {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rnpolywo_nS_nxwell,poly)/2.0;
+	L = AREA(rnpolywo_nS_nxwell)/W;
+	/*EV_RESVAL = 20;*/
+} temp = res_dev
+
+RES rppoly_3t_nw rppolywo_r_nxwell poly poly nxwell {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rppolywo_r_nxwell,poly)/2.0;
+	L = AREA(rppolywo_r_nxwell)/W;
+	/*EV_RESVAL = 390;*/
+} temp = res_dev
+
+RES rppolyS_3t_nw rppolywo_nS_nxwell poly poly nxwell {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rppolywo_nS_nxwell,poly)/2.0;
+	L = AREA(rppolywo_nS_nxwell)/W;
+	/*EV_RESVAL = 15;*/
+} temp = res_dev
+
+RES hrnpoly_3t_nw hrpoly_nxwell hrpoly_term_NP hrpoly_term_NP nxwell { 
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(hrpoly_nxwell,hrpoly_term_NP)/2.0;
+	L = AREA(hrpoly_nxwell)/W;
+	/*EV_RESVAL = 700;*/
+} temp = res_dev
+
+RES hrppoly_3t_nw hrppoly_nxwell hrpoly_term_PP hrpoly_term_PP nxwell { 
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(hrppoly_nxwell,hrpoly_term_PP)/2.0;
+	L = AREA(hrppoly_nxwell)/W;
+	/*EV_RESVAL = 800;*/
+} temp = res_dev
+
+
+RES rndiff_3t rdiff_res resndiff resndiff psub {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rdiff_res,resndiff)/2.0;
+	L = AREA(rdiff_res)/W;
+	/*EV_RESVAL = 10.5;*/
+} temp = res_dev
+
+RES rndiffS_3t rdiff_res_nS resndiff_nS resndiff_nS psub {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rdiff_res_nS,resndiff_nS)/2.0;
+	L = AREA(rdiff_res_nS)/W;
+	/*EV_RESVAL = 25;*/
+} temp = res_dev
+
+RES rpdiff_3t rpdiff rpdiff_term rpdiff_term nxwell {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rpdiff,rpdiff_term)/2.0;
+	L = AREA(rpdiff)/W;
+	/*EV_RESVAL = 40;*/
+} temp = res_dev
+
+RES rpdiffS_3t rpdiff_nS rpdiff_term_nS rpdiff_term_nS nxwell {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(rpdiff_nS,rpdiff_term_nS)/2.0;
+	L = AREA(rpdiff_nS)/W;
+	/*EV_RESVAL = 30;*/
+} temp = res_dev
+
+RES rnwell_3t nwsti_r nxwell nxwell psub {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(nwsti_r,nxwell)/2.0;
+	L = AREA(nwsti_r)/W;
+	/*EV_RESVAL = 330;*/
+} temp = res_dev
+
+RES rnwdiff_3t nwdiff_r nxwell nxwell psub {
+        DEVICE_PREFIX = X;
+	PROPERTY = { W L };
+	W = PERIM_COIN(nwdiff_r,nxwell)/2.0;
+	L = AREA(nwdiff_r)/W;
+	/*EV_RESVAL = 550;*/
+} temp = res_dev
+
+/* Serpentine 3 terminal extraction */
+
+RES rpolyc pres_norf_subdef RTERMARKER RTERMARKER psub{
+    DEVICE_PREFIX=X
+    EV_WIDTH = EV_WAVG;
+    EV_LENGTH = EV_LAVG - (EV_WAVG * EV_LNUM45 * 0.168) - (EV_WAVG * EV_LNUM90 * 0.5);
+} temp = res_dev
+
+RES rpolyhc presh_norf_subdef preshterm preshterm psub{
+    DEVICE_PREFIX=X
+    EV_WIDTH = EV_WAVG;
+    EV_LENGTH = EV_LAVG - (EV_WAVG * EV_LNUM45 * 0.168) - (EV_WAVG * EV_LNUM90 * 0.5);
+    } TEMP = res_dev
+
+
+} ELSE {
+
+SELECT POLS INTERACT rnpolywo_r { } TEMP = rnpoly_poly_
+BOOLEAN rnpoly_poly_ NOT rnpolywo_r { } TEMP = rnpoly_poly
+CONNECT { metal1 rnpoly_poly BY [ OVERLAP TOUCH ] polyCont }
+
+RES rnpoly rnpolywo_r rnpoly_poly rnpoly_poly{
+	EV_RESVAL = 402.10;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+
+
+RES rnpolyS rnpolywo_nS poly poly {
+	EV_RESVAL = 20;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+SELECT POLS INTERACT rppolywo_r { } TEMP = rppoly_poly_
+BOOLEAN rppoly_poly_ NOT rppolywo_r { } TEMP = rppoly_poly
+CONNECT { metal1 rppoly_poly BY [ OVERLAP TOUCH ] polyCont }
+
+
+
+RES rppoly rppolywo_r rppoly_poly rppoly_poly {
+	EV_RESVAL = 390;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES rppolyS rppolywo_nS poly poly {
+	EV_RESVAL = 15;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES hrnpoly hrpoly hrpoly_term_NP hrpoly_term_NP { 
+	EV_RESVAL = 700;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES hrppoly hrppoly hrpoly_term_PP hrpoly_term_PP { 
+	EV_RESVAL = 800;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES rndiff rdiff_res resndiff resndiff  {
+	EV_RESVAL = 10.5;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES rndiffS rdiff_res_nS resndiff_nS resndiff_nS {
+	EV_RESVAL = 25;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES rpdiff rpdiff rpdiff_term rpdiff_term {
+	EV_RESVAL = 40;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES rpdiffS rpdiff_nS rpdiff_term_nS rpdiff_term_nS {
+	EV_RESVAL = 30;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES rnwell nwsti_r nxwell nxwell {
+	EV_RESVAL = 330;
+        DEVICE_PREFIX=X
+} temp = res_dev
+
+RES rnwdiff nwdiff_r nxwell nxwell {
+	EV_RESVAL = 550;
+        DEVICE_PREFIX=X
+} temp = res_dev
+ 
+/************** Serperntine Resistors Extraction - 2term *********************/  
+RES rpoly  pres_norf RTERMARKER RTERMARKER {
+    DEVICE_PREFIX=X
+    EV_WIDTH = EV_WAVG;
+    EV_LENGTH = EV_LAVG - (EV_WAVG * EV_LNUM45 * 0.168) - (EV_WAVG * EV_LNUM90 * 0.5);
+    } temp = res_dev
+
+
+RES rpolyh presh_norf preshterm preshterm {
+    DEVICE_PREFIX=X
+    EV_WIDTH = EV_WAVG;
+    EV_LENGTH = EV_LAVG - (EV_WAVG * EV_LNUM45 * 0.168) - (EV_WAVG * EV_LNUM90 * 0.5);
+    } TEMP = res_dev
+
+RES rpolyrf pres_rf_device RTERMARKER RTERMARKER {
+    DEVICE_PREFIX=X
+    EV_WIDTH = EV_WAVG;
+    EV_LENGTH = EV_LAVG - (EV_WAVG * EV_LNUM45 * 0.168) - (EV_WAVG * EV_LNUM90 * 0.5);
+    } TEMP = res_dev
+
+RES rpolyhrf presh_rf_device preshterm preshterm {
+    DEVICE_PREFIX=X
+    EV_WIDTH = EV_WAVG;
+    EV_LENGTH = EV_LAVG - (EV_WAVG * EV_LNUM45 * 0.168) - (EV_WAVG * EV_LNUM90 * 0.5);
+    } TEMP = res_dev
+}    
+
+
+/********** MIMCAP EXTRACTION **********/
+
+
+IF (DRAWCBM == 0) {
+IF (CAP_3TERM == 0) {
+CAP cmim_2t RCTM CAP_MIMS sec_top_met {
+	EV_AREA_CAPVAL = 1.0274e-15;
+	EV_PERIM_CAPVAL = 0.1685e-15;
+	PROPERTY = { l(U), w(U) }
+	DEVICE_PREFIX=X
+	l = EV_LENGTH;
+	w = EV_WIDTH;
+} TEMP=_generated_output_layer
+} ELSE {
+CAP cmim_3t RCTM CAP_MIMS sec_top_met pinshield {
+	EV_AREA_CAPVAL = 1.0274e-15;
+	EV_PERIM_CAPVAL = 0.1685e-15;
+	CAP_BULK_INTERACT=TRUE
+	PROPERTY = {l(U), w(U)}
+	DEVICE_PREFIX=X
+	l = EV_LENGTH;
+	w = EV_WIDTH;
+} TEMP=_generated_output_layer
+}
+} ELSE {
+IF (CAP_3TERM == 0) {
+CAPACITOR cmim_2t RCTM CAP_MIMS CBM {
+	EV_AREA_CAPVAL = 1.0274e-15;
+	EV_PERIM_CAPVAL = 0.1685e-15;
+	PROPERTY = {l(U), w(U)}
+	DEVICE_PREFIX=X
+	l = EV_LENGTH;
+	w = EV_WIDTH;
+} TEMP=_generated_output_layer
+} ELSE {
+CAPACITOR cmim_3t RCTM CAP_MIMS CBM pinshield {
+	EV_AREA_CAPVAL = 1.0274e-15;
+	EV_PERIM_CAPVAL = 0.1685e-15;
+	PROPERTY = {l(U), w(U)}
+	DEVICE_PREFIX=X
+	CAP_BULK_INTERACT=TRUE
+	l = EV_LENGTH;
+	w = EV_WIDTH;
+} TEMP=_generated_output_layer
+}
+}
+
+
+
+/********** DIODE EXTRACTION **********/
+
+/* P-type diffusion diode */
+DIODE PN pdiode tpdiff nxwell { 
+	DIODE_TYPE = PN; 
+} temp = diode_dev
+
+DIODE PN18V pn18v_dio tpdiff nxwell { 
+	DIODE_TYPE = PN; 
+} temp = diode_dev
+
+DIODE PN25V pn25v_dio tpdiff nxwell { 
+	DIODE_TYPE = PN; 
+} temp = diode_dev
+
+DIODE PN33V pn33v_dio tpdiff nxwell { 
+	DIODE_TYPE = PN; 
+} temp = diode_dev
+
+DIODE PN_HVT pdio_hvt tpdiff nxwell { 
+	DIODE_TYPE = PN; 
+} temp = diode_dev
+
+DIODE PN_LVT pdio_lvt tpdiff nxwell { 
+	DIODE_TYPE = PN; 
+} temp = diode_dev
+
+/* N-type diffusion diode */
+DIODE NP ndiode tndiff psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NP18V np18v_dio tndiff psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NP25V np25v_dio tndiff psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NP33V np33v_dio tndiff psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NP_HVT ndio_hvt tndiff psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NP_LVT ndio_lvt tndiff psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NP_NA ndio_na_dio tndiff psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NP_NA18V ndio_na18v_dio tndiff psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NP_NA25V ndio_na25v_dio tndiff psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NP_NA33V ndio_na33v_dio tndiff psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+
+/* well diode */
+DIODE NWDIO nwdiode_dio nxwell_NWDIODE psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NWDIO18V nwdiode18_dio nxwell_NWDIODE18 psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NWDIO25V nwdiode25_dio nxwell_NWDIODE25 psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+
+DIODE NWDIO33V nwdiode33_dio nxwell_NWDIODE33 psub { 
+	DIODE_TYPE = NP; 
+} temp = diode_dev
+/********** Deep Nwell Diode Extraction******/
+
+
+DEVICE DNWDIODE dnwdiode_pwell dnwdiode_nwell psub {
+    DEVICE_PREFIX=X
+    CREATE_DEFAULT_PROPERTIES = FALSE
+    PROPERTY = {area,pj};
+    PROCESSING_LAYERS = {dnwdiode_pwell1};
+    area = AREA(dnwdiode_pwell1);
+    pj   = PERIM(dnwdiode_pwell1);
+} temp = dev_dnwdio_dev
+
+
+/*******Vertical BJTS*****************/
+PNP VPNP 1_0V_BJT_COLL 1_0V_BJT_BASE 1_0V_BJT_EMIT {
+	} TEMP=_generated_output_layer
+
+PNP VPNP25V 2_5V_BJT_COLL 2_5V_BJT_BASE 2_5V_BJT_EMIT {
+	} TEMP=_generated_output_layer
+
+NPN VNPN 1_0V_BJT_EMIT_NPN 1_0V_BJT_BASE_NPN 1_0V_BJT_COLL_NPN {
+	} TEMP=_generated_output_layer
+
+NPN VNPN25V 2_5V_BJT_EMIT_NPN 2_5V_BJT_BASE_NPN 2_5V_BJT_COLL_NPN {
+	} TEMP=_generated_output_layer
+/*******Lateral BJTS*****************/
+PNP LPNP 1_0V_BJT_COLLL 1_0V_BJT_BASEL 1_0V_BJT_EMITL {
+	BJT_TOPOLOGY = LATERAL
+	} TEMP=_generated_output_layer
+PNP LPNP25V 2_5V_BJT_COLLL 2_5V_BJT_BASEL 2_5V_BJT_EMITL {
+	BJT_TOPOLOGY = LATERAL
+	} TEMP=_generated_output_layer
+NPN LNPN 1_0V_BJT_EMIT_NPNL 1_0V_BJT_BASE_NPNL 1_0V_BJT_COLL_NPNL {
+	BJT_TOPOLOGY = LATERAL
+	} TEMP=_generated_output_layer
+NPN LNPN25V 2_5V_BJT_EMIT_NPNL 2_5V_BJT_BASE_NPNL 2_5V_BJT_COLL_NPNL {
+	BJT_TOPOLOGY = LATERAL
+	} TEMP=_generated_output_layer
+
+PNP DNWPNP coll_dnw_pnp base_dnw_pnp emit_dnw_pnp {
+	} TEMP=_generated_output_layer
+
+/********** VARACTOR EXTRACTION **********/
+/*
+//CAPACITOR NVAR1 varngate varnpoly varndiff {
+//DEVICE_PREFIX=X
+//PROPERTY = {lr(u),wr(u)};
+//lr = PERIM_COIN (varnpoly,varngate);
+//EV_LENGTH = lr;
+//EV_WIDTH = EV_AREA/lr;
+//} TEMP = var_nc
+
+//CAPACITOR PVAR1 varpgate varppoly varpdiff {
+//DEVICE_PREFIX=X
+//PROPERTY = {lr(u),wr(u)};
+//lr = PERIM_COIN (varppoly,varpgate);
+//EV_LENGTH = lr;
+//EV_WIDTH = EV_AREA/lr;
+//} TEMP = var_nc
+
+//CAPACITOR NVAR2 varngate25 varnpoly varndiff25 {
+//DEVICE_PREFIX=X
+//PROPERTY = {lr(u),wr(u)};
+//lr = PERIM_COIN (varnpoly,varngate25);
+//EV_LENGTH = lr;
+//EV_WIDTH = EV_AREA/lr;
+//} TEMP = var_nc
+
+//CAPACITOR PVAR2 varpgate25 varppoly varpdiff25 {
+//DEVICE_PREFIX=X
+//PROPERTY = {lr(u),wr(u)};
+//lr = PERIM_COIN (varppoly,varpgate25);
+//EV_LENGTH = lr;
+//EV_WIDTH = EV_AREA/lr;
+//} TEMP = var_nc
+*/
+
+CAPACITOR MOSVAR_1V2  varngate varnpoly varndiff varnwell {
+DEVICE_PREFIX=X
+PROPERTY = {l(u),w(u), fingers, Mcell};
+l = PERIM_COIN (varnpoly,varngate);
+EV_LENGTH = l;
+EV_WIDTH = EV_AREA/l;
+} TEMP = var_nc
+
+/********** INDUCTOR EXTRACTION **********/
+
+IND SYNSTD ind_octagon top_metex sec_top_met psub {
+        DEVICE_PREFIX=X
+	PROPERTY = { R,S,N };
+	tu = EV_TURN;
+	ro_tur = round(tu);
+	tu_diff = tu - ro_tur;
+	if (tu == 1 || tu < 1.0) {
+	    D = EV_BBWIDTH - (2*tu*EV_WIDTH);
+	    EV_SPACE = 0;
+	}
+	if ( tu > 1 && tu_diff == 0) {
+	    D = EV_BBWIDTH - (2*tu*EV_WIDTH) - (2*(tu-1)*EV_SPACE);
+	}
+	if ( tu > 1 && tu_diff == 0.25) {
+	    D = EV_BBWIDTH - (2*ro_tur*EV_WIDTH) - (2*(ro_tur-1)*EV_SPACE) - EV_WIDTH - EV_SPACE;
+	}
+	if ( tu > 1 && tu_diff == 0.5) {
+	    D = EV_BBWIDTH - (2*ro_tur*EV_WIDTH) - (2*(ro_tur-2)*EV_SPACE) - EV_WIDTH - EV_SPACE;
+	}	
+	if ( tu > 1 && tu_diff == -0.25) {
+	    D = EV_BBWIDTH - (2*ro_tur*EV_WIDTH) - (2*(ro_tur-1)*EV_SPACE);
+	}
+	S = EV_SPACE;
+	N = EV_TURN;
+	R = D/2;
+} temp = ind_dev
+
+IND INDSYM ind_oct_sym top_metex top_metex psub {
+        DEVICE_PREFIX=X
+	PROPERTY = { R,S,N };
+	tu = EV_TURN;
+	ro_tur = round(tu);
+	tu_diff = tu - ro_tur;
+	if (tu == 1 || tu < 1.0) {
+	    EV_WIDTH = PERIM_COIN(ind_oct_sym,top_metex)/2;
+	    D = EV_BBWIDTH - (2*tu*EV_WIDTH);
+	    EV_SPACE = 0;
+	}
+	if ( tu > 1 && tu_diff == 0) {
+	    D = EV_BBWIDTH - (2*tu*EV_WIDTH) - (2*(tu-1)*EV_SPACE);
+	}
+	if ( tu > 1 && tu_diff == 0.25) {
+	    D = EV_BBWIDTH - (2*ro_tur*EV_WIDTH) - (2*(ro_tur-1)*EV_SPACE) - EV_WIDTH - EV_SPACE;
+	}
+	if ( tu > 1 && tu_diff == 0.5) {
+	    D = EV_BBWIDTH - (2*ro_tur*EV_WIDTH) - (2*(ro_tur-2)*EV_SPACE) - EV_WIDTH - EV_SPACE;
+	}	
+	if ( tu > 1 && tu_diff == -0.25) {
+	    D = EV_BBWIDTH - (2*ro_tur*EV_WIDTH) - (2*(ro_tur-1)*EV_SPACE);
+	}
+	S = EV_SPACE;
+	N = EV_TURN;
+	R = D/2;
+} temp = ind_dev
+
+/*
+DEVICE INDSYM ind_oct_sym top_metex<A> top_metex<B> psub<BULK> {
+	PROCESSING_LAYERS = { sec_top_metindsym space_ind_sym ind_oct_sym_radhole }
+	DEV_NONPIN_BODY = TRUE
+	PROPERTY = { R,S,N }
+	N = COUNT_POLYGON(sec_top_metindsym)+1;
+        EV_WIDTH = PERIM_COIN(ind_oct_sym,top_metex)/2;
+        S = 2 * (AREA(space_ind_sym)/(PERIM_COIN(space_ind_sym,ind_oct_sym)));
+	R = ((PERIM(ind_oct_sym_radhole)/16)/0.4142);
+} temp = ind_dev
+*/
+
+DEVICE INDSYMCT  ind_oct_symct top_metex<A> top_metex<B> third_top_met<C> psub<BULK> {
+        DEVICE_PREFIX=X
+	PROCESSING_LAYERS = { sec_top_metindct space_ind_symct ind_oct_symct_radhole }
+	DEV_NONPIN_BODY = TRUE
+	PROPERTY = { R,S,N }
+	N = COUNT_POLYGON(sec_top_metindct);
+        EV_WIDTH = PERIM_COIN(ind_oct_symct,top_metex)/2;
+        S = 2 * (AREA(space_ind_symct)/(PERIM_COIN(space_ind_symct,ind_oct_symct)));
+	R = ((PERIM(ind_oct_symct_radhole)/16)/0.4142);
+} temp = ind_dev
+
+DEVICE cmom_123 mom_cap_123_body mom_cap_123_term<PLUS> mom_cap_123_term<MINUS> poly<BULK> {
+        DEVICE_PREFIX=X
+	PROCESSING_LAYERS = { MOM_field1, MOM_field2, F_reg1,mom_cap_123_body  }
+	PROPERTY = { w(U), s(U), nv, nh, stm, spm }
+	DEV_NONPIN_BODY=TRUE
+	CREATE_DEFAULT_PROPERTIES=FALSE
+	nv = COUNT_POLYGON(MOM_field1);
+	nh = COUNT_POLYGON(MOM_field2);
+	w = PERIM_COIN(MOM_field2,mom_cap_123_body)/nh;
+	s = ((PERIM(F_reg1)-PERIM_COIN(F_reg1,MOM_field1))/2)/(nv-1);
+	stm = 1;
+	spm = 3;
+} TEMP=mom_cap_123_out
+
+DEVICE cmom_1234 mom_cap_1234_body mom_cap_1234_term<PLUS> mom_cap_1234_term<MINUS> poly<BULK> {
+        DEVICE_PREFIX=X
+	PROCESSING_LAYERS = { MOM_field1, MOM_field2, F_reg1, mom_cap_123_body }
+	PROPERTY = { w(U), s(U), nv, nh, stm, spm }
+	DEV_NONPIN_BODY=TRUE
+	CREATE_DEFAULT_PROPERTIES=FALSE
+	nv = COUNT_POLYGON(MOM_field1);
+	nh = COUNT_POLYGON(MOM_field2);
+	w = PERIM_COIN(MOM_field2,mom_cap_123_body)/nh;
+	s = ((PERIM(F_reg1)-PERIM_COIN(F_reg1,MOM_field1))/2)/(nv-1);
+	stm = 1;
+	spm = 3;
+} TEMP=mom_cap_1234_out
+
+DEVICE cmom_234 mom_cap_234_body mom_cap_234_term<PLUS> mom_cap_234_term<MINUS> poly<BULK> {
+        DEVICE_PREFIX=X
+	PROCESSING_LAYERS = { MOM_field2, MOM_field3, F_reg2, mom_cap_234_body }
+	PROPERTY = { w(U), s(U), nv, nh, stm, spm }
+	DEV_NONPIN_BODY=TRUE
+	CREATE_DEFAULT_PROPERTIES=FALSE
+	nv = COUNT_POLYGON(MOM_field2);
+	nh = COUNT_POLYGON(MOM_field3);
+	w = PERIM_COIN(MOM_field2,mom_cap_234_body)/nh;
+	s = ((PERIM(F_reg2)-PERIM_COIN(F_reg2,MOM_field2))/2)/(nv-1);
+	stm = 1;
+	spm = 3;
+} TEMP=mom_cap_234_out
+
+
+/* Data creation XJVAR */
+
+BOOLEAN nxwell AND VARMARKER { } TEMP=varnwj_rf
+SELECT varnwj_rf INTERACT tpdiff { } TEMP=jvar1_rf
+SELECT jvar1_rf INTERACT tndiff { } TEMP=jvar2_rf
+BOOLEAN jvar2_rf NOT RFDMY { } TEMP=jvar3_rf
+BOOLEAN jvar3_rf AND VARMARKER { } TEMP=jvar_rf3t
+BOOLEAN jvar2_rf AND tpdiff { } TEMP=jvarp_rf
+BOOLEAN jvar2_rf AND tndiff { } TEMP=jvarn_rf
+SELECT jvar_rf3t ENCLOSING jvarp_rf { } TEMP = jvar_nr
+BOOLEAN jvar_rf3t NOT jvar_nr { } TEMP = jvar_ws
+EXTERNAL jvarp_rf jvarn_rf {
+   SPACING < 0.29        /* "0.29" is a trade number from spice model */
+   PARALLEL = TRUE 
+   PARALLEL_POINT_PROJECTION = TRUE
+   SET_CORNERS_TO_SPACING = FALSE
+   SHADOW = FALSE
+} TEMP = w_fac
+
+/* Device Extraction & Equate XJVAR */
+
+DEVICE xjvar jvar_nr tpdiff<PLUS> tndiff<MINUS> psub<BULK> {
+   DEVICE_PREFIX=X
+   PROPERTY = {NR,W};
+   DEV_NONPIN_BODY = TRUE;
+   CREATE_DEFAULT_PROPERTIES = FALSE
+   PROCESSING_LAYERS = {jvarp_rf w_fac}
+   NR = COUNT_CELL_DEV(jvarp_rf);
+   W  = PERIM_COIN(jvarp_rf,w_fac)/(2*NR);
+}TEMP=_generated_output_layer
+
+/* End XJVAR Data and Extraction */
+
+
+/* Data creation VARDIO */
+
+
+DEVICE vardio pvardio<PLUS> nxwell<MINUS> { 
+	DEVICE_PREFIX = X;
+	PROPERTY = { A N };
+	RECOGNITION_LAYER = { RFDMY }
+	N = COUNT_CELL_DEV(pvardio);
+	A = AREA(pvardio);
+} TEMP=_generated_output_layer 
+
+/* End VARDIO Data and Extraction */
+
+/* TEXTING and PORT Creation */
+
+
+/* TEXT_POLYGON POLS.TEXT {
+        SIZE = 0.01
+        CELL_LIST = { * }
+        TEXT_LIST = { * }
+} TEMP = poly_mark
+TEXT_POLYGON M1S.TEXT {
+        SIZE = 0.01
+        CELL_LIST = { * }
+        TEXT_LIST = { * }
+} TEMP = m1_mark
+TEXT_POLYGON M2S.TEXT {
+        SIZE = 0.01
+        CELL_LIST = { * }
+        TEXT_LIST = { * }
+} TEMP = m2_mark
+TEXT_POLYGON M3S.TEXT {
+        SIZE = 0.01
+        CELL_LIST = { * }
+        TEXT_LIST = { * }
+} TEMP = m3_mark
+TEXT_POLYGON M4S.TEXT {
+        SIZE = 0.01
+        CELL_LIST = { * }
+        TEXT_LIST = { * }
+} TEMP = m4_mark
+*/ 
+
+
+
+/*CONNECT {
+        poly BY poly_mark
+        metal1  BY m1_mark
+        third_top_met BY m2_mark
+	sec_top_met BY m3_mark
+	top_metex BY m4_mark
+	metal1 BY m1_pin
+	} */
+CONNECT { metal1 by M1PIN 
+	  metal2 by M2PIN
+	  metal3 by M3PIN
+	  metal4 by M4PIN
+	  metal5 by M5PIN
+	  metal6 by M6PIN
+	  metal7 by M7PIN
+	  metal8 by M8PIN
+	  metal9 by M9PIN
+	  POLS by POLYPIN
+	  poly by POLYPIN
+		        }	
+
+/*TEXT {
+       poly BY POLS.TEXT
+	metal1 BY M1S.TEXT
+	third_top_met BY M2S.TEXT
+	sec_top_met BY M3S.TEXT
+	top_metex BY M4S.TEXT
+} */
+
+TEXT { 
+    metal1 by M1S.TEXT
+    metal2 by M2S.text
+    metal3 by M3S.text
+    metal4 by M4S.text
+    metal5 by M5S.text
+    metal6 by M6S.text
+    metal7 by M7S.text
+    metal8 by M8S.text
+    metal9 by M9S.text
+    poly by POLS.text
+}
+
+TEXT {
+    POLS by POLS.text
+}
+
+/* CREATE_PORTS { */
+       /*TOP_CELL_ONLY = TRUE */
+/*       metal1  BY m1_mark
+       third_top_met BY m2_mark
+       sec_top_met BY m3_mark
+       top_metex BY m4_mark
+       poly BY poly_mark
+} */
+
+CREATE_PORTS {
+       metal1 BY M1PIN
+       metal2 BY M2PIN
+       metal3 BY M3PIN
+       metal4 BY M4PIN
+       POLS BY POLYPIN
+       poly by POLYPIN
+}
+
+PROCESS_TEXT_OPENS { }
+
+NETLIST { NETLIST_EMPTY_CELLS=FALSE }
+
+SPICE {
+        FORMAT = LVS
+        XREF   = TRUE
+	OUTPUT_FILE  = layout.spice
+}
+
+
+
+/* EQUATE SECTION */ 
+
+EQUATE NMOS N=N GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+
+EQUATE NMOS N25=N25 GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+	TOLERANCE[Width] = { 0.00 }
+	TOLERANCE[Width] = { 0.00 }
+	FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+	OPTIONAL= { BULK }
+}
+
+EQUATE NMOS NM25=NM25 GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+	TOLERANCE[Width] = { 0.00 }
+	TOLERANCE[Width] = { 0.00 }
+	FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+	OPTIONAL= { BULK }
+}
+
+EQUATE NMOS NL=NL GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+	TOLERANCE[Width] = { 0.00 }
+	TOLERANCE[Width] = { 0.00 }
+	FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+	OPTIONAL= { BULK }
+}
+
+EQUATE NMOS NH=NH GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+	TOLERANCE[Width] = { 0.00 }
+	TOLERANCE[Width] = { 0.00 }
+	FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+	OPTIONAL= { BULK }
+}
+
+EQUATE NMOS NM=NM GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+	TOLERANCE[Width] = { 0.00 }
+	TOLERANCE[Width] = { 0.00 }
+	FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+	OPTIONAL= { BULK }
+}
+
+
+EQUATE NMOS N18=N18 GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+	TOLERANCE[Width] = { 0.00 }
+	TOLERANCE[Width] = { 0.00 }
+	FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+	OPTIONAL= { BULK }
+}
+
+EQUATE NMOS N33=N33 GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+	TOLERANCE[Width] = { 0.00 }
+	TOLERANCE[Width] = { 0.00 }
+	FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+	OPTIONAL= { BULK }
+}
+
+EQUATE NMOS N=NDN GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+EQUATE NMOS N25=NDN25 GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+	TOLERANCE[Width] = { 0.00 }
+	TOLERANCE[Width] = { 0.00 }
+	FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+	OPTIONAL= { BULK }
+}
+
+EQUATE NMOS NA=NA GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+EQUATE NMOS NA25=NA25 GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+
+EQUATE NMOS NA18=NA18 GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+
+EQUATE NMOS NA33=NA33 GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { NMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+
+EQUATE PMOS P=P GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { PMOS-1 }
+        MERGE_PARALLEL=TRUE
+        MERGE_SERIES=FALSE
+        MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+
+EQUATE PMOS P25=P25 GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { PMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+
+EQUATE PMOS P33=P33 GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { PMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+
+EQUATE PMOS P18=P18 GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { PMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+
+EQUATE PMOS PL=PL GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { PMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+
+EQUATE PMOS PM=PM GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { PMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+
+EQUATE PMOS PH=PH GATE SRC DRN BULK {
+        CHECK_PROPERTIES = { Width Length }
+        TOLERANCE[Length]= { 0.00 }
+        TOLERANCE[Width] = { 0.00 }
+        FILTER_OPTIONS = { PMOS-1 }
+	MERGE_PARALLEL=TRUE
+	MERGE_SERIES=FALSE
+	MERGE_PATHS=FALSE
+        OPTIONAL= { BULK }
+}
+
+
+
+
+
+
+
+/* Capacitor Equate */
+IF (DRAWCBM == 0 )  {
+EQUATE CAP cmim_2t=cmim_2t PLUS MINUS {}
+EQUATE CAP cmim_3t=cmim_3t PLUS MINUS BULK {}
+}
+
+IF (DRAWCBM == 1) {
+EQUATE CAP cmim_3t=cmim_3t PLUS MINUS BULK {
+	CHECK_USER_PROPERTIES = { l, w }
+	REL_TOLERANCE[l] = { 0 }
+	REL_TOLERANCE[w] = { 0 }          
+        RESTRICT_SERIES_MERGING = {
+                PROPERTIES = { l, w }
+                REL_TOLERANCE[l] = { 0 }
+                REL_TOLERANCE[t] = { 0 }
+        }
+        RESTRICT_PARALLEL_MERGING = {
+                PROPERTIES = { l, w }
+                REL_TOLERANCE[l] = { 0 }
+                REL_TOLERANCE[w] = { 0 }
+        }
+        SERIES_PROPERTY_MERGE_METHOD[l] = AVG
+        SERIES_PROPERTY_MERGE_METHOD[w] = AVG
+        PARALLEL_PROPERTY_MERGE_METHOD[l] = AVG
+        PARALLEL_PROPERTY_MERGE_METHOD[w] = AVG
+}
+
+EQUATE CAP cmim_2t=cmim_2t PLUS MINUS {
+	CHECK_USER_PROPERTIES = { l, w }
+	REL_TOLERANCE[l] = { 0 }
+	REL_TOLERANCE[w] = { 0 }          
+        RESTRICT_SERIES_MERGING = {
+                PROPERTIES = { l, w }
+                REL_TOLERANCE[t] = { 0 }
+                REL_TOLERANCE[w] = { 0 }
+        }
+        RESTRICT_PARALLEL_MERGING = {
+                PROPERTIES = { l, w }
+                REL_TOLERANCE[l] = { 0 }
+                REL_TOLERANCE[w] = { 0 }
+        }
+        SERIES_PROPERTY_MERGE_METHOD[l] = AVG
+        SERIES_PROPERTY_MERGE_METHOD[w] = AVG
+        PARALLEL_PROPERTY_MERGE_METHOD[l] = AVG
+        PARALLEL_PROPERTY_MERGE_METHOD[w] = AVG
+}
+}
+
+
+EQUATE RES rm1=rm1 PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rm2=rm2 PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rm3=rm3 PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+
+EQUATE RES rm4=rm4 PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rm5=rm5 PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rm6=rm6 PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rm7=rm7 PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rm8=rm8 PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rmt=rm9 PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+
+
+
+
+
+IF ( RES_3TERM == 1) {
+
+EQUATE RES rnpoly_3t=rnpoly_3t_psub PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rnpolyS_3t=rnpolyS_3t_psub PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rppoly_3t=rppoly_3t_psub PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}  
+EQUATE RES rppolyS_3t=rppolyS_3t_psub PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}  
+EQUATE RES hrnpoly_3t=hrnpoly_3t_psub PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES hrppoly_3t=hrppoly_3t_psub PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rnpoly_3t=rnpoly_3t_nw PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rnpolyS_3t=rnpolyS_3t_nw PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rppoly_3t=rppoly_3t_nw PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}  
+EQUATE RES rppolyS_3t=rppolyS_3t_nw PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}  
+EQUATE RES hrnpoly_3t=hrnpoly_3t_nw PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES hrppoly_3t=hrppoly_3t_nw PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rndiff_3t=rndiff_3t PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+} 
+EQUATE RES rndiffS_3t=rndiffS_3t PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+} 
+EQUATE RES rpdiff_3t=rpdiff_3t PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rpdiffS_3t=rpdiffS_3t PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rnwell_3t=rnwell_3t PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rnwdiff_3t=rnwdiff_3t PLUS MINUS BULK {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+
+/* Serp Resistor 3 term EQUATE */
+EQUATE RES rpolyc=rpolyc PLUS MINUS BULK { 
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+    }
+EQUATE RES rpolyhc=rpolyhc PLUS MINUS BULK { 
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+    }
+
+} ELSE {
+EQUATE RES rnpoly=rnpoly PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rnpolyS=rnpolyS PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rppoly=rppoly PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}  
+EQUATE RES rppolyS=rppolyS PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}  
+EQUATE RES hrnpoly=hrnpoly PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+
+EQUATE RES hrppoly=hrppoly PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+
+EQUATE RES rndiff=rndiff PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+} 
+EQUATE RES rndiffS=rndiffS PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+} 
+EQUATE RES rpdiff=rpdiff PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rpdiffS=rpdiffS PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rnwell=rnwell PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+EQUATE RES rnwdiff=rnwdiff PLUS MINUS {
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+}
+
+/***** Serpentine Resistors 2-term Equate *****/
+
+EQUATE RES rpoly=rpoly PLUS MINUS { 
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+    }
+
+EQUATE RES rpolyh=rpolyh PLUS MINUS { 
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+    }
+
+EQUATE RES rpolyrf=rpolyrf PLUS MINUS { 
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+    }
+
+EQUATE RES rpolyhrf=rpolyhrf PLUS MINUS { 
+    CHECK_PROPERTIES = { l,w }
+    MERGE_PARALLEL= TRUE
+    MERGE_SERIES= TRUE
+    TOLERANCE[l]= { +1.000, -1.000 }
+    TOLERANCE[w]= { +1.000, -1.000 }
+    }
+
+}
+
+/***** Diode Equate *****/
+EQUATE DIODE NP=NP CATHODE ANODE { 
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NP18V=NP18V CATHODE ANODE { 
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NP25V=NP25V CATHODE ANODE { 
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NP33V=NP33V CATHODE ANODE { 
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NP_HVT=NP_HVT CATHODE ANODE { 
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NP_LVT=NP_LVT CATHODE ANODE { 
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NP_NA=NP_NA CATHODE ANODE { 
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NP_NA18V=NP_NA18V CATHODE ANODE { 
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NP_NA25V=NP_NA25V CATHODE ANODE { 
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NP_NA33V=NP_NA33V CATHODE ANODE { 
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE PN=PN ANODE CATHODE {      
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE PN18V=PN18V ANODE CATHODE {      
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE PN25V=PN25V ANODE CATHODE {      
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE PN33V=PN33V ANODE CATHODE {      
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE PN_HVT=PN_HVT ANODE CATHODE {      
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE PN_LVT=PN_LVT ANODE CATHODE {      
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NWDIO=NWDIO CATHODE ANODE {      
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NWDIO18V=NWDIO18V CATHODE ANODE {      
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NWDIO25V=NWDIO25V CATHODE ANODE {      
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+EQUATE DIODE NWDIO33V=NWDIO33V CATHODE ANODE {      
+       CHECK_PROPERTIES = { AREA }
+       TOLERANCE[AREA]= {  10.00 }
+}
+
+
+/***** Capacitor Equate *****/
+/*
+//EQUATE CAP NVAR1=NVAR1 PLUS MINUS {}
+//EQUATE CAP NVAR2=NVAR2 PLUS MINUS {}
+//EQUATE CAP PVAR1=PVAR1 PLUS MINUS {}
+//EQUATE CAP PVAR2=PVAR2 PLUS MINUS {}
+*/
+EQUATE CAP MOSVAR_1V2 = MOSVAR_1V2 PLUS MINUS BULK {
+       CHECK_USER_PROPERTIES = { l, w }
+       TOLERANCE[l] = { 5.00 }
+       TOLERANCE[w] = { 5.00 }
+}
+
+EQUATE IND SYNSTD=SYNSTD PLUS MINUS BULK {
+       CHECK_USER_PROPERTIES = { N,w,S,R }
+       TOLERANCE[S]= {  5.00 }
+       TOLERANCE[w]= {  5.00 }
+}
+
+EQUATE IND INDSYM=INDSYM PLUS MINUS BULK {
+       CHECK_USER_PROPERTIES = { N,w,S,R }
+       TOLERANCE[S]= {  5.00 }
+       TOLERANCE[w]= {  5.00 }
+}
+
+EQUATE DEVICE INDSYMCT=INDSYMCT PLUS MINUS CTAP BULK {
+       CHECK_USER_PROPERTIES = { N,w,S,R }
+       TOLERANCE[S]= {  5.00 }
+       TOLERANCE[w]= {  5.00 }
+}
+
+EQUATE DEVICE DNWDIODE=DNWDIODE PW DNW PSUB {
+       CHECK_USER_PROPERTIES = {area, pj} }
+
+/***************BJT***********************/
+EQUATE PNP VPNP = VPNP COLL BASE EMIT {
+        FILTER_OPTIONS = {PNP-1  } }
+EQUATE PNP VPNP25V = VPNP25V COLL BASE EMIT {
+	FILTER_OPTIONS = {PNP-1  } }
+EQUATE PNP LPNP = LPNP COLL BASE EMIT {
+	FILTER_OPTIONS = { PNP-1 } }
+EQUATE PNP LPNP25V = LPNP25V COLL BASE EMIT {
+	FILTER_OPTIONS = { PNP-1 } }
+EQUATE PNP DNWPNP = DNWPNP COLL BASE EMIT {
+	FILTER_OPTIONS = { PNP-1 } }
+
+EQUATE NPN VNPN = VNPN EMIT BASE COLL {
+	FILTER_OPTIONS = { NPN-1 } }
+EQUATE NPN VNPN25V = VNPN25V EMIT BASE COLL {
+	FILTER_OPTIONS = { NPN-1 } }
+EQUATE NPN LNPN = LNPN EMIT BASE COLL {
+	FILTER_OPTIONS = { NPN-1 } }
+EQUATE NPN LNPN25V = LNPN25V EMIT BASE COLL {
+	FILTER_OPTIONS = { NPN-1 } }
+
+
+
+/* RTMOM */
+
+EQUATE DEVICE cmom=cmom_123 PLUS MINUS BULK {
+	CHECK_USER_PROPERTIES = { w, s, nv, nh, stm, spm }
+	REL_TOLERANCE[w] = { 0 }
+        REL_TOLERANCE[s] = { 0 }
+        REL_TOLERANCE[nv] = { 0 }
+        REL_TOLERANCE[nh] = { 0 }
+        REL_TOLERANCE[stm] = { 0 }
+        REL_TOLERANCE[spm] = { 0 }
+	SCHEMATIC_SWAPPABLE_PORTS = { PLUS MINUS }
+}
+
+EQUATE DEVICE cmom=cmom_1234 PLUS MINUS BULK {
+	CHECK_USER_PROPERTIES = { w, s, nv, nh, stm, spm }
+	REL_TOLERANCE[w] = { 0 }
+        REL_TOLERANCE[s] = { 0 }
+        REL_TOLERANCE[nv] = { 0 }
+        REL_TOLERANCE[nh] = { 0 }
+        REL_TOLERANCE[stm] = { 0 }
+        REL_TOLERANCE[spm] = { 0 }
+	SCHEMATIC_SWAPPABLE_PORTS = { PLUS MINUS }
+}
+
+EQUATE DEVICE cmom=cmom_234 PLUS MINUS BULK {
+	CHECK_USER_PROPERTIES = { w, s, nv, nh, stm, spm }
+	REL_TOLERANCE[w] = { 0 }
+        REL_TOLERANCE[s] = { 0 }
+        REL_TOLERANCE[nv] = { 0 }
+        REL_TOLERANCE[nh] = { 0 }
+        REL_TOLERANCE[stm] = { 0 }
+        REL_TOLERANCE[spm] = { 0 }
+	SCHEMATIC_SWAPPABLE_PORTS = { PLUS MINUS }
+}
+
+/* END RTMOM */
+
+
+
+/* XJVAR Equate */
+EQUATE DEV XJVAR = xjvar PLUS MINUS BULK {
+        check_user_properties  = {NR,W}
+        rel_user_tolerance[NR]  = {0,0}
+        rel_user_tolerance[W]  = {0,0}
+}
+
+/* XJVAR Equate end */
+
+
+/* VARDIO Equate */
+
+EQUATE DEV VARDIO=vardio PLUS MINUS{ 
+	CHECK_POLARITY=TRUE
+	NO_SWAP=TRUE
+	CHECK_USER_PROPERTIES = { A }
+	REL_USER_TOLERANCE[A] = {0.00,0.00}
+	} 
+/* End VARDIO Equate */
+
+
+
+/******************************************/
+
+COMPARE {
+	CALCULATE_CLASS=TRUE
+	COMPARE_PROPERTIES=TRUE
+	DETECT_PERMUTABLE_PORTS=TRUE
+	EQUATE_BY_NET_NAME=TRUE
+	EXPLODE_ON_ERROR=TRUE
+	FILTER=TRUE
+	MATCH_BY_PROPERTY=TRUE
+	MERGE_PARALLEL= TRUE 
+	MERGE_PATHS=FALSE
+	MERGE_SERIES=TRUE
+	PARALLEL_MERGE_RATIO=TRUE
+	PROPERTY_WARNING=FALSE
+	PUSH_DOWN_PINS=TRUE
+	PUSH_DOWN_DEVICES=TRUE
+	REMOVE_DANGLING_NETS=TRUE
+	SHORT_EQUIVALENT_NODES=FALSE
+	RETAIN_NEW_DATA=TRUE
+	RETAIN_PREVIOUS_DATA=FALSE
+	OPTIONAL_PINS = FALSE 
+}
+
+WRITE_EXTRACT_VIEW {
+	LIBRARY_NAME = EXTRACT_VIEW
+	LIBRARY_PATH = ./
+}
+
+GRAPHICS_NETLIST {
+	EXPLORER_LAYERS (0)
+}
+
+
+
+
+
+

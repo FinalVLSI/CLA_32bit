@@ -1,0 +1,12 @@
+<module name="vsl: reference90RF n_4t auCdl vl: auCdl schematic symbol" >
+<scope name="Terminal" >
+<forward>
+<mapping src="&lt;termOrder>" dst="D G S B" />
+<mapping src="&lt;unmappedTermOrder>" dst="D G S B" />
+</forward>
+<reverse>
+<mapping src="D G S B" dst="&lt;unmappedTermOrder>" />
+</reverse>
+</scope>
+<master_instances/>
+</module>

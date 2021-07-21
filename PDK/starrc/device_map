@@ -1,0 +1,132 @@
+//**************************************************************************/
+//*  Copyright (c), 2009-2010 Synopsys, Inc.  All rights reserved.         */
+//*  This file and the associated documentation are confidential           */
+//*  and proprietary to Synopsys, Inc.                                     */
+//*------------------------------------------------------------------------*/
+//*  DISCLAIMER                                                            */
+//*  The information contained herein is provided by Synopsys, Inc. on     */
+//*  an "AS IS" basis without any warranty, and Synopsys has no obligation */
+//*  to support or otherwise maintain the information.                     */
+//*                                                                        */
+//*  Synopsys, Inc. disclaims any representation that the information      */
+//*  does not infringe any intellectual property rights or proprietary     */
+//*  rights of any third parties.  There are no other warranties given by  */
+//*  Synopsys, whether express, implied or statutory, including, without   */
+//*  limitation, implied warranties of merchantability and fitness for a   */
+//*  particular purpose.                                                   */
+//*                                                                        */
+//*  Synopsys, Inc. reserves the right to make changes to the information  */
+//*  at any time and without notice.                                       */
+//**************************************************************************/
+
+
+// Fields:
+// dev_netlist_model   dev_lib   dev_cell   dev_view  pin_1 pin_2 [pin_3 pin_4 ....] 
+
+pres  analogLib   presistor  ivpcell  PLUS MINUS MAG=1.0
+pcap  analogLib   pcapacitor ivpcell  PLUS MINUS MAG=1.0
+
+
+N	reference90RF n_4t        ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+NL	reference90RF nl_4t       ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+NH	reference90RF nh_4t       ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+NM	reference90RF nm_4t       ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+N18	reference90RF n18_4t      ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+N25	reference90RF n25_4t      ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+N33	reference90RF n33_4t      ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+NM25	reference90RF nm25_4t     ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+NA	reference90RF na_4t       ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+NA25	reference90RF na25_4t     ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+NA18	reference90RF na18_4t     ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+NA33	reference90RF na33_4t     ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+P	reference90RF p_4t	ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+PL	reference90RF pl_4t       ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+PM	reference90RF pm_4t       ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+PH	reference90RF ph_4t       ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+P25	reference90RF p25_4t      ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+P18	reference90RF p18_4t      ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+P33	reference90RF p33_4t      ivpcell  D G S B  MAG=1.5   PROPMAP w=wtot
+
+
+
+
+NP       reference90RF np       ivpcell  PLUS MINUS MAG=1.5	 
+NP18V    reference90RF np18     ivpcell  PLUS MINUS MAG=1.5	 
+PN       reference90RF pn       ivpcell  PLUS MINUS MAG=1.5	 
+PN18V    reference90RF pn18     ivpcell  PLUS MINUS MAG=1.5	 
+NWDIO    reference90RF nwdio     ivpcell  PLUS MINUS MAG=1.5	 
+
+
+hrnpoly	    reference90RF	hrnpoly	ivpcell	PLUS MINUS MAG=1.5  PROPMAP l=Leff
+hrppoly	    reference90RF	hrppoly ivpcell	PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rnpoly	    reference90RF rnpoly	ivpcell	PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rppoly	    reference90RF rppoly  ivpcell	PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rndiff	    reference90RF rndiff  ivpcell	PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rndiffS	    reference90RF rndiffs ivpcell	PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rpdiff	    reference90RF rpdiff  ivpcell	PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rpdiffS	    reference90RF rpdiffs ivpcell	PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rnwell	    reference90RF rnwell  ivpcell	PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rnwdiff	    reference90RF rnwdiff ivpcell	PLUS MINUS MAG=1.5	PROPMAP l=Leff
+rnpolyS	    reference90RF rnpolys ivpcell	PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rppolyS	    reference90RF rppolys ivpcell	PLUS MINUS MAG=1.5  PROPMAP l=Leff
+
+hrnpoly_3t  reference90RF	hrnpoly_3t ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+hrppoly_3t  reference90RF	hrppoly_3t ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+rnpoly_3t   reference90RF rnpoly_3t  ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+rppoly_3t   reference90RF rppoly_3t  ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+rndiff_3t   reference90RF rndiff_3t  ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+rndiffS_3t  reference90RF rndiffs_3t ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+rpdiff_3t   reference90RF rpdiff_3t  ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+rpdiffS_3t  reference90RF rpdiffs_3t ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+rnwell_3t   reference90RF rnwell_3t  ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+rnwdiff_3t  reference90RF rnwdiff_3t ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+rnpolyS_3t  reference90RF rnpolys_3t ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+rppolyS_3t  reference90RF rppolys_3t ivpcell PLUS MINUS BULK MAG=1.5  PROPMAP l=Leff
+
+rm1         reference90RF rm1         ivpcell PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rm2         reference90RF rm2         ivpcell PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rm3         reference90RF rm3         ivpcell PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rm4         reference90RF rm4         ivpcell PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rm5         reference90RF rm5         ivpcell PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rm6         reference90RF rm6         ivpcell PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rm7         reference90RF rm7         ivpcell PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rm8         reference90RF rm8         ivpcell PLUS MINUS MAG=1.5  PROPMAP l=Leff
+rmt         reference90RF rmt         ivpcell PLUS MINUS MAG=1.5  PROPMAP l=Leff
+
+rpoly	    reference90RF rpoly	ivpcell	PLUS MINUS MAG=1.5
+rpolyh	    reference90RF rpolyh	ivpcell	PLUS MINUS MAG=1.5
+rpolyrf	    reference90RF rpolyrf	ivpcell	PLUS MINUS MAG=1.5
+rpolyhrf    reference90RF rpolyhrf    ivpcell PLUS MINUS MAG=1.5
+
+rpolyc	    reference90RF rpolyc	    ivpcell PLUS MINUS BULK MAG=1.5
+rpolyhc	    reference90RF rpolyhc	    ivpcell PLUS MINUS BULK MAG=1.5
+
+cmim_2t	    reference90RF	    cmim_2t	ivpcell	 PLUS MINUS MAG=1.5
+cmim_3t	    reference90RF	    cmim_3t	ivpcell	 PLUS MINUS BULK MAG=1.5
+cmom        reference90RF     cmom    ivpcell  PLUS MINUS BULK MAG=1.5 PROPMAP s=spacing PROPMAP w=width PROPMAP stm=startmetal PROPMAP spm=endmetal
+
+
+LNPN	    reference90RF  lnpn	    ivpcell C B E MAG=1.5
+LNPN25V	    reference90RF  lnpn25v    ivpcell C B E MAG=1.5
+LPNP	    reference90RF  lpnp	    ivpcell C B E MAG=1.5
+LPNP25V	    reference90RF  lpnp25v    ivpcell C B E MAG=1.5
+VPNP	    reference90RF  vnpn	    ivpcell C B E MAG=1.5
+VPNP25V	    reference90RF  vnpn25v    ivpcell C B E MAG=1.5
+VNPN	    reference90RF  vpnp	    ivpcell C B E MAG=1.5
+VNPN25V	    reference90RF  vpnp25v    ivpcell C B E MAG=1.5
+
+
+NVAR1	    reference90RF  nvar1	    ivpcell PLUS MINUS MAG=1.5
+NVAR2	    reference90RF  nvar2	    ivpcell PLUS MINUS MAG=1.5
+PVAR1	    reference90RF  pvar1	    ivpcell PLUS MINUS MAG=1.5
+PVAR2	    reference90RF  pvar2	    ivpcell PLUS MINUS MAG=1.5
+
+VARDIO	    reference90RF	 vardio	    ivpcell PLUS MINUS MAG=1.5
+XJVAR	    reference90RF	 xjvar	    ivpcell PLUS MINUS BULK MAG=1.5 PROPMAP W=wr PROPMAP NR=nr
+
+
+
+SYNSTD	    reference90RF synstd	    ivpcell PLUS MINUS BULK MAG=1.5
+INDSYM	    reference90RF indsym	    ivpcell PLUS MINUS BULK MAG=1.5
+INDSYMCT    reference90RF indsymct    ivpcell PLUS MINUS CTAP BULK MAG=1.5
+

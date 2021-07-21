@@ -1,0 +1,203 @@
+//**************************************************************************/
+//*  Copyright (c), 2009-2010 Synopsys, Inc.  All rights reserved.         */
+//*  This file and the associated documentation are confidential           */
+//*  and proprietary to Synopsys, Inc.                                     */
+//*------------------------------------------------------------------------*/
+//*  DISCLAIMER                                                            */
+//*  The information contained herein is provided by Synopsys, Inc. on     */
+//*  an "AS IS" basis without any warranty, and Synopsys has no obligation */
+//*  to support or otherwise maintain the information.                     */
+//*                                                                        */
+//*  Synopsys, Inc. disclaims any representation that the information      */
+//*  does not infringe any intellectual property rights or proprietary     */
+//*  rights of any third parties.  There are no other warranties given by  */
+//*  Synopsys, whether express, implied or statutory, including, without   */
+//*  limitation, implied warranties of merchantability and fitness for a   */
+//*  particular purpose.                                                   */
+//*                                                                        */
+//*  Synopsys, Inc. reserves the right to make changes to the information  */
+//*  at any time and without notice.                                       */
+//**************************************************************************/
+
+//FORMAT: Runset Layer  Interconnect-LPP Port-LPP    Subnode-LPP
+
+nwsti_r                 nwell drawing    nwell net   nwell subnode
+psub                    psub  drawing    psub  net   psub  subnode
+nxwell                  nwell drawing    nwell net   nwell subnode
+nxwell_NWDIODE          diff  drawing    diff  net   diff  subnode
+nxwell_NWDIODE18        diff  drawing    diff  net   diff  subnode
+nxwell_NWDIODE25        diff  drawing    diff  net   diff  subnode
+nxwell_NWDIODE33        diff  drawing    diff  net   diff  subnode
+1_0V_BJT_COLL           diff  drawing    diff  net   diff  subnode
+2_5V_BJT_COLL           diff  drawing    diff  net   diff  subnode
+1_0V_BJT_EMIT           diff  drawing    diff  net   diff  subnode
+2_5V_BJT_EMIT           diff  drawing    diff  net   diff  subnode
+1_0V_BJT_BASE           diff  drawing    diff  net   diff  subnode
+2_5V_BJT_BASE           diff  drawing    diff  net   diff  subnode
+1_0V_BJT_COLL_NPN       diff  drawing    diff  net   diff  subnode
+1_0V_BJT_EMIT_NPN       diff  drawing    diff  net   diff  subnode
+1_0V_BJT_BASE_NPN       diff  drawing    diff  net   diff  subnode
+2_5V_BJT_COLL_NPN       diff  drawing    diff  net   diff  subnode
+2_5V_BJT_EMIT_NPN       diff  drawing    diff  net   diff  subnode
+2_5V_BJT_BASE_NPN       diff  drawing    diff  net   diff  subnode
+1_0V_BJT_COLLL          diff  drawing    diff  net   diff  subnode
+1_0V_BJT_BASEL          diff  drawing    diff  net   diff  subnode
+1_0V_BJT_EMITL          diff  drawing    diff  net   diff  subnode
+2_5V_BJT_COLLL          diff  drawing    diff  net   diff  subnode
+2_5V_BJT_BASEL          diff  drawing    diff  net   diff  subnode
+2_5V_BJT_EMITL          diff  drawing    diff  net   diff  subnode
+1_0V_BJT_COLL_NPNL      diff  drawing    diff  net   diff  subnode
+1_0V_BJT_EMIT_NPNL      diff  drawing    diff  net   diff  subnode
+1_0V_BJT_BASE_NPNL      diff  drawing    diff  net   diff  subnode
+2_5V_BJT_COLL_NPNL      diff  drawing    diff  net   diff  subnode
+2_5V_BJT_EMIT_NPNL      diff  drawing    diff  net   diff  subnode
+2_5V_BJT_BASE_NPNL      diff  drawing    diff  net   diff  subnode
+base_dnw_pnp            diff  drawing    diff  net   diff  subnode
+subtie                  diff  drawing    diff  net   diff  subnode
+dnwdiode_pwell          diff  drawing    diff  net   diff  subnode
+welltie                 diff  drawing    diff  net   diff  subnode
+dnwdiode_nwell          diff  drawing    diff  net   diff  subnode
+nodcon                  nplus drawing    nplus net   nplus subnode
+tiod                    diff  drawing    diff  net   diff  subnode
+tndiff                  nplus drawing    nplus net   nplus subnode
+tndiff18                nplus drawing    nplus net   nplus subnode 
+tndiff33                nplus drawing    nplus net   nplus subnode
+podcon                  pplus drawing    pplus net   pplus subnode
+pvardio                 diff  drawing    diff  net   diff  subnode
+tpdiff                  pplus drawing    pplus net   pplus subnode
+rdiff_res               diff  drawing    diff  net   diff  subnode
+rdiff_res_nS            diff  drawing    diff  net   diff  subnode
+rpdiff                  diff  drawing    diff  net   diff  subnode
+rpdiff_nS               diff  drawing    diff  net   diff  subnode
+nwdiff_r                diff  drawing    diff  net   diff  subnode
+tndiff_dnwell           diff  drawing    diff  net   diff  subnode
+resndiff_nS             diff  drawing    diff  net   diff  subnode
+rpdiff_term_nS          diff  drawing    diff  net   diff  subnode
+resndiff                diff  drawing    diff  net   diff  subnode
+rpdiff_term             diff  drawing    diff  net   diff  subnode
+varpdiff25              diff  drawing    diff  net   diff  subnode
+varpdiff                diff  drawing    diff  net   diff  subnode
+varndiff                diff  drawing    diff  net   diff  subnode
+varndiff25              diff  drawing    diff  net   diff  subnode
+emit_dnw_pnp            diff  drawing    diff  net   diff  subnode
+ngate                   poly  drawing    poly  net   poly  subnode
+hngate                  poly  drawing    poly  net   poly  subnode
+mngate                  poly  drawing    poly  net   poly  subnode
+lngate                  poly  drawing    poly  net   poly  subnode
+mngate25                poly  drawing    poly  net   poly  subnode
+ngate25                 poly  drawing    poly  net   poly  subnode
+ngate18                 poly  drawing    poly  net   poly  subnode
+ngate33                 poly  drawing    poly  net   poly  subnode
+natgate                 poly  drawing    poly  net   poly  subnode
+natgate25               poly  drawing    poly  net   poly  subnode
+natgate18               poly  drawing    poly  net   poly  subnode
+natgate33               poly  drawing    poly  net   poly  subnode
+varngate                poly  drawing    poly  net   poly  subnode
+varngate25              poly  drawing    poly  net   poly  subnode
+ngate_dnwell            poly  drawing    poly  net   poly  subnode
+ngate_dnwell25          poly  drawing    poly  net   poly  subnode
+pgate                   poly  drawing    poly  net   poly  subnode
+hpgate                  poly  drawing    poly  net   poly  subnode
+lpgate                  poly  drawing    poly  net   poly  subnode
+mpgate                  poly  drawing    poly  net   poly  subnode
+pgate25                 poly  drawing    poly  net   poly  subnode
+pgate18                 poly  drawing    poly  net   poly  subnode
+pgate33                 poly  drawing    poly  net   poly  subnode
+varpgate                poly  drawing    poly  net   poly  subnode
+varpgate25              poly  drawing    poly  net   poly  subnode
+poly                    poly  drawing    poly  net   poly  subnode
+preshterm               poly  drawing    poly  net   poly  subnode
+varnpoly                poly  drawing    poly  net   poly  subnode
+varppoly                poly  drawing    poly  net   poly  subnode
+pres_norf               poly  drawing    poly  net   poly  subnode
+pres_rf_device          poly  drawing    poly  net   poly  subnode
+presh_norf              poly  drawing    poly  net   poly  subnode
+presh_rf_device         poly  drawing    poly  net   poly  subnode
+rnpolywo_r              poly  drawing    poly  net   poly  subnode
+rnpolywo_nS             poly  drawing    poly  net   poly  subnode
+rppolywo_r              poly  drawing    poly  net   poly  subnode
+rppolywo_nS             poly  drawing    poly  net   poly  subnode
+hrpoly                  poly  drawing    poly  net   poly  subnode
+hrppoly                 poly  drawing    poly  net   poly  subnode
+RTERMARKER              poly  drawing    poly  net   poly  subnode
+hrpoly_term_NP          poly  drawing    poly  net   poly  subnode
+hrpoly_term_PP          poly  drawing    poly  net   poly  subnode
+hrppoly_psub            poly  drawing    poly  net   poly  subnode
+hrpoly_psub             poly  drawing    poly  net   poly  subnode
+hrppoly_nxwell          poly  drawing    poly  net   poly  subnode
+rppolywo_nS_nxwell      poly  drawing    poly  net   poly  subnode
+rppolywo_r_nxwell       poly  drawing    poly  net   poly  subnode
+hrpoly_nxwell           poly  drawing    poly  net   poly  subnode
+rnpolywo_nS_nxwell      poly  drawing    poly  net   poly  subnode
+polyCont                cont  drawing    cont  net   cont  subnode
+1_0V_BJT_COLL_cont      cont  drawing    cont  net   cont  subnode
+2_5V_BJT_COLL_cont      cont  drawing    cont  net   cont  subnode
+1_0V_BJT_EMIT_cont      cont  drawing    cont  net   cont  subnode
+2_5V_BJT_EMIT_cont      cont  drawing    cont  net   cont  subnode
+1_0V_BJT_BASE_cont      cont  drawing    cont  net   cont  subnode
+2_5V_BJT_BASE_cont      cont  drawing    cont  net   cont  subnode
+2_5V_BJT_BASE_cont_NPNL cont  drawing    cont  net   cont  subnode
+2_5V_BJT_EMIT_cont_NPNL cont  drawing    cont  net   cont  subnode
+2_5V_BJT_COLL_cont_NPNL cont  drawing    cont  net   cont  subnode
+1_0V_BJT_BASE_cont_NPNL cont  drawing    cont  net   cont  subnode
+1_0V_BJT_EMIT_cont_NPNL cont  drawing    cont  net   cont  subnode
+1_0V_BJT_COLL_cont_NPNL cont  drawing    cont  net   cont  subnode
+2_5V_BJT_EMIT_contL     cont  drawing    cont  net   cont  subnode
+2_5V_BJT_BASE_contL     cont  drawing    cont  net   cont  subnode
+2_5V_BJT_COLL_contL     cont  drawing    cont  net   cont  subnode
+1_0V_BJT_EMIT_contL     cont  drawing    cont  net   cont  subnode
+1_0V_BJT_BASE_contL     cont  drawing    cont  net   cont  subnode
+1_0V_BJT_COLL_contL     cont  drawing    cont  net   cont  subnode
+2_5V_BJT_BASE_cont_NPN  cont  drawing    cont  net   cont  subnode
+2_5V_BJT_EMIT_cont_NPN  cont  drawing    cont  net   cont  subnode
+2_5V_BJT_COLL_cont_NPN  cont  drawing    cont  net   cont  subnode
+1_0V_BJT_BASE_cont_NPN  cont  drawing    cont  net   cont  subnode
+1_0V_BJT_EMIT_cont_NPN  cont  drawing    cont  net   cont  subnode
+1_0V_BJT_COLL_cont_NPN  cont  drawing    cont  net   cont  subnode
+base_dnw_pnp_cont       cont  drawing    cont  net   cont  subnode
+emit_dnw_pnp_cont       cont  drawing    cont  net   cont  subnode
+diffCont                cont  drawing    cont  net   cont  subnode
+dnwCont                 cont  drawing    cont  net   cont  subnode
+tndiff_dnwell25         cont  drawing    cont  net   cont  subnode
+subtie_scon             psub  drawing    psub  net   psub  subnode
+nxwell_scon             psub  drawing    psub  net   psub  subnode
+nxwell_NWDIODE_scon     nplus drawing    nplus net   nplus subnode
+nxwell_NWDIODE18_scon   nplus drawing    nplus net   nplus subnode
+nxwell_NWDIODE25_scon   nplus drawing    nplus net   nplus subnode
+nxwell_NWDIODE33_scon   nplus drawing    nplus net   nplus subnode
+metal1                  m1    drawing    m1    net   m1    subnode
+rm1_body                m1    drawing    m1    net   m1    subnode
+V1S                     v1    drawing    v1    net   v1    subnode
+third_top_met           m7    drawing    m7    net   m7    subnode
+fourth_top_met          m6    drawing    m6    net   m6    subnode
+fifth_top_met           m5    drawing    m5    net   m5    subnode
+sixth_top_met           m4    drawing    m4    net   m4    subnode
+seventh_top_met         m3    drawing    m3    net   m3    subnode
+eighth_top_met          m2    drawing    m2    net   m2    subnode
+rm2_body                m2    drawing    m2    net   m2    subnode
+sec_top_via             v7    drawing    v7    net   v7    subnode
+third_top_via           v6    drawing    v6    net   v6    subnode
+fourth_top_via          v5    drawing    v5    net   v5    subnode
+fifth_top_via           v4    drawing    v4    net   v4    subnode
+sixth_top_via           v3    drawing    v3    net   v3    subnode
+seventh_top_via         v2    drawing    v2    net   v2    subnode
+mom_cap_123_term        m3    drawing    m3    net   m3    subnode
+sec_top_met             m8    drawing    m8    net   m8    subnode
+CAP_MIMS                m8    drawing    m8    net   m8    subnode
+CBM                     cbm   drawing    cbm   net   cbm   subnode
+rm3_body                m3    drawing    m3    net   m3    subnode
+top_via                 v3    drawing    v3    net   v3    subnode
+cap_top_via             v8    drawing    v8    net   v8    subnode
+CTM_VIA                 v8    drawing    v8    net   v8    subnode
+CBM_VIA                 v8    drawing    v8    net   v8    subnode
+top_metex               m9    drawing    m9    net   m9    subnode
+rm4_body                m4    drawing    m4    net   m4    subnode
+rm5_body                m5    drawing    m5    net   m5    subnode
+rm6_body                m6    drawing    m6    net   m6    subnode
+rm7_body                m7    drawing    m7    net   m7    subnode
+rm8_body                m8    drawing    m8    net   m8    subnode
+rm9_body                m9    drawing    m9    net   m9    subnode
+rnpoly_poly             poly  drawing    poly  net   poly  subnode
+rnpoly3t_poly           poly  drawing    poly  net   poly  subnode
+rppoly_poly             poly  drawing    poly  net   poly  subnode
+rppoly3t_poly           poly  drawing    poly  net   poly  subnode

@@ -1,0 +1,58 @@
+#########################################################################
+#
+# This file and the associated documentation are confidential 
+# and proprietary to Synopsys, Inc. 
+#
+# Copyright (c), 2008 Synopsys, Inc. All rights reserved.
+#
+# DISCLAIMER
+# The information contained herein is provided by Synopsys, Inc. on 
+# an "AS IS" basis without any warranty, and Synopsys has no obligation 
+# to support or otherwise maintain the information.
+#
+# Synopsys, Inc. disclaims any representation that the information 
+# does not infringe any intellectual property rights or proprietary
+# rights of any third parties. There are no other warranties given by
+# Synopsys, whether express, implied or statutory, including, without
+# limitation, implied warranties of merchantability and fitness for a
+# particular purpose.
+#
+# Synopsys, Inc. reserves the right to make changes to the information 
+# at any time and without notice.
+#
+#########################################################################
+#
+#	Change Log:
+#
+#	10 Aug 06 : Adding First version
+#	15 Dec 07 : Moved ref90_getFTKVersion from DesignRules.tcl
+##########################################################################
+
+db::setPrefValue leActiveLPP -value "8 4294967295" -scope user
+
+source [oa::getPath [oa::LibFind reference90RF]]/../scripts/callbacks/iPDK_snps.tcl
+source [oa::getPath [oa::LibFind reference90RF]]/../scripts/callbacks/ref90_common.tcl
+source [oa::getPath [oa::LibFind reference90RF]]/../scripts/callbacks/cap_reference90RF_cbk.tcl
+source [oa::getPath [oa::LibFind reference90RF]]/../scripts/callbacks/mos_reference90RF_cbk.tcl
+source [oa::getPath [oa::LibFind reference90RF]]/../scripts/callbacks/res_reference90RF_cbk.tcl
+source [oa::getPath [oa::LibFind reference90RF]]/../scripts/callbacks/dio_reference90RF_cbk.tcl
+source [oa::getPath [oa::LibFind reference90RF]]/../scripts/callbacks/cust_reference90RF_cbk.tcl
+source [oa::getPath [oa::LibFind reference90RF]]/../scripts/common/abutProcedures.tcl
+
+###################################################################################
+# ref90_getFTKVersion is a procedure gives the information about the version of the 
+#	of the FTK
+# Outputs:
+# ---------
+# Prints the FTK library name, Version and release date on console
+#
+###################################################################################
+proc ref90_getPDKVersion { } {
+    puts "\t#######################################"
+    puts "\tPDK Library Name\t: reference90RF"
+    puts "\tPDK Version\t\t: 2.0"
+    puts "\tPDK Release Date\t: 25-March-2010 "
+    puts "\t#######################################\n"
+}
+
+ref90_getPDKVersion

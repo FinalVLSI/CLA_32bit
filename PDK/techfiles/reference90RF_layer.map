@@ -1,0 +1,125 @@
+#########################################################################
+#
+# Copyright (c), 2009-2010 Synopsys, Inc. All rights reserved.
+# This file and the associated documentation are confidential 
+# and proprietary to Synopsys, Inc. 
+# 
+#
+# DISCLAIMER
+# The information contained herein is provided by Synopsys, Inc. on 
+# an "AS IS" basis without any warranty, and Synopsys has no obligation 
+# to support or otherwise maintain the information.
+#
+# Synopsys, Inc. disclaims any representation that the information 
+# does not infringe any intellectual property rights or proprietary
+# rights of any third parties. There are no other warranties given by
+# Synopsys, whether express, implied or statutory, including, without
+# limitation, implied warranties of merchantability and fitness for a
+# particular purpose.
+#
+# Synopsys, Inc. reserves the right to make changes to the information 
+# at any time and without notice.
+#
+#########################################################################
+#
+#	Change Log:
+#
+#	23 Mar 09 : Adding First version
+##########################################################################
+
+#layerName	layerPurpose	layerNo.	layerDataType
+nwell		drawing		1		0
+diff		drawing		2		0
+pplus		drawing		4		0
+nplus		drawing		5		0
+rpoly		drawing		6		0
+cont		drawing		7		0
+
+poly		drawing		3		0
+poly		pin		41		0
+polytext        drawing         41              0
+
+m1		drawing		8		0
+m1		pin		9		0
+m1text		drawing		9		0
+
+m2		drawing		10		0
+m2		pin		11		0
+m2text          drawing         11              0
+
+m3		drawing		12		0
+m3		pin		13		0
+m3text          drawing         13              0
+
+m4		drawing		14		0
+m4		pin		15		0
+m4text          drawing         15              0
+
+v1		drawing		16		0
+v2		drawing		17		0
+v3		drawing		18		0
+
+exclude		blockage	19		0
+mtcap		drawing		20		0
+mbcap		drawing		21		0
+dnw		drawing		22		0
+nwdmy		drawing		23		0
+rpdmy		drawing		24		0
+diode		drawing		25		0
+nat		drawing		26		0
+diff25		drawing		27		0
+rmarker		drawing		28		0
+hrimp		drawing		29		0
+inddmy		drawing		30		0
+varmarker	drawing		31		0
+rmdmy		drawing		32		0
+medvtn		drawing		33		0
+medvtp		drawing		34		0
+diff18		drawing		35		0
+diff33		drawing		36		0
+lowvtn		drawing		37		0
+lowvtp		drawing		38		0
+highvtn		drawing		39		0
+highvtp		drawing		40		0
+bjtdummy	drawing		49		0		
+iplayer		waterMark	63		0
+psub		drawing		64		0
+pindummy	drawing		65		0		
+rtermmarker	drawing		66		0
+ctmdmy		drawing		67		0
+momdmy		dmy1		68		1
+momdmy		dmy2		68		2
+momdmy		dmy3		68		3
+momdmy		dmy4		68		4
+rfdmy		drawing		69		0
+
+
+
+m5		drawing		70		0
+m5		pin		71		0
+m5text          drawing         71              0
+
+m6		drawing		72		0
+m6		pin		73		0
+m6text          drawing         73              0
+
+m7		drawing		74		0
+m7		pin		75		0
+m7text          drawing         75              0
+
+m8		drawing		76		0
+m8		pin		77		0
+m8text          drawing         77              0
+
+m9		drawing		78		0
+m9		pin		79		0
+m9text          drawing         79              0
+
+
+v4		drawing		80		0
+v5		drawing		81		0
+v6		drawing		82		0
+v7		drawing		83		0
+v8		drawing		84		0
+
+

@@ -1,0 +1,15 @@
+INCLUDE $SYNOPSYS_CUSTOM_INSTALL/samples/lib.defs
+DEFINE reference90RF ./PDK/reference90RF
+ASSIGN reference90RF libMode shared
+DEFINE logic_lib ./logic_lib
+ASSIGN logic_lib writePath ./logic_lib
+ASSIGN logic_lib libMode shared
+DEFINE PFA ./PFA
+ASSIGN PFA writePath ./PFA
+ASSIGN PFA libMode shared
+DEFINE CLA ./CLA
+ASSIGN CLA writePath ./CLA
+ASSIGN CLA libMode shared
+DEFINE TOP ./TOP
+ASSIGN TOP writePath ./TOP
+ASSIGN TOP libMode shared

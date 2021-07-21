@@ -1,0 +1,277 @@
+*/**************************************************************************/
+*/*  Copyright (c), 2009-2010 Synopsys, Inc.  All rights reserved.         */
+*/*  This file and the associated documentation are confidential           */
+*/*  and proprietary to Synopsys, Inc.                                     */
+*/*------------------------------------------------------------------------*/
+*/*  DISCLAIMER                                                            */
+*/*  The information contained herein is provided by Synopsys, Inc. on     */
+*/*  an "AS IS" basis without any warranty, and Synopsys has no obligation */
+*/*  to support or otherwise maintain the information.                     */
+*/*                                                                        */
+*/*  Synopsys, Inc. disclaims any representation that the information      */
+*/*  does not infringe any intellectual property rights or proprietary     */
+*/*  rights of any third parties.  There are no other warranties given by  */
+*/*  Synopsys, whether express, implied or statutory, including, without   */
+*/*  limitation, implied warranties of merchantability and fitness for a   */
+*/*  particular purpose.                                                   */
+*/*                                                                        */
+*/*  Synopsys, Inc. reserves the right to make changes to the information  */
+*/*  at any time and without notice.                                       */
+*/**************************************************************************/
+
+conducting_layers
+  1_0V_BJT_COLL		ACTIVE
+  2_5V_BJT_COLL		ACTIVE
+  1_0V_BJT_EMIT		ACTIVE			
+  2_5V_BJT_EMIT		ACTIVE
+  1_0V_BJT_BASE		ACTIVE
+  2_5V_BJT_BASE		ACTIVE
+  1_0V_BJT_COLL_NPN	ACTIVE	
+  1_0V_BJT_EMIT_NPN	ACTIVE
+  1_0V_BJT_BASE_NPN	ACTIVE
+  2_5V_BJT_COLL_NPN	ACTIVE
+  2_5V_BJT_EMIT_NPN	ACTIVE	
+  2_5V_BJT_BASE_NPN	ACTIVE
+  1_0V_BJT_COLLL	ACTIVE
+  1_0V_BJT_BASEL	ACTIVE
+  1_0V_BJT_EMITL	ACTIVE
+  2_5V_BJT_COLLL	ACTIVE
+  2_5V_BJT_BASEL	ACTIVE
+  2_5V_BJT_EMITL	ACTIVE
+  1_0V_BJT_COLL_NPNL	ACTIVE
+  1_0V_BJT_EMIT_NPNL	ACTIVE
+  1_0V_BJT_BASE_NPNL	ACTIVE
+  2_5V_BJT_COLL_NPNL	ACTIVE
+  2_5V_BJT_EMIT_NPNL	ACTIVE
+  2_5V_BJT_BASE_NPNL	ACTIVE
+  base_dnw_pnp		ACTIVE
+  subtie		ACTIVE
+  dnwdiode_pwell	ACTIVE
+  welltie		ACTIVE
+  dnwdiode_nwell	ACTIVE
+  nodcon		ACTIVE
+  tiod			ACTIVE
+  tndiff		ACTIVE
+  tndiff18		ACTIVE
+  tndiff33		ACTIVE
+  podcon		ACTIVE
+  pvardio		ACTIVE
+  tpdiff		ACTIVE
+  poly			POLY
+  preshterm		POLY
+  ngate			GATE
+  hngate		GATE
+  mngate		GATE	
+  lngate		GATE
+  mngate25		GATE
+  ngate25		GATE
+  ngate18		GATE
+  ngate33		GATE
+  natgate		GATE
+  natgate25		GATE
+  natgate18		GATE
+  natgate33		GATE
+  varngate		GATE
+  varnpoly		POLY
+  varngate25		GATE
+  ngate_dnwell		GATE
+  ngate_dnwell25	GATE
+  pgate			GATE
+  hpgate		GATE
+  lpgate		GATE
+  mpgate		GATE
+  pgate25		GATE
+  pgate18		GATE
+  pgate33		GATE
+  varpgate		GATE
+  varppoly		POLY
+  varpgate25		GATE
+  
+  eighth_top_met	M2
+  seventh_top_met	M3
+  sixth_top_met		M4
+  fifth_top_met		M5
+  fourth_top_met	M6
+  third_top_met		M7
+  sec_top_met		M8
+  top_metex		M9
+  
+  CAP_MIMS		M8
+  CBM			M8
+  
+  M1S			M1
+  M3S			M3
+  M4S			M4
+  M5S			M5
+  M6S			M6
+  M7S			M7
+  M8S			M8
+  M9S			M9
+  
+  rm1_body		M1
+  rm2_body		M2
+  rm3_body		M3
+  rm4_body		M4
+  rm5_body		M5
+  rm6_body		M6
+  rm7_body		M7
+  rm8_body		M8
+  rm9_body		M9
+  
+  metal1		M1
+  metal2		M2
+  metal3		M3
+  metal4		M4
+  metal5		M5
+  metal6		M6
+  metal7		M7
+  metal8		M8
+  metal9		M9
+  
+  rdiff_res		ACTIVE
+  rdiff_res_nS		ACTIVE
+  rpdiff		ACTIVE
+  rpdiff_nS		ACTIVE
+  nwsti_r		SUBSTRATE
+  NWELL         SUBSTRATE
+  varnwell      SUBSTRATE
+  nwdiff_r		ACTIVE
+  POLS			POLY
+  pres_norf		POLY
+  pres_rf_device	POLY
+  presh_norf		POLY
+  presh_rf_device	POLY
+  rnpolywo_r		POLY
+  rnpolywo_nS		POLY
+  rppolywo_r		POLY
+  rppolywo_nS		POLY
+  hrpoly		POLY
+  hrppoly		POLY
+  RTERMARKER		POLY
+  rnpoly_poly		POLY
+  rnpoly3t_poly		POLY
+  rppoly_poly		POLY
+  rppoly3t_poly		POLY
+  pinshield		M1
+  hrpoly_term_NP	POLY
+  hrpoly_term_PP	POLY
+  tndiff_dnwell		ACTIVE
+  resndiff_nS		ACTIVE
+  rpdiff_term_nS	ACTIVE
+  resndiff		ACTIVE
+  rpdiff_term		ACTIVE
+  varpdiff25		ACTIVE
+  varpdiff		ACTIVE
+  varndiff		ACTIVE
+  varndiff25		ACTIVE
+  emit_dnw_pnp		ACTIVE
+  psub			SUBSTRATE
+  nxwell		SUBSTRATE
+  nxwell_NWDIODE	SUBSTRATE	
+  nxwell_NWDIODE18	SUBSTRATE
+  nxwell_NWDIODE25	SUBSTRATE	
+  nxwell_NWDIODE33	SUBSTRATE	
+  hrppoly_psub		POLY
+  hrpoly_psub		POLY
+  hrppoly_nxwell        POLY
+  rppolywo_nS_nxwell	POLY
+  rppolywo_r_nxwell	POLY
+  hrpoly_nxwell		POLY 
+  rnpolywo_nS_nxwell	POLY
+
+  
+via_layers
+  1_0V_BJT_COLL_cont	CS_AA
+  2_5V_BJT_COLL_cont	CS_AA
+  1_0V_BJT_EMIT_cont	CS_AA
+  2_5V_BJT_EMIT_cont	CS_AA
+  1_0V_BJT_BASE_cont	CS_AA
+  2_5V_BJT_BASE_cont	CS_AA
+  V1S			V1
+  V2S			V2
+  V3S			V3
+  V4S			V4
+  V5S			V5
+  V6S			V6
+  V7S			V7
+  tndiff_dnwell25	CS_SCON
+  subtie_scon   CS_SCON  
+  nxwell_scon   CS_SCON  
+  nxwell_NWDIODE_scon   CS_SCON  
+  nxwell_NWDIODE18_scon   CS_SCON  
+  nxwell_NWDIODE25_scon   CS_SCON  
+  nxwell_NWDIODE33_scon   CS_SCON  
+  2_5V_BJT_BASE_cont_NPNL	CS_AA
+  2_5V_BJT_EMIT_cont_NPNL	CS_AA
+  2_5V_BJT_COLL_cont_NPNL	CS_AA
+  1_0V_BJT_BASE_cont_NPNL	CS_AA
+  1_0V_BJT_EMIT_cont_NPNL	CS_AA
+  1_0V_BJT_COLL_cont_NPNL	CS_AA
+  2_5V_BJT_EMIT_contL	CS_AA
+  2_5V_BJT_BASE_contL	CS_AA
+  2_5V_BJT_COLL_contL	CS_AA
+  1_0V_BJT_EMIT_contL	CS_AA
+  1_0V_BJT_BASE_contL	CS_AA
+  1_0V_BJT_COLL_contL	CS_AA
+  2_5V_BJT_BASE_cont_NPN	CS_AA
+  2_5V_BJT_EMIT_cont_NPN	CS_AA
+  2_5V_BJT_COLL_cont_NPN	CS_AA
+  1_0V_BJT_BASE_cont_NPN	CS_AA
+  1_0V_BJT_EMIT_cont_NPN	CS_AA
+  1_0V_BJT_COLL_cont_NPN	CS_AA
+  base_dnw_pnp_cont	CS_AA
+  emit_dnw_pnp_cont	CS_AA
+  diffCont	CS_AA
+  polyCont	CS_GC
+  dnwCont	CS_AA
+
+  
+    
+  seventh_top_via   V2  
+  sixth_top_via	    V3  
+  fifth_top_via	    V4  
+  fourth_top_via    V5  
+  third_top_via	    V6  
+  sec_top_via	V7
+  top_via	V8
+  cap_top_via	V8
+  CTM_VIA	V8
+  CBM_VIA	V8
+  
+marker_layers
+  m1_mark
+  m2_mark
+  m3_mark
+  m4_mark
+  m5_mark
+  m6_mark
+  m7_mark
+  m8_mark
+  m9_mark
+  poly_mark
+  M1PIN
+  M2PIN
+  M3PIN
+  M4PIN
+  M5PIN
+  M6PIN
+  M7PIN
+  M8PIN
+  M9PIN
+  POLYPIN
+  
+remove_layers
+  coll_dnw_pnp		
+  rnpolywo_r_psub	
+  rnpolywo_nS_psub	
+  rppolywo_r_psub	
+  rppolywo_nS_psub	
+  rnpolywo_r_nxwell	
+  	
+  pres_norf_subdef	
+  presh_norf_subdef	
+  tpdiff_dnwell		
+  mom_cap_123_term
+  mom_cap_1234_term
+  mom_cap_234_term	
+

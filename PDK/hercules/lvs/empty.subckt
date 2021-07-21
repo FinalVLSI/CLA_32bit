@@ -1,0 +1,118 @@
+.GLOBAL gnd! vdd!
+*.LENGTH_UNIT R S
+.subckt rnpoly PLUS MINUS
+.ends
+.subckt rppoly PLUS MINUS
+.ends
+.subckt rnpolyS PLUS MINUS
+.ends
+.subckt rppolyS PLUS MINUS
+.ends
+.subckt rndiff PLUS MINUS
+.ends
+.subckt rpdiff PLUS MINUS
+.ends
+.subckt rndiffS PLUS MINUS
+.ends
+.subckt rpdiffS PLUS MINUS
+.ends
+.subckt rnpoly_3t PLUS MINUS BULK
+.ends
+.subckt rppoly_3t PLUS MINUS BULK
+.ends
+.subckt rnpolyS_3t PLUS MINUS BULK
+.ends
+.subckt rppolyS_3t PLUS MINUS BULK
+.ends
+.subckt rndiff_3t PLUS MINUS BULK
+.ends
+.subckt rpdiff_3t PLUS MINUS BULK
+.ends
+.subckt rndiffS_3t PLUS MINUS BULK
+.ends
+.subckt rpdiffS_3t PLUS MINUS BULK
+.ends
+.subckt rnwell PLUS MINUS
+.ends
+.subckt rnwdiff PLUS MINUS
+.ends
+.subckt rnwell_3t PLUS MINUS BULK
+.ends
+.subckt rnwdiff_3t PLUS MINUS BULK
+.ends
+.subckt hrnpoly PLUS MINUS
+.ends
+.subckt hrppoly PLUS MINUS
+.ends
+.subckt hrnpoly_3t PLUS MINUS BULK
+.ends
+.subckt hrppoly_3t PLUS MINUS BULK
+.ends
+.subckt rm1 PLUS MINUS
+.ends
+.subckt rm2 PLUS MINUS
+.ends
+.subckt rm3 PLUS MINUS
+.ends
+.subckt rm4 PLUS MINUS
+.ends
+.subckt rm5 PLUS MINUS
+.ends
+.subckt rm6 PLUS MINUS
+.ends
+.subckt rm7 PLUS MINUS
+.ends
+.subckt rm8 PLUS MINUS
+.ends
+.subckt rmt PLUS MINUS
+.ends
+.subckt rpoly PLUS MINUS
+.ends
+.subckt rpolyh PLUS MINUS
+.ends
+.subckt rpolyrf PLUS MINUS
+.ends
+.subckt rpolyhrf PLUS MINUS
+.ends
+.subckt rpolyc PLUS MINUS BULK
+.ends
+.subckt rpolyhc PLUS MINUS BULK
+.ends
+.subckt cmim_2t PLUS MINUS
+.ends
+.subckt cmim_3t PLUS MINUS BULK
+.ends
+.subckt cmom PLUS MINUS BULK
+.ends
+.subckt DNWDIODE PW DNW PSUB
+.ends
+.subckt NVAR1 PLUS MINUS
+.ends
+.subckt NVAR2 PLUS MINUS
+.ends
+.subckt PVAR1 PLUS MINUS
+.ends
+.subckt PVAR2 PLUS MINUS
+.ends
+.subckt XJVAR PLUS MINUS BULK
+.ends
+.subckt VARDIO PLUS MINUS
+.ends
+.subckt SYNSTD PLUS MINUS BULK
+.ends
+.subckt INDSYM PLUS MINUS BULK
+.ends
+.subckt INDSYMCT PLUS MINUS CTAP BULK
+.ends
+.subckt NDN DRN GATE SRC PW PSUB DNW
+m1 D G S PW N
+q2 PW PSUB DNW DNWPNP
+.ends
+.subckt NDN25 DRN GATE SRC PW PSUB DNW
+m1 D G S PW N25
+q2 PW PSUB DNW DNWPNP
+.ends
+
+.subckt MOSVAR_1V2 PLUS MINUS BULK
+.ends
+

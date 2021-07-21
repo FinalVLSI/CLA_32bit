@@ -1,0 +1,65 @@
+
+**************************************************************************/
+*  Copyright (c), 2009-2010 Synopsys, Inc.  All rights reserved.         */
+*  This file and the associated documentation are confidential       */
+*  and proprietary to Synopsys, Inc.                                     */
+*------------------------------------------------------------------------*/
+*  DISCLAIMER                                                            */
+*  The information contained herein is provided by Synopsys, Inc. on     */
+*  an "AS IS" basis without any warranty, and Synopsys has no obligation */
+*  to support or otherwise maintain the information.                     */
+*                                                                        */
+*  Synopsys, Inc. disclaims any representation that the information      */
+*  does not infringe any intellectual property rights or proprietary     */
+*  rights of any third parties.  There are no other warranties given by  */
+*  Synopsys, whether express, implied or statutory, including, without   */
+*  limitation, implied warranties of merchantability and fitness for a   */
+*  particular purpose.                                                   */
+*                                                                        */
+*  Synopsys, Inc. reserves the right to make changes to the information  */
+*  at any time and without notice.                                       */
+**************************************************************************/
+
+BLOCK: testcell
+ICV_RUNSET_REPORT_FILE : ../testcell.icv.lvs/pex_runset_report_file
+TCAD_GRD_FILE: ./reference_90nm_9lm_typ.nxtgrd
+
+COUPLE_TO_GROUND: NO
+COUPLING_MULTIPLIER: 1
+EXTRACTION: RC
+CASE_SENSITIVE: YES
+NETLIST_FORMAT: OA
+NETLIST_NODE_SECTION: YES
+NETLIST_CONNECT_SECTION: YES
+NETLIST_SUBCKT: YES
+NETLIST_PASSIVE_PARAMS: YES
+NETLIST_TAIL_COMMENTS: YES
+NETLIST_DELIMITER: :
+REDUCTION: NO
+XREF: YES
+EXTRACT_VIA_CAPS: NO
+IGNORE_CAPACITANCE: ALL
+KEEP_VIA_NODES: NO
+MAGNIFICATION_FACTOR: 1.0
+MAGNIFY_DEVICE_PARAMS: YES
+METAL_FILL_POLYGON_HANDLING: IGNORE
+MODE: 200
+MOS_GATE_DELTA_RESISTANCE: NO
+REMOVE_DANGLING_NETS: NO
+REMOVE_FLOATING_NETS: NO
+TRANSLATE_RETAIN_BULK_LAYERS: YES
+SKIP_CELLS: !*
+HIERARCHICAL_SEPARATOR: |
+OBSERVATION_POINTS: *
+EXTRA_GEOMETRY_INFO: NODE
+
+
+OA_LIB_NAME: testLib
+OA_VIEW_NAME: starrc
+OA_MARKER_SIZE: 0.1
+OA_REMOVE_SPICECARD_PREFIX: NO
+OA_DEVICE_MAPPING_FILE: ./device_map
+
+HN_NETLIST_MODEL_NAME: rm9 rmt
+
+

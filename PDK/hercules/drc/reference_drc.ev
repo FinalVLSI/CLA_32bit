@@ -1,0 +1,3437 @@
+/***********************************************************************/
+/*                    SYNOPSYS REFERENCE PDK DRC RUNSET                  */
+/***********************************************************************/
+/* This File and the associated documentation are confidential         */
+/* and proprietary to Synopsys, Inc.                                   */ 
+/*                                                                     */
+/* Copyright (c), 2009-2010 Synopsys, Inc. All rights reserved.        */
+/* This drc deck and the associated documentation are confidential     */
+/* and proprietary to Synopsys, Inc.                                   */
+/*                                                                     */
+/* DISCLAIMER                                                          */
+/* The information contained herein is provided by Synopsys, Inc. on   */
+/* an "AS IS" basis without any warranty, and Synopsys has no          */ 
+/* obligation to support or otherwise maintain the information.        */
+/*								       */
+/* Synopsys, Inc. disclaims any representation that the information    */
+/* does not infringe any intellectual property rights or proprietary   */
+/* rights of any third parties. There are no other warranties given by */
+/* Synopsys, whether express, implied or statutory, including, without */
+/* limitation, implied warranties of merchantability and fitness for a */
+/* particular purpose.						       */
+/*								       */
+/* Synopsys, Inc. reserves the right to make changes to the information*/ 
+/* at any time and without notice.				       */
+/*								       */
+/***********************************************************************/
+/*                                                                     */
+/*  								       */
+/* Change Log:                                                         */ 
+/* 7 Apr  09        Adding first version			       */ 
+/*								       */ 	
+/***********************************************************************/
+/*                                                                     */
+/* Synopsys 90 nm Demo DRC runset                                      */
+/* This is for a fictional process and just shows how things can be    */ 
+/* Synopsys accepts no responsibility for any use of this runset.      */
+/*                                                                     */
+/***********************************************************************/
+
+/***********************************************************************
+*
+* VARIABLE SETTING
+*
+* OPTION is a variable to run different level of metals.
+* In default it runs 4 metal process.
+* OPTION = 4 will run 4 metal process.
+* OPTION = 3 will run 3 metal process.
+* Only 2 numbers can be set, other numbers are not allowed.
+*
+***********************************************************************/
+
+
+ENVIRONMENT DOUBLE OPTION defaults to 9;
+
+HEADER {
+        INLIB = template
+        LAYOUT_PATH = .
+        BLOCK = test_r1
+        FORMAT = OPENACCESS
+	OUTPUT_FORMAT = GDSII
+}
+
+OPTIONS {
+	PRINT_ERRSUM_FILE = TRUE
+	IGNORE_CASE = FALSE
+	RESOLUTION = 0.001 	/* tool resolution, layout grid is 0.005 */
+	NET_PREFIX = N_
+	ERR_PREFIX = "ERR"
+	PROTOTYPE_PLACEMENTS = TRUE
+	GDSIN_OPTIONS = "-nl -b"
+	MAXIMUM_CELLNAME_LENGTH = 127
+	CREATE_VUE_OUTPUT = TRUE
+        
+}
+
+OPENACCESS_OPTIONS {
+	LIBRARY_MAPPING_FILE = ./lib.defs
+        LAYER_MAPPING_FILE = /remote/dept-seg-cae2/FTK/agarwals/PERFORCE/IPL/reference/90nm/techfiles/reference90RF_layer.map
+}
+
+ASSIGN {
+	NWELL		(1)               /* Nwell layer */
+	DIFN		(2)               /* Diffusion : Active layer */
+	POLS 		(3)     text(41;0)  /* polysilicon layer */
+	POLYPIN         (41;0)  
+	PPS 		(4)               /* P+ implant layer */
+	NPS		(5)               /* N+ implant layer */
+	SAB		(6)               /* Silicide blockage layer */
+	CONTS		(7)               /* polysilicon and diffusion to metal contact */
+	M1S		(8)     text(9;0)    /* Metal 1 */
+        M1PIN           (9;0)
+	M2S		(10)    text(11;0)  /* Metal 2 */
+	M2PIN           (11;0)   
+	M3S		(12)    text(13;0)  /* Metal 3 */
+	M3PIN           (13;0)  
+	M4S		(14)    text(15;0)  /* Metal 4 */
+	M4PIN           (15;0) 
+	V1S		(16)              /* Via 1 */
+	V2S		(17)              /* Via 2 */
+	V3S		(18)              /* Via 3 */
+	CAP_MIMS	(20)              /* Capacitor top plate */
+	MBCAP    	(21)		  /* Capacitor Bottom Plate */ 
+        DNWELL          (22)              /* Deep nwell */
+	NWDMY		(23)              /* Nwell resistor marking layer */
+	RMARKER		(28)              /* Resistor marking layer */
+	DIODE		(25)              /* Diode marking layer */
+	NAT		(26)              /* Native devices layer */
+	DIFF25		(27)              /* 2.5V thick gate oxide layer */
+        HRIMP          (29)              /* high resistance implantation layer*/
+        DUM_INDS	(30)              /* inductor marking layer */
+	VARMARKER       (31)              /* Varactor marking layer */
+	RMDMY           (32)              /* Metal Resistor Marking Layer */
+        BJTDUMMY        (49)              /* BJT Marker Layer */
+        M1SLOT          (8;1)             /* Metal1 Slot */
+        DIFF18          (35)              /* Diff 18*/
+        DIFF33          (36)              /* Diff 33*/
+	lowvtn		(37)		  /* LowVTN */
+	highvtn		(39)		  /* HighVTN */
+	medvtn		(33)		  /* Medium VTN */
+	lowvtp		(38)		  /* LowVTP */
+	highvtp		(40)		  /* HighVTP */
+	medvtp		(34)		  /* Medium VTP */
+	MOMDMY1  	(68;1)		  /* dummy layer for MOM metal1 covered. */
+	MOMDMY2  	(68;2)		  /* dummy layer for MOM metal2 covered. */
+	MOMDMY3  	(68;3)		  /* dummy layer for MOM metal3 covered. */
+	MOMDMY4  	(68;4)		  /* dummy layer for MOM metal4 covered. */
+        RFDMY		(69)		  /* RF Dummy */
+	PINDMY		(65)
+	RTERMMARKER	(66)          	  /* Terminal Marker for Serp Resistors */
+	CTM_DMY		(67)
+	M5S		(70)    text(70;0)  /* Metal 4 */
+	M5PIN           (71;0) 
+
+	M6S		(72)    text(18;0)  /* Metal 4 */
+	M6PIN           (73;0) 
+
+	M7S		(74)    text(20;0)  /* Metal 4 */
+	M7PIN           (75;0) 
+
+	M8S		(76)    text(22;0)  /* Metal 4 */
+	M8PIN           (77;0) 
+
+	M9S		(78)    text(24;0)  /* Metal 4 */
+	M9PIN           (79;0) 
+
+	V4S		(80)              /* Via 4 */
+	V5S		(81)              /* Via 5 */
+	V6S		(82)              /* Via 6 */
+	V7S		(83)              /* Via 7 */
+	V8S		(84)              /* Via 8 */
+}
+
+GRID_CHECK { GRID = 0.005 CHECK_45=TRUE ASSIGN_LAYERS = TRUE } (200)
+
+
+BOOLEAN (POLS AND DIFN) NOT VARMARKER 				TEMP = allgate
+BOOLEAN (POLS NOT DIFN) NOT VARMARKER 				TEMP = fldgate
+BOOLEAN ((allgate AND NPS) NOT DIFF25 NOT DIFF18 NOT DIFF33 NOT lowvtn NOT highvtn NOT medvtn) NOT NAT NOT NWELL  	TEMP = ngate
+BOOLEAN ((allgate AND NPS) NOT DIFF25 NOT DIFF18 NOT DIFF33 NOT lowvtn NOT highvtn NOT medvtn) AND NAT NOT NWELL     	TEMP = nangate
+BOOLEAN ((allgate AND NPS) AND DIFF25) NOT NAT NOT NWELL  	TEMP = n25gate
+BOOLEAN ((allgate AND NPS) AND DIFF25) AND NAT NOT NWELL  	TEMP = na25ngate
+BOOLEAN ((allgate AND NPS) AND DIFF18) NOT NAT NOT NWELL  	TEMP = n18gate
+BOOLEAN ((allgate AND NPS) AND DIFF18) AND NAT NOT NWELL  	TEMP = na18gate
+BOOLEAN ((allgate AND NPS) AND DIFF33) NOT NAT NOT NWELL  	TEMP = n33gate
+BOOLEAN ((allgate AND NPS) AND DIFF33) AND NAT NOT NWELL  	TEMP = na33gate
+BOOLEAN ((allgate AND NPS) AND lowvtn) NOT NAT NOT NWELL  	TEMP = nlgate
+BOOLEAN ((allgate AND NPS) AND highvtn) NOT NAT NOT NWELL  	TEMP = nhgate
+BOOLEAN ((allgate AND NPS) AND medvtn) NOT NAT NOT NWELL  	TEMP = nmgate_tmp
+BOOLEAN nmgate_tmp NOT DIFF25 					TEMP = nmgate
+BOOLEAN nmgate_tmp AND DIFF25					TEMP = nm25gate
+BOOLEAN ((allgate AND PPS) NOT DIFF25 NOT DIFF18 NOT DIFF33 NOT lowvtp NOT highvtp NOT medvtp) NOT NAT AND NWELL  	TEMP = pgate
+BOOLEAN ((allgate AND PPS) AND DIFF25) NOT NAT AND NWELL  	TEMP = p25gate
+BOOLEAN ((allgate AND PPS) AND DIFF18) NOT NAT AND NWELL  	TEMP = p18gate
+BOOLEAN ((allgate AND PPS) AND DIFF33) NOT NAT AND NWELL  	TEMP = p33gate
+BOOLEAN ((allgate AND PPS) AND lowvtp) NOT NAT AND NWELL  	TEMP = plgate
+BOOLEAN ((allgate AND PPS) AND highvtp) NOT NAT AND NWELL  	TEMP = phgate
+BOOLEAN ((allgate AND PPS) AND medvtp) NOT NAT AND NWELL  	TEMP = pmgate_tmp
+BOOLEAN pmgate_tmp NOT DIFF25 					TEMP = pmgate
+BOOLEAN pmgate_tmp AND DIFF25					TEMP = pm25gate
+
+
+BOOLEAN DIFN NOT VARMARKER 					TEMP = all_diff
+BOOLEAN all_diff AND NPS 					TEMP = all_ndiff
+BOOLEAN all_diff AND PPS 					TEMP = all_pdiff
+SELECT all_ndiff INTERACT ngate 				TEMP = alln_srcdrn
+SELECT all_pdiff INTERACT pgate 				TEMP = allp_srcdrn
+BOOLEAN (all_ndiff AND NAT) NOT DIFF25 				TEMP = allna_srcdrn
+BOOLEAN (all_ndiff NOT NAT) AND DIFF25 				TEMP = alln25_srcdrn
+BOOLEAN (all_ndiff AND NAT) AND DIFF25 				TEMP = allna25_srcdrn
+BOOLEAN (all_pdiff NOT NAT) AND DIFF25 				TEMP = allp25_srcdrn
+BOOLEAN (all_pdiff NOT NAT) NOT DIFF25 				TEMP = allp_srcdrn
+BOOLEAN (all_ndiff NOT NAT) AND DIFF18 				TEMP = alln18_srcdrn
+BOOLEAN (all_ndiff AND NAT) AND DIFF18 				TEMP = allna18_srcdrn
+BOOLEAN (all_ndiff NOT NAT) AND DIFF33 				TEMP = alln33_srcdrn
+BOOLEAN (all_ndiff AND NAT) AND DIFF33 				TEMP = allna33_srcdrn
+BOOLEAN (all_ndiff NOT NAT) AND lowvtn 				TEMP = allnl_srcdrn
+BOOLEAN (all_ndiff NOT NAT) AND highvtn 		        TEMP = allnh_srcdrn
+BOOLEAN (all_ndiff NOT NAT) AND medvtn 				TEMP = allnm_srcdrn_tmp
+BOOLEAN allnm_srcdrn_tmp AND DIFF25				TEMP = allnm25_srcdrn
+BOOLEAN allnm_srcdrn_tmp NOT DIFF25				TEMP = allnm_srcdrn
+
+
+BOOLEAN (all_pdiff NOT NAT) AND DIFF25 				TEMP = allp25_srcdrn
+BOOLEAN (all_pdiff NOT NAT) NOT DIFF25 				TEMP = allp_srcdrn
+
+BOOLEAN (all_pdiff NOT NAT) AND DIFF18 				TEMP = allp18_srcdrn
+BOOLEAN (all_pdiff NOT NAT) AND DIFF33 				TEMP = allp33_srcdrn
+BOOLEAN (all_pdiff NOT NAT) AND lowvtp 				TEMP = allpl_srcdrn
+BOOLEAN (all_pdiff NOT NAT) AND highvtp 			TEMP = allph_srcdrn
+BOOLEAN (all_pdiff NOT NAT) AND medvtp 				TEMP = allpm_srcdrn_tmp
+BOOLEAN allpm_srcdrn_tmp AND DIFF25				TEMP = allpm25_srcdrn
+BOOLEAN allpm_srcdrn_tmp NOT DIFF25				TEMP = allpm_srcdrn
+
+
+BOOLEAN allp_srcdrn NOT  pgate         				TEMP = p_sd
+BOOLEAN allp25_srcdrn NOT  p25gate     				TEMP = p25_sd
+BOOLEAN alln_srcdrn NOT ngate          				TEMP = n_sd
+BOOLEAN alln25_srcdrn NOT  n25gate     				TEMP = n25_sd
+BOOLEAN allna_srcdrn NOT nangate       				TEMP = na_sd
+BOOLEAN allna25_srcdrn NOT na25ngate   				TEMP = na25_sd
+
+BOOLEAN alln18_srcdrn NOT n18gate 				TEMP = n18_sd
+BOOLEAN allna18_srcdrn NOT na18gate 				TEMP = na18_sd
+BOOLEAN alln33_srcdrn NOT n33gate 				TEMP = n33_sd
+BOOLEAN allna33_srcdrn NOT na33gate 				TEMP = na33_sd
+BOOLEAN allnl_srcdrn NOT nlgate 				TEMP = nl_sd
+BOOLEAN allnh_srcdrn NOT nhgate 				TEMP = nh_sd
+BOOLEAN allnm_srcdrn NOT nmgate 				TEMP = nm_sd
+BOOLEAN allnm25_srcdrn NOT nm25gate 				TEMP = nm25_sd
+
+BOOLEAN allp18_srcdrn NOT p18gate 				TEMP = p18_sd
+BOOLEAN allp33_srcdrn NOT p33gate 				TEMP = p33_sd
+BOOLEAN allpl_srcdrn NOT plgate 				TEMP = pl_sd
+BOOLEAN allph_srcdrn NOT phgate 				TEMP = ph_sd
+BOOLEAN allpm_srcdrn NOT pmgate 				TEMP = pm_sd
+BOOLEAN allpm25_srcdrn NOT pm25gate 				TEMP = pm25_sd
+
+BOOLEAN all_ndiff NOT (alln_srcdrn AND allna_srcdrn AND alln25_srcdrn AND allna25_srcdrn AND  alln18_srcdrn AND allna18_srcdrn AND alln33_srcdrn AND allna33_srcdrn AND allnl_srcdrn AND allnh_srcdrn AND allnm_srcdrn  AND allnm25_srcdrn ) TEMP = welltie
+BOOLEAN all_pdiff NOT (allp_srcdrn AND allp_srcdrn AND allp25_srcdrn AND allp25_srcdrn AND allp18_srcdrn AND allp33_srcdrn AND allpl_srcdrn  AND allph_srcdrn AND allpm_srcdrn AND allpm25_srcdrn) TEMP = subtie
+
+SELECT DIFN INTERACT NWDMY TEMP = diff_nwres 
+BOOLEAN DIFN NOT diff_nwres TEMP = DIFN
+BOOLEAN (DIFN NOT BJTDUMMY) NOT (NPS OR PPS) {
+      COMMENT = " DIFF Must be enclosed by NPS or PPS"
+      } (100)
+
+BOOLEAN subtie AND CONTS 					TEMP = subtie_cont
+BOOLEAN welltie AND CONTS 					TEMP = welltie_cont
+
+BOOLEAN alln_srcdrn AND CONTS 					TEMP = ndiff_cont
+BOOLEAN allp_srcdrn AND CONTS 					TEMP = pdiff_cont
+BOOLEAN allna_srcdrn AND CONTS 					TEMP = nadiff_cont
+BOOLEAN alln25_srcdrn AND CONTS 				TEMP = n25diff_cont
+BOOLEAN allna25_srcdrn AND CONTS 				TEMP = na25diff_cont
+BOOLEAN allp25_srcdrn AND CONTS 				TEMP = p25diff_cont
+BOOLEAN alln18_srcdrn AND CONTS 				TEMP = n18diff_cont
+BOOLEAN allna18_srcdrn AND CONTS 				TEMP = na18diff_cont
+BOOLEAN alln33_srcdrn AND CONTS 				TEMP = n33diff_cont
+BOOLEAN allna33_srcdrn AND CONTS 				TEMP = na33diff_cont
+BOOLEAN allnl_srcdrn AND CONTS 					TEMP = nldiff_cont
+BOOLEAN allnh_srcdrn AND CONTS 					TEMP = nhdiff_cont
+BOOLEAN allnm_srcdrn AND CONTS 					TEMP = nmdiff_cont
+BOOLEAN allnm25_srcdrn AND CONTS 				TEMP = nm25diff_cont
+
+BOOLEAN allp18_srcdrn AND CONTS 				TEMP = p18diff_cont
+BOOLEAN allp33_srcdrn AND CONTS 				TEMP = p33diff_cont
+BOOLEAN allpl_srcdrn AND CONTS 					TEMP = pldiff_cont
+BOOLEAN allph_srcdrn AND CONTS 					TEMP = phdiff_cont
+BOOLEAN allpm_srcdrn AND CONTS 					TEMP = pmdiff_cont
+BOOLEAN allpm25_srcdrn AND CONTS 				TEMP = pm25diff_cont
+
+BOOLEAN DIFN NOT DIFF25 NOT DIFF18 NOT DIFF33 NOT lowvtn NOT highvtn NOT medvtn NOT medvtp NOT NAT NOT lowvtp NOT highvtp NOT VARMARKER TEMP = plain_diff_temp
+SELECT plain_diff_temp INTERACT POLS { }	TEMP = plain_diff
+BOOLEAN DIFN NOT plain_diff NOT NAT { } TEMP = other_diff
+BOOLEAN DIFN AND (medvtn OR medvtp OR lowvtp OR lowvtn OR highvtn OR highvtp) NOT DIFF25 NOT DIFF18 NOT DIFF33 NOT VARMARKER  NOT NAT { } TEMP = othervt_diff
+BOOLEAN DIFN AND (DIFF18 OR DIFF25 OR DIFF33 OR NAT) NOT VARMARKER { } TEMP = voltage_diff
+
+/* NMOS devices formed in the DNWELL */
+BOOLEAN ngate AND DNWELL { }					TEMP = ndnwgate
+SELECT alln_srcdrn INTERACT ndnwgate { }			TEMP = allndnw_srcdrn
+BOOLEAN n25gate AND DNWELL { }					TEMP = ndnw25gate
+SELECT alln25_srcdrn INTERACT ndnw25gate { }			TEMP = allndnw25_srcdrn
+ 
+
+
+/*************************************************/
+/*     Section 1: MOSFET Design Rules            */
+/*************************************************/ 
+ 
+/* Rule 1.1 */
+EXTERNAL ndiff_cont ngate {
+	COMMENT = "1.1: N gate to Contact spacing >= 0.08"
+	SPACING < 0.08
+	TOUCH
+	OVERLAP
+	} (100)
+	
+/* Rule 1.2 */
+EXTERNAL nadiff_cont nangate {
+	COMMENT = "1.2: NA gate to Contact spacing >= 0.08"
+	SPACING < 0.08
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.3 */
+EXTERNAL n25diff_cont n25gate {
+	COMMENT = "1.3: N25 gate to Contact spacing >= 0.15"
+	SPACING < 0.15
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.4 */
+EXTERNAL na25diff_cont na25ngate {
+	COMMENT = "1.4: NA25 gate to Contact spacing >= 0.15"
+	SPACING < 0.15
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.5 */
+EXTERNAL p25diff_cont p25gate {
+	COMMENT = "1.5: P25 gate to Contact spacing >= 0.15"
+	SPACING < 0.15
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.6 */
+EXTERNAL pdiff_cont pgate {
+	COMMENT = "1.6: P gate to Contact spacing >= 0.08"
+	SPACING < 0.08
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.7 */
+/*EXTERNAL allgate {
+        COMMENT = "1.7: Gate (Polysilicon over Diffusion) minimum spacing to Gate >= 0.15"
+        SPACING < 0.15
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)       
+*/ 
+
+
+/* Rule 1.83 */
+EXTERNAL ngate {
+        COMMENT = "1.83: N Gate-Gate minimum spacing >= 0.15"
+        SPACING < 0.15
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)       
+
+
+/* Rule 1.83 */
+EXTERNAL nlgate {
+        COMMENT = "1.83: NL Gate-Gate minimum spacing >= 0.15"
+        SPACING < 0.15
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)       
+
+/* Rule 1.83 */
+EXTERNAL nhgate {
+        COMMENT = "1.83: NH Gate-Gate minimum spacing >= 0.15"
+        SPACING < 0.15
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    
+
+/* Rule 1.84 */
+EXTERNAL nangate {
+        COMMENT = "1.84: NA Gate-Gate minimum spacing >= 0.15"
+        SPACING < 0.15
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    
+
+
+/* Rule 1.85 */
+EXTERNAL na25ngate {
+        COMMENT = "1.85: NA Gate-Gate minimum spacing >= 0.35"
+        SPACING < 0.35
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    
+
+
+/* Rule 1.85 */
+EXTERNAL na18gate {
+        COMMENT = "1.85: NA Gate-Gate minimum spacing >= 0.35"
+        SPACING < 0.35
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    
+
+
+/* Rule 1.85 */
+EXTERNAL na33gate {
+        COMMENT = "1.85: NA Gate-Gate minimum spacing >= 0.35"
+        SPACING < 0.35
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    
+
+/* Rule 1.86 */
+EXTERNAL n25gate {
+        COMMENT = "1.86: N25 & NM25 Gate-Gate minimum spacing >= 0.35"
+        SPACING < 0.35
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    	
+
+/* Rule 1.86 */
+EXTERNAL n18gate {
+        COMMENT = "1.86: N18 Gate-Gate minimum spacing >= 0.35"
+        SPACING < 0.35
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    	
+
+/* Rule 1.86 */
+EXTERNAL n33gate {
+        COMMENT = "1.86: N33 Gate-Gate minimum spacing >= 0.35"
+        SPACING < 0.35
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    	
+  	
+/* Rule 1.87 */
+EXTERNAL pgate {
+        COMMENT = "1.87: P Gate-Gate minimum spacing >= 0.15"
+        SPACING < 0.15
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    	
+
+/* Rule 1.87 */
+EXTERNAL plgate {
+        COMMENT = "1.87: PL Gate-Gate minimum spacing >= 0.15"
+        SPACING < 0.15
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    	
+
+/* Rule 1.87 */
+EXTERNAL phgate {
+        COMMENT = "1.87: PH Gate-Gate minimum spacing >= 0.15"
+        SPACING < 0.15
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    		
+
+/* Rule 1.87 */
+EXTERNAL pmgate {
+        COMMENT = "1.87: PM Gate-Gate minimum spacing >= 0.15"
+        SPACING < 0.15
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)   
+
+	
+/* Rule 1.88 */
+EXTERNAL p25gate {
+        COMMENT = "1.88: PH Gate-Gate minimum spacing >= 0.35"
+        SPACING < 0.35
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)    		
+
+/* Rule 1.88 */
+EXTERNAL p33gate {
+        COMMENT = "1.88: P33 Gate-Gate minimum spacing >= 0.35"
+        SPACING < 0.35
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)   
+
+/* Rule 1.88 */
+EXTERNAL p25gate {
+        COMMENT = "1.88: P25 Gate-Gate minimum spacing >= 0.35"
+        SPACING < 0.35
+        POINT_TOUCH
+        CHECK_SAME_POLYGON
+        } (100)   
+
+
+/* Rule 1.8 */
+ENCLOSE allgate BY NPS {
+        COMMENT = "1.8: Enclosure of Gate within Implant >= 0.13"
+        SPACING < 0.13
+        TOUCH
+        OVERLAP
+        } (100)  
+
+ENCLOSE allgate BY PPS {
+        COMMENT = "1.8: Enclosure of Gate within Inplant >= 0.13"
+        SPACING < 0.13
+        TOUCH
+        OVERLAP
+        } (100)
+	
+/* Rule 1.891 */
+ENCLOSE ngate BY medvtn {
+        COMMENT = "1.891: Enclosure of N-Gate within medvtn >= 0.22"
+        SPACING < 0.22
+        TOUCH
+        OVERLAP
+        } (100)
+ENCLOSE pgate BY medvtn {
+        COMMENT = "1.891: Enclosure of N-Gate within medvtn >= 0.22"
+        SPACING < 0.22
+        TOUCH
+        OVERLAP
+        } (100)	
+/* Rule 1.892 */
+ENCLOSE ngate BY lowvtn {
+        COMMENT = "1.892: Enclosure of N-Gate within lowvtn >= 0.12"
+        SPACING < 0.12
+        TOUCH
+        OVERLAP
+        } (100)
+ENCLOSE pgate BY lowvtn {
+        COMMENT = "1.892: Enclosure of N-Gate within lowvtn >= 0.12"
+        SPACING < 0.12
+        TOUCH
+        OVERLAP
+        } (100)
+/* Rule 1.893 */
+ENCLOSE ngate BY highvtn {
+        COMMENT = "1.893: Enclosure of N-Gate within highvtn >= 0.12"
+        SPACING < 0.12
+        TOUCH
+        OVERLAP
+        } (100)
+ENCLOSE pgate BY highvtn {
+        COMMENT = "1.893: Enclosure of N-Gate within highvtn >= 0.12"
+        SPACING < 0.12
+        TOUCH
+        OVERLAP
+        } (100)
+	
+/* Rule 1.9 */
+ENCLOSE DIFN BY  NAT {
+        COMMENT = "1.9: Enclosure of Diffusion within NAT >= 0.28"
+        SPACING < 0.28
+        TOUCH
+        OVERLAP
+        } (100)  
+
+/* Rule 1.10 */
+ENCLOSE DIFN BY DIFF25 {
+        COMMENT = "1.10: Enclosure of Diffusion within 25Volt Diffusion (DIFF25) >= 0.30"
+        SPACING < 0.30
+        TOUCH
+        OVERLAP
+        } (100)
+/* Rule 1.18 */
+EXTERNAL NAT DIFN {
+	COMMENT = "1.18: NAT to Diffusion spacing >= 0.20"
+	SPACING < 0.20
+	OVERLAP
+	} (100)
+/* Rule 1.19 */
+ENCLOSE allgate BY DIFF25 {
+	COMMENT = "1.19: DIFF25 to gate Enclosure >= 0.35"
+	SPACING < 0.35
+	OVERLAP
+	} (100)
+ENCLOSE allgate BY DIFF18 {
+	COMMENT = "1.19: DIFF18 to gate Enclosure >= 0.35"
+	SPACING < 0.35
+	OVERLAP
+	} (100)
+ENCLOSE allgate BY DIFF33 {
+	COMMENT = "1.19: DIFF33 to gate Enclosure >= 0.35"
+	SPACING < 0.35
+	OVERLAP
+	} (100)
+/* Rule 1.23 */
+/*EXTERNAL POLS all_ndiff {
+	COMMENT = "1.23: POLY to N Diffusion spacing >= 0.12"
+	SPACING < 0.12
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	} (100) */
+/* Rule 1.24 */	
+/*EXTERNAL POLS all_pdiff {
+	COMMENT = "1.24: POLY to P Diffusion spacing >= 0.12"
+	SPACING < 0.12
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	} (100)
+*/	
+
+/* Rule 1.187 */
+ENCLOSE DIFN BY DIFF18 {
+        COMMENT = "1.187: Enclosure of Diffusion within 25Volt Diffusion (DIFF25) >= 0.30"
+        SPACING < 0.30
+        TOUCH
+        OVERLAP
+        } (100)
+/* Rule 1.188 */
+ENCLOSE DIFN BY DIFF33 {
+        COMMENT = "1.10: Enclosure of Diffusion within 25Volt Diffusion (DIFF25) >= 0.30"
+        SPACING < 0.30
+        TOUCH
+        OVERLAP
+        } (100)	
+/* Rule 1.11 */
+SELECT DIFN INTERACT POLS TEMP = diff_int_poly
+EXTERNAL diff_int_poly DIFN {
+        COMMENT = "1.11: Active Diffusion (touching Polysilicon) spacing to Active Diffusion  >= 0.13"
+        SPACING < 0.13
+        TOUCH
+        OVERLAP
+        } (100)  
+/* Rule 1.117 */
+EXTERNAL n18diff_cont n18gate {
+	COMMENT = "1.117: N18 gate to Contact spacing >= 0.15"
+	SPACING < 0.15
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.119 */
+EXTERNAL na18diff_cont na18gate {
+	COMMENT = "1.119: NA18 gate to Contact spacing >= 0.15"
+	SPACING < 0.15
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.118 */
+EXTERNAL n33diff_cont n33gate {
+	COMMENT = "1.118: N33 gate to Contact spacing >= 0.15"
+	SPACING < 0.15
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.120 */
+EXTERNAL na33diff_cont na33gate {
+	COMMENT = "1.120: NA33 gate to Contact spacing >= 0.15"
+	SPACING < 0.15
+	TOUCH
+	OVERLAP
+	} (100)
+/* Rule 1.124 */
+EXTERNAL nldiff_cont nlgate {
+	COMMENT = "1.124: NL gate to Contact spacing >= 0.11"
+	SPACING < 0.11
+	TOUCH
+	OVERLAP
+	} (100)
+/* Rule 1.125 */
+EXTERNAL nhdiff_cont nhgate {
+	COMMENT = "1.125: NH gate to Contact spacing >= 0.11"
+	SPACING < 0.11
+	TOUCH
+	OVERLAP
+	} (100)
+/* Rule 1.123 */
+EXTERNAL nmdiff_cont nmgate {
+	COMMENT = "1.123: NM gate to Contact spacing >= 0.08"
+	SPACING < 0.08
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.126 */
+EXTERNAL nm25diff_cont nm25gate {
+	COMMENT = "1.126: NM25 gate to Contact spacing >= 0.15"
+	SPACING < 0.15
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.122 */
+EXTERNAL p18diff_cont p18gate {
+	COMMENT = "1.122: P18 gate to Contact spacing >= 0.15"
+	SPACING < 0.15
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.121 */
+EXTERNAL p33diff_cont p33gate {
+	COMMENT = "1.121: P33 gate to Contact spacing >= 0.15"
+	SPACING < 0.15
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.129 */
+EXTERNAL pldiff_cont plgate {
+	COMMENT = "1.129: PL gate to Contact spacing >= 0.11"
+	SPACING < 0.11
+	TOUCH
+	OVERLAP
+	} (100)
+/* Rule 1.130 */
+EXTERNAL phdiff_cont phgate {
+	COMMENT = "1.130: PH gate to Contact spacing >= 0.11"
+	SPACING < 0.11
+	TOUCH
+	OVERLAP
+	} (100)
+/* Rule 1.127 */
+EXTERNAL pmdiff_cont pmgate {
+	COMMENT = "1.127: PM gate to Contact spacing >= 0.08"
+	SPACING < 0.08
+	TOUCH
+	OVERLAP
+	} (100)
+
+/* Rule 1.126 */
+EXTERNAL nm25diff_cont nm25gate {
+	COMMENT = "1.126: PM25 gate to Contact spacing >= 0.15"
+	SPACING < 0.15
+	TOUCH
+	OVERLAP
+	} (100)
+
+/*************************/
+/*   PMOS Design Rules   */
+/*************************/
+
+/* Rule 1.12/1.13/1.16/1.17 */
+MOSCHECK pgate p_sd p_sd {
+       COMMENT = "1.12/1.13/1.16/1.17: Minimum Width (of P model Device) >= 0.12;Maximum Width (of P model Device) <= 900; Minimum length (of P model Device) >= 0.1;Maximum length (of P model Device) <= 20"
+       EQUATIONS {
+             IF(EV_WMIN < 0.12) EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)  EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.1)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 20)   EV_ERROR_LMAX=EV_LMAX;
+             }
+} (102;171)
+
+/* Rule 1.14/1.15/1.18/1.19 */
+MOSCHECK p25gate p25_sd p25_sd {
+       COMMENT = "1.14/1.15/1.18/1.19: Minimum Width (of P25 model Device) >= 0.4;Maximum Width (of P25 model Device) <= 900; Minimum length (of P25 model Device) >= 0.28;Maximum length (of P25 model Device) <= 900"
+       EQUATIONS {
+             IF(EV_WMIN < 0.4)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.28)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 900)   EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+
+MOSCHECK p18gate p18_sd p18_sd {
+       COMMENT = "1.132/1.133/1.142/1.143: Minimum Width (of P18 model Device) >= 0.4;Maximum Width (of P18 model Device) <= 900; Minimum length (of P18 model Device) >= 0.28;Maximum length (of N18 model Device) <= 900"
+       EQUATIONS {
+             IF(EV_WMIN < 0.4)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.28)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 900)   EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+
+
+MOSCHECK p33gate p33_sd p33_sd {
+       COMMENT = "1.138/1.139/1.148/1.149: Minimum Width (of N33 model Device) >= 0.4;Maximum Width (of N33 model Device) <= 900; Minimum length (of N33 model Device) >= 0.28;Maximum length (of N33 model Device) <= 900"
+       EQUATIONS {
+             IF(EV_WMIN < 0.4)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.28)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 900)   EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+
+
+MOSCHECK plgate pl_sd pl_sd {
+       COMMENT = "1.134/1.135/1.142/1.143: Minimum Width (of NL model Device) >= 0.3;Maximum Width (of NL model Device) <= 900; Minimum length (of NL model Device) >= 0.15;Maximum length (of NL model Device) <= 20"
+       EQUATIONS {
+             IF(EV_WMIN < 0.3)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.15)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 20)   EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+
+MOSCHECK phgate ph_sd ph_sd {
+       COMMENT = "1.140/1.141/1.150/1.151: Minimum Width (of NH model Device) >= 0.3;Maximum Width (of NH model Device) <= 900; Minimum length (of NH model Device) >= 0.15;Maximum length (of NH model Device) <= 20"
+       EQUATIONS {
+             IF(EV_WMIN < 0.3)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.15)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 20)   EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+
+MOSCHECK pmgate pm_sd pm_sd {
+       COMMENT = "1.136/1.137/1.146/1.147: Minimum Width (of NM model Device) >= 0.3;Maximum Width (of NM model Device) <= 900; Minimum length (of NM model Device) >= 0.15;Maximum length (of NM model Device) <= 20"
+       EQUATIONS {
+             IF(EV_WMIN < 0.3)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.15)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 20)   EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+
+/*************************/
+/*   NMOS Design Rules   */
+/*************************/
+
+/* Rule  1.20/1.21/1.28/1.29 */  
+MOSCHECK ngate n_sd n_sd {
+       COMMENT = "1.20/1.21/1.28/1.29: Minimum Width (of N model Device) >= 0.12;Maximum Width (of N model Device) <= 900; Minimum length (of N model Device) >= 0.1;Maximum length (of N model Device) <= 20"
+       EQUATIONS {
+             IF(EV_WMIN < 0.12) EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)  EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.1)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 20)   EV_ERROR_LMAX=EV_LMAX;
+             }
+} (102;171)
+
+/* Rule 1.22/1.23/1.30/1.31 */
+MOSCHECK n25gate n25_sd n25_sd {
+       COMMENT = "1.22/1.23/1.30/1.31:  Minimum Width (of P25 model Device) >= 0.4;Maximum Width (of P25 model Device) <= 900; Minimum length (of P25 model Device) >= 0.28;Maximum length (of P25 model Device) <= 900"
+       EQUATIONS {
+             IF(EV_WMIN < 0.4)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.28)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 900)   EV_ERROR_LMAX=EV_LMAX;
+             }
+} (102;171)
+
+/* Rule 1.24/1.25/1.32/1.33 */
+MOSCHECK nangate na_sd na_sd {
+       COMMENT = "1.24/1.25/1.32/1.33: Minimum Width (of NA model Device) >= 0.12;Maximum Width (of NA model Device) <= 900; Minimum length (of NA model Device) >= 0.1;Maximum length (of NA model Device) <= 20"
+       EQUATIONS {
+             IF(EV_WMIN < 0.5) EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)  EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.2)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 20)   EV_ERROR_LMAX=EV_LMAX;
+             }
+} (102;171)
+
+/* Rule 1.26/1.27/1.34/1.35 */
+MOSCHECK na25ngate na25_sd na25_sd {
+       COMMENT = "1.26/1.27/1.34/1.35: Minimum Width (of NA25 model Device) >= 0.4;Maximum Width (of NA25 model Device) <= 900; Minimum length (of NA25 model Device) >= 0.28;Maximum length (of NA25 model Device) <= 900"
+       EQUATIONS {
+             IF(EV_WMIN < 0.5)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 1.2)   EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 900)   EV_ERROR_LMAX=EV_LMAX;
+             }
+} (102;171)
+/* Rule 1.155/1.156/1.175/1.176*/
+MOSCHECK n18gate n18_sd n18_sd {
+       COMMENT = "1.155/1.156/1.175/1.176: Minimum Width (of N18 model Device) >= 0.4;Maximum Width (of N18 model Device) <= 900; Minimum length (of N18 model Device) >= 0.28;Maximum length (of N18 model Device) <= 900"
+       EQUATIONS {
+             IF(EV_WMIN < 0.4)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.28)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 900)   EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+/* Rule 1.157/1.158/1.177/1.178*/
+MOSCHECK na18gate na18_sd na18_sd {
+       COMMENT = "1.157/1.158/1.177/1.178: Minimum Width (of NA18 model Device) >= 0.4;Maximum Width (of NA18 model Device) <= 900; Minimum length (of NA18 model Device) >= 1.2;Maximum length (of NA18 model Device) <= 900"
+       EQUATIONS {
+             IF(EV_WMIN < 0.5)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 1.2)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 20)   EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+
+/* Rule 1.162/1.163/1.181/1.182*/
+MOSCHECK n33gate n33_sd n33_sd {
+       COMMENT = "1.162/1.163/1.181/1.182: Minimum Width (of N33 model Device) >= 0.4;Maximum Width (of N33 model Device) <= 900; Minimum length (of N33 model Device) >= 0.28;Maximum length (of N33 model Device) <= 900"
+       EQUATIONS {
+             IF(EV_WMIN < 0.4)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.28)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 900)   EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+
+/* Rule 1.41 */
+BOOLEAN CONTS NOT DIFN {  } TEMP=COPO /*  POLY contacts + floating contacts */
+EXTERNAL COPO  DIFN { 
+COMMENT = "1.41  {CO inside PO} space to OD >= 0.12 " 
+            SPACING < 0.12
+            NON_PARALLEL = TRUE
+            SHADOW_OTHER_LAYER = TRUE
+            TOUCH = TRUE
+ } (163)
+
+
+/* Rule 1.164/1.165/1.183/1.184*/
+MOSCHECK na33gate na33_sd na33_sd {
+       COMMENT = "1.164/1.165/1.183/1.184: Minimum Width (of NA33 model Device) >= 0.4;Maximum Width (of NA33 model Device) <= 900; Minimum length (of NA33 model Device) >= 1.2;Maximum length (of NA33 model Device) <= 900"
+       EQUATIONS {
+             IF(EV_WMIN < 0.5)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 1.2)   EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 20)    EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+/* Rule 1.159/1.161/1.179/1.180*/
+MOSCHECK nlgate nl_sd nl_sd {
+       COMMENT = "1.159/1.161/1.179/1.180: Minimum Width (of NL model Device) >= 0.3;Maximum Width (of NL model Device) <= 900; Minimum length (of NL model Device) >= 0.15;Maximum length (of NL model Device) <= 900"
+       EQUATIONS {
+             IF(EV_WMIN < 0.3)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.15)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 20)    EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+/* Rule 1.166/1.167/1.185/1.186*/
+MOSCHECK nhgate nh_sd nh_sd {
+       COMMENT = "1.166/1.167/1.185/1.186: Minimum Width (of NH model Device) >= 0.3;Maximum Width (of NH model Device) <= 900; Minimum length (of NH model Device) >= 0.15;Maximum length (of NH model Device) <= 20"
+       EQUATIONS {
+             IF(EV_WMIN < 0.3)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.15)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 20)    EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+/* Rule 1.152/1.153/1.171/1.172*/
+MOSCHECK nmgate nm_sd nm_sd {
+       COMMENT = "1.152/1.153/1.171/1.172: Minimum Width (of NM model Device) >= 0.3;Maximum Width (of NM model Device) <= 900; Minimum length (of NM model Device) >= .15;Maximum length (of NM model Device) <= 20"
+       EQUATIONS {
+             IF(EV_WMIN < 0.3)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.15)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 20)    EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+
+/* Rule 1.168/1.169/1.173/1.174*/
+MOSCHECK nm25gate nm25_sd nm25_sd {
+       COMMENT = "1.168/1.169/1.173/1.174: Minimum Width (of NM25 model Device) >= 0.4;Maximum Width (of NM model Device) <= 900; Minimum length (of NM model Device) >= 0.28;Maximum length (of NM model Device) <= 900"
+       EQUATIONS {
+             IF(EV_WMIN < 0.4)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.28)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 900)   EV_ERROR_LMAX=EV_LMAX;
+             } 
+} (102;171)
+
+/* Rule 1.35 */
+SELECT POLS INSIDE_HOLE { INNER_HOLE_ONLY } TEMP = poly_hole
+AREA poly_hole {
+	COMMENT = "1.35: Enclosed Poly hole area can not be > 0.2 sq.u "
+	RANGE = [0.001, 0.200]
+}(102;172)	
+
+/**********************************************/
+/*********** 2. Resistor Section **************/
+/**********************************************/
+	
+BOOLEAN POLS AND RMARKER 				TEMP = resbody
+BOOLEAN resbody AND NPS 				TEMP = nresbody
+BOOLEAN resbody AND PPS 				TEMP = presbody
+
+BOOLEAN nresbody AND SAB NOT HRIMP 			TEMP = rnpoly_body
+SELECT nresbody OUTSIDE SAB {LINE_TOUCH = FALSE POINT_TOUCH = FALSE}	TEMP = rnpolys_poss_body
+BOOLEAN rnpolys_poss_body NOT SAB NOT HRIMP		TEMP = rnpolys_body
+SIZE rnpolys_body { OVERSIZE = 0.01 }			TEMP = rnpolys_poss_term
+BOOLEAN POLS AND rnpolys_poss_term NOT rnpolys_body	TEMP = rnpolys_term
+
+BOOLEAN presbody AND SAB NOT HRIMP 			TEMP = rppoly_body
+SELECT presbody OUTSIDE SAB {LINE_TOUCH = FALSE POINT_TOUCH = FALSE}	TEMP = rppolys_poss_body
+BOOLEAN rppolys_poss_body NOT SAB NOT HRIMP 		TEMP = rppolys_body
+SIZE rppolys_body { OVERSIZE = 0.01 }			TEMP = rppolys_poss_term
+BOOLEAN POLS AND rppolys_poss_term NOT rppolys_body	TEMP = rppolys_term
+
+SELECT DIFN INTERACT RMARKER 				TEMP = diffres
+
+BOOLEAN DIFN AND RMARKER 				TEMP = diffresbody
+BOOLEAN diffresbody AND NPS 				TEMP = ndiffresbody
+BOOLEAN diffresbody AND PPS 				TEMP = pdiffresbody
+
+BOOLEAN ndiffresbody AND SAB 				TEMP = rndiff_body
+SELECT ndiffresbody OUTSIDE SAB {LINE_TOUCH = FALSE POINT_TOUCH = FALSE}   TEMP = rndiffs_poss_body
+BOOLEAN rndiffs_poss_body NOT SAB 			TEMP = rndiffs_body
+SIZE rndiffs_body { OVERSIZE = 0.01 }			TEMP = rndiffs_poss_term
+BOOLEAN DIFN AND rndiffs_poss_term NOT rndiffs_body	TEMP = rndiffs_term
+
+BOOLEAN pdiffresbody AND SAB 				TEMP = rpdiff_body
+SELECT pdiffresbody OUTSIDE SAB {LINE_TOUCH = FALSE POINT_TOUCH = FALSE}    TEMP = rpdiffs_poss_body
+BOOLEAN rpdiffs_poss_body NOT SAB 			TEMP = rpdiffs_body
+SIZE rpdiffs_body { OVERSIZE = 0.01 }			TEMP = rpdiffs_poss_term
+BOOLEAN DIFN AND rpdiffs_poss_term NOT rpdiffs_body	TEMP = rpdiffs_term
+
+SELECT_EDGE rnpoly_body TOUCHING SAB 			TEMP = rnpoly_wid
+SELECT_EDGE rnpoly_body TOUCHING RMARKER 		TEMP = rnpoly_len
+SELECT_EDGE rppoly_body TOUCHING SAB 			TEMP = rppoly_wid
+SELECT_EDGE rppoly_body TOUCHING RMARKER 		TEMP = rppoly_len
+
+SELECT_EDGE rndiff_body TOUCHING SAB 			TEMP = rndiff_wid
+SELECT_EDGE rndiff_body TOUCHING RMARKER 		TEMP = rndiff_len
+SELECT_EDGE rpdiff_body TOUCHING SAB 			TEMP = rpdiff_wid
+SELECT_EDGE rpdiff_body TOUCHING RMARKER 		TEMP = rpdiff_len
+
+SELECT SAB INTERACT NPS 				TEMP = rpols_int_nps
+SELECT SAB INTERACT PPS 				TEMP = rpols_int_pps
+
+BOOLEAN (resbody AND rpols_int_nps AND HRIMP) NOT NPS 	TEMP = hrnpoly_body
+BOOLEAN (resbody AND rpols_int_pps AND HRIMP) NOT PPS 	TEMP = hrppoly_body
+SELECT_EDGE hrnpoly_body TOUCHING NPS 			TEMP = hrnpoly_wid
+SELECT_EDGE hrnpoly_body TOUCHING RMARKER 		TEMP = hrnpoly_len
+SELECT_EDGE hrppoly_body TOUCHING PPS 			TEMP = hrppoly_wid
+SELECT_EDGE hrppoly_body TOUCHING RMARKER 		TEMP = hrppoly_len
+
+/* Rule 2.1 */
+LENGTH rnpoly_wid {
+	COMMENT = "2.1: Minimum Width ( for RNPOLY device)  >= 0.15"
+	SPACING < 0.15
+	} (102;171)
+
+/* Rule 2.14 */
+LENGTH rnpoly_wid {
+	COMMENT = "2.14: Maximum Width ( for RNPOLY device)  <= 100"
+	SPACING > 100
+	} (102;171)
+
+/* Rule 2.1.1/2.7.1/2.13/2.14 */
+MOSCHECK rnpolys_body rnpolys_term rnpolys_term {
+       	COMMENT = "2.1.1/2.7.1/2.13/2.14: Minimum Width for RNPOLYS 0.15;Maximum Width (of RNPOLYS ) <= 100; Minimum length >= 0.8;Maximum length <= 1000"
+       	EQUATIONS {
+             IF(EV_WMIN < 0.15)  EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 100)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.8)   EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 1000)    EV_ERROR_LMAX=EV_LMAX;
+             }
+	} (121)
+
+/* Rule 2.2 */
+LENGTH rppoly_wid {
+	COMMENT = "2.2: Minimum Width ( for RPPOLY device)  >= 0.18"
+	SPACING < 0.18
+	} (102;171)
+
+/* Rule 2.2.1/2.8.1/2.13/2.14 */
+MOSCHECK rppolys_body rppolys_term rppolys_term {
+       	COMMENT = "2.2.1/2.8.1/2.13/2.14: Minimum Width for RPPOLYS 0.12;Maximum Width (of RPPOLYS ) <= 100; Minimum length >= 0.6;Maximum length <= 1000"
+       	EQUATIONS {
+             IF(EV_WMIN < 0.12)  EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 100)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.6)   EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 1000)    EV_ERROR_LMAX=EV_LMAX;
+             }
+	} (121)
+	
+/* Rule 2.14 */
+LENGTH rppoly_wid {
+	COMMENT = "2.16: Maximum Width ( for RPPOLY device) <= 100"
+	SPACING > 100
+	} (102;171)
+
+/* Rule 2.3 */
+LENGTH rndiff_wid {
+	COMMENT = "2.3: Minimum Width ( for RNDIFF device)  >= 0.16"
+	SPACING < 0.16
+	} (102;171)
+
+/* Rule 2.3.1/2.9.1/2.13/2.14 */
+MOSCHECK rndiffs_body rndiffs_term rndiffs_term {
+       	COMMENT = "2.3.1/2.9.1/2.13/2.14: Minimum Width for RNDIFFS 0.14;Maximum Width <= 100; Minimum length >= 0.7;Maximum length <= 1000"
+       	EQUATIONS {
+             IF(EV_WMIN < 0.14)  EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 100)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.7)   EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 1000)    EV_ERROR_LMAX=EV_LMAX;
+             }
+	} (121)
+	
+/* Rule 2.14 */
+LENGTH rndiff_wid {
+	COMMENT = "2.14: Maximum Width ( for RNDIFF device) <= 100"
+	SPACING > 100
+	} (102;171)
+
+/* Rule 2.4 */
+LENGTH rpdiff_wid {
+	COMMENT = "2.4: Minimum Width ( for RPDIFF device)  >= 0.18"
+	SPACING < 0.18
+	} (102;171)
+
+/* Rule 2.4.1/2.10.1/2.13/2.14 */
+MOSCHECK rpdiffs_body rpdiffs_term rpdiffs_term {
+       	COMMENT = "2.4.1/2.10.1/2.13/2.14: Minimum Width for RPDIFFS 0.14; Maximum Width <= 100; Minimum length >= 0.5; Maximum length <= 1000"
+       	EQUATIONS {
+             IF(EV_WMIN < 0.14)  EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 100)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.5)   EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 1000)    EV_ERROR_LMAX=EV_LMAX;
+             }
+	} (121)
+	
+/* Rule 2.14 */
+LENGTH rpdiff_wid {
+	COMMENT = "2.14: Maximum Width ( for RPDIFF device) <= 100"
+	SPACING > 100
+	} (102;171)
+
+/* Rule 2.5 */
+LENGTH hrnpoly_wid {
+	COMMENT = "2.5: Minimum Width ( for HRNPOLY device)  >= 1.2"
+	SPACING < 1.2
+	} (102;171)
+
+/* Rule 2.14 */
+LENGTH hrnpoly_wid {
+	COMMENT = "2.14: Maximum Width ( for HRNPOLY device) <= 100"
+	SPACING > 100
+	} (102;171)
+
+/* Rule 2.6 */
+LENGTH hrppoly_wid {
+	COMMENT = "2.6: Minimum Width ( for HRPPOLY device)  >= 1.3"
+	SPACING < 1.3
+	} (102;171)
+
+/* Rule 2.14 */
+LENGTH hrppoly_wid {
+	COMMENT = "2.14: Maximum Width ( for HRNPOLY device) <= 100"
+	SPACING > 100
+	} (102;171)
+
+/* Rule 2.7 */
+LENGTH rnpoly_len {
+	COMMENT = "2.7: Minimum Length ( for RNPOLY device)  >= 0.8"
+	SPACING < 0.8
+	} (102;171)
+
+/* Rule 2.13 */
+LENGTH rnpoly_len {
+	COMMENT = "2.13: Maximum Length ( for RNPOLY device) <= 1000"
+	SPACING > 1000
+	} (102;171)
+
+/* Rule 2.8 */
+LENGTH rppoly_len {
+	COMMENT = "2.8: Minimum Length ( for RPPOLY device)  >= 1.0"
+	SPACING < 1.0
+	} (102;171)
+
+/* Rule 2.13 */
+LENGTH rppoly_len {
+	COMMENT = "2.13: Maximum Length ( for RPPOLY device) <= 1000"
+	SPACING > 1000
+	} (102;171)
+	
+/* Rule 2.9 */	
+LENGTH rndiff_len {
+	COMMENT = "2.9: Minimum Length ( for RNDIFF device)  >= 2.0"
+	SPACING < 2.0
+	} (102;171)
+
+/* Rule 2.13 */	
+LENGTH rndiff_len {
+	COMMENT = "2.13: Maximum Length ( for RNDIFF device) <= 1000"
+	SPACING > 1000
+	} (102;171)
+
+/* Rule 2.10 */
+LENGTH rpdiff_len {
+	COMMENT = "2.10: Minimum Length ( for RPDIFF device)  >= 2.0"
+	SPACING < 2.0
+	} (102;171)
+
+/* Rule 2.13 */
+LENGTH rpdiff_len {
+	COMMENT = "2.13: Maximum Length ( for RPDIFF device) <= 1000"
+	SPACING > 1000
+	} (102;171)
+
+/* Rule 2.11 */
+LENGTH hrnpoly_len {
+	COMMENT = "2.11: Minimum Length ( for HRNPOLY device)  >= 1.2"
+	SPACING < 1.2
+	} (102;171)
+
+/* Rule 2.13 */
+LENGTH hrnpoly_len {
+	COMMENT = "2.13: Maximum Length ( for HRNPOLY device) <= 1000"
+	SPACING > 1000
+	} (102;171)
+
+/* Rule 2.12 */
+LENGTH hrppoly_len {
+	COMMENT = "2.12: Minimum Length ( for HRPPOLY device)  >= 1.3"
+	SPACING < 1.3
+	} (102;171)
+
+/* Rule 2.13 */
+LENGTH hrppoly_len {
+	COMMENT = "2.13: Maximum Length ( for HRPPOLY device) <= 1000"
+	SPACING > 1000
+	} (102;171)
+
+/* Rule 2.16 */
+ENCLOSE SAB BY POLS {
+        COMMENT = "2.16: Minimum enclosure of RPOLY within Poly >= 0.5"
+        SPACING < 0.5
+        TOUCH
+        } (100)
+        
+/* Rule 2.17 */
+ENCLOSE SAB BY DIFN {
+        COMMENT = "2.17: Minimum enclosure of RPOLY within Diffusion >= 0.8"
+        SPACING < 0.8
+        TOUCH
+        } (100)        
+
+/* Rule 2.18 */
+ENCLOSE diffres BY NPS {
+        COMMENT = "2.18: Minimum enclosure of Resistor Diffusion within Implant >= 0.2"
+        SPACING < 0.2
+        TOUCH
+        } (100)        
+ENCLOSE diffres BY PPS {
+        COMMENT = "2.18: Minimum enclosure of Resistor Diffusion within Implant >= 0.2"
+        SPACING < 0.2
+        TOUCH
+        } (100)        
+
+/* Rule 2.19 */
+BOOLEAN SAB AND NPS AND HRIMP			TEMP = nplus_rpol
+BOOLEAN SAB AND PPS AND HRIMP			TEMP = pplus_rpol
+INTERNAL nplus_rpol {
+     COMMENT = "2.19: Minimum NPLUS RPOLY overlap = 0.18"
+     DIMENSION = [0.18,*]
+     } (100;1)
+
+/* Rule 2.20 */
+INTERNAL pplus_rpol {
+     COMMENT = "2.20: Minimum PPLUS RPOLY overlap = 0.18"
+     DIMENSION = [0.18,*]
+     } (100;1)
+
+/* Rule 2.21 */
+ENCLOSE POLS BY HRIMP {
+        COMMENT = "2.21: Minimum Enclosure of Poly within HR-implant >= 0.23"
+        SPACING < 0.23
+        TOUCH
+        OVERLAP
+        } (100)
+     
+/* Rule 2.22 */
+EXTERNAL HRIMP {
+        COMMENT = "2.22: Minimum HR-implant spacing >= 0.2"
+        SPACING < 0.2
+        POINT_TOUCH
+        } (100)
+       
+ 
+/***********************************************************/
+/***  Section 3: Diode Design rules ************************/
+/***********************************************************/
+
+BOOLEAN DIFN AND DIODE 				TEMP = diff_diode
+BOOLEAN diff_diode AND PPS AND NWELL 		TEMP = poss_pndiode
+SELECT  poss_pndiode OUTSIDE POLS 		TEMP = pndiode1
+SELECT pndiode1 OUTSIDE DNWELL			TEMP = pndiode
+
+BOOLEAN (diff_diode AND NPS) NOT NWELL  	TEMP = poss_npdiode
+SELECT  poss_npdiode OUTSIDE POLS 		TEMP = npdiode1
+SELECT npdiode1 OUTSIDE DNWELL			TEMP = npdiode
+
+
+/* Rule 3.1/3.2 */
+INTERNAL npdiode {
+    COMMENT = "3.1/3.2: Minimum width ( NP Model Device) >= 0.2;Minimum length ( NP Model Device) >= 0.2"
+    SPACING < 0.2
+    POINT_TOUCH
+    } (100)
+
+/* Rule 3.3/3.4 */
+INTERNAL npdiode {
+    COMMENT = "3.3/3.4: Minimum width ( PN Model Device) >= 0.2;Minimum length ( PN Model Device) >= 0.2"
+    SPACING < 0.2
+    POINT_TOUCH
+    } (100)
+
+/* Rule 3.5/3.6 */    
+SIZE npdiode {
+    COMMENT = "3.5/3.6: Maximum width ( NP Model Device) >= 100;Maximum length ( NP Model Device) >= 100"
+    UNDER_OVER = 50
+    } (100)
+
+/* Rule 3.7/3.8 */    
+SIZE pndiode {
+    COMMENT = "3.7/3.8: Maximum width ( PN Model Device) >= 100;Maximum length ( PN Model Device) >= 100"
+    UNDER_OVER = 50
+    } (100)
+
+
+/***********************************************************/
+/***  Section 4: Capacitor Design rules ********************/
+/***********************************************************/
+
+/* Rule 4.1 */
+INTERNAL CAP_MIMS {
+    COMMENT = "4.1: Minimum width of a capacitor plate >= 1"
+    SPACING < 1
+    POINT_TOUCH
+    } (100)
+
+/* Rule 4.2 */    
+SIZE CAP_MIMS {
+    COMMENT = "4.2: Maximum width of a capacitor plate <= 100"
+    UNDER_OVER = 50
+    } (100)
+
+IF (OPTION == 9) {
+   
+/* Rule 4.3 */
+ENCLOSE V8S BY CAP_MIMS {
+     COMMENT = "4.3: Enclosure of Via within the capacitor layer >= 0.24"
+     SPACING < 0.24
+     OVERLAP
+     TOUCH
+     } (101)
+/* Rule 4.13 */
+ENCLOSE V8S BY MBCAP { 
+     COMMENT = "4.13: CBM Enclosure of Via8 within the capacitor layer >= 0.2"
+     SPACING < 0.2
+     OVERLAP
+     TOUCH
+     } (101)
+
+
+
+/* Rule 4.4 */
+ENCLOSE CAP_MIMS BY M8S {
+       COMMENT = "4.4: Enclose of Capacitor layer within M3 >= 0.3"
+       SPACING < 0.3
+       OVERLAP
+       TOUCH
+       } (102)
+
+/* Rule 4.12 */
+BOOLEAN V8S AND CAP_MIMS TEMP = via8_within_cap
+ENCLOSE via8_within_cap BY M9S {
+       COMMENT = "4.12: Enclose of (via within Capacitor layer) within M9 >= 0.06"
+       SPACING < 0.06
+       OVERLAP
+       TOUCH
+       } (102)
+}
+/*Rules from Hspice(need not be coded) : 4.6,4.7,4.26,4.27,4.28 */
+/*Rules 4.29,4.30,4.31,4.32 are based on original rule 4.1 */
+/*Slot and Shield related rules(deviced from layout sample): 4.20,4.21,4.22,4.23,4.24,4.25 */
+
+/***  MOM Capacitor Design rules ********************/
+/* 4.40/4.41 : Not a DRC rule: need not be coded*/
+/* 4.42/4.43/4.44/4.45/4.46/4.47/4.48/4.49 : need not be coded as they are Hspice recommendations*/
+
+
+/***********************************************************/
+/***  Section 5: Varactor Design rules *********************/
+/***********************************************************/
+
+BOOLEAN DIFN AND VARMARKER            TEMP = var_diff
+BOOLEAN var_diff AND NPS NOT DIFF25   TEMP = var_model_n1       
+BOOLEAN var_diff AND NPS AND DIFF25   TEMP = var_model_n2       
+BOOLEAN var_diff AND PPS NOT DIFF25   TEMP = var_model_p1       
+BOOLEAN var_diff AND PPS AND DIFF25   TEMP = var_model_p2       
+
+BOOLEAN POLS AND var_model_n1         TEMP = varbody_model_n1
+BOOLEAN POLS AND var_model_n2         TEMP = varbody_model_n2
+BOOLEAN POLS AND var_model_p1         TEMP = varbody_model_p1
+BOOLEAN POLS AND var_model_p2         TEMP = varbody_model_p2
+
+SELECT_EDGE varbody_model_n1 TOUCHING var_diff TEMP = varbody_model_n1_len
+SELECT_EDGE varbody_model_n2 TOUCHING var_diff TEMP = varbody_model_n2_len
+SELECT_EDGE varbody_model_p1 TOUCHING var_diff TEMP = varbody_model_p1_len
+SELECT_EDGE varbody_model_p2 TOUCHING var_diff TEMP = varbody_model_p2_len
+
+BOOLEAN var_model_n1 NOT varbody_model_n1 TEMP = var_model_n1_sd
+BOOLEAN var_model_n2 NOT varbody_model_n2 TEMP = var_model_n2_sd
+BOOLEAN var_model_p1 NOT varbody_model_p1 TEMP = var_model_p1_sd
+BOOLEAN var_model_p2 NOT varbody_model_p2 TEMP = var_model_p2_sd
+
+/* Rule 5.1 */
+LENGTH varbody_model_n1_len {
+    COMMENT = "5.1 Minimum length (for NVAR1 device) >= 0.20"
+    SPACING < 0.20
+  } (101;1)
+
+/* Rule 5.2 */
+LENGTH varbody_model_n2_len {
+      COMMENT = "5.1 Minimum length (for NVAR2 device) >= 0.50"
+      SPACING < 0.50
+    } (101;1)
+
+/* Rule 5.3 */
+LENGTH varbody_model_p1_len {
+  COMMENT = "5.3 Minimum length (for PVAR1 device) >= 0.20"
+SPACING < 0.20
+} (101;1)
+
+/* Rule 5.4 */
+LENGTH varbody_model_p2_len {
+    COMMENT = "5.4 Minimum length (for PVAR2 device) >= 0.50"
+  SPACING < 0.50
+} (101;1)
+
+/* Rule 5.5 */
+LENGTH varbody_model_n1_len {
+COMMENT = "5.5 Maximum length (for NVAR1 device) <= 50"
+SPACING > 50
+  } (101;1)
+
+/* Rule 5.6 */
+LENGTH varbody_model_n2_len {
+COMMENT = "5.6 Maximum length (for NVAR2 device) <= 50"
+SPACING > 50
+  } (101;1)
+
+/* Rule 5.7 */
+LENGTH varbody_model_p1_len {
+COMMENT = "5.7 Maximum length (for PVAR1 device) <= 50"
+SPACING > 50
+ } (101;1)
+
+/* Rule 5.8 */
+LENGTH varbody_model_p2_len {
+COMMENT = "5.8 Maximum length (for PVAR2 device) <= 50"
+SPACING > 50
+} (101;1)
+
+BOOLEAN var_diff NOT varbody_model_n1 TEMP = var_diff_sd_n1
+BOOLEAN var_diff NOT varbody_model_n2 TEMP = var_diff_sd_n2
+BOOLEAN var_diff NOT varbody_model_p1 TEMP = var_diff_sd_p1
+BOOLEAN var_diff NOT varbody_model_p2 TEMP = var_diff_sd_p2
+
+SELECT_EDGE varbody_model_n1 TOUCHING var_diff_sd_n1 TEMP = varbody_model_n1_len_wid
+SELECT_EDGE varbody_model_n2 TOUCHING var_diff_sd_n2 TEMP = varbody_model_n2_len_wid
+SELECT_EDGE varbody_model_p1 TOUCHING var_diff_sd_p1 TEMP = varbody_model_p1_len_wid
+SELECT_EDGE varbody_model_p2 TOUCHING var_diff_sd_p2 TEMP = varbody_model_p2_len_wid
+
+LEVEL varbody_model_n1 TEMP = lvl
+POLYGON_FEATURES lvl_varbody_model_n1 {
+        VERTICES [ 
+                ANGLES  = [90]
+                PLACE  = CENTERED
+                SIZE   = 0.01
+                STYLE  = SQUARE ]
+  } TEMP = gate_90_corner_n1
+SELECT gate_90_corner_n1 OUTSIDE varbody_model_n1_len             TEMP = varbody_90_corner_out_len_n1
+BOOLEAN varbody_model_n1_len_wid NOT varbody_90_corner_out_len_n1 TEMP = poss_varbody_len_wid_n1
+SIZE poss_varbody_len_wid_n1 { OVERSIZE = 0.01 }                  TEMP = poss_varbody_len_wid_n1_os 
+SELECT poss_varbody_len_wid_n1_os INTERACT varbody_90_corner_out_len_n1 { RANGE = [1,1] } TEMP = varbody_wid_n1
+SELECT_EDGE varbody_model_n1 TOUCHING varbody_wid_n1              TEMP = varbody_wid_n1_edge
+
+/* Rule 5.9 */
+LENGTH varbody_wid_n1_edge {
+      COMMENT = "5.9 : Minimum width (for NVAR1 device) >= 0.5"
+      SPACING < 0.5
+      } (100)
+
+/* Rule 5.13 */
+LENGTH varbody_wid_n1_edge {
+      COMMENT = "5.13 : Maximum width (for NVAR1 device) <= 50"
+      SPACING > 50
+      } (100)
+
+LEVEL varbody_model_n2 TEMP = lvl
+POLYGON_FEATURES lvl_varbody_model_n2 {
+        VERTICES [ 
+                ANGLES  = [90]
+                PLACE  = CENTERED
+                SIZE   = 0.01
+                STYLE  = SQUARE ]
+  } TEMP = gate_90_corner_n2
+SELECT gate_90_corner_n2 OUTSIDE varbody_model_n2_len             TEMP = varbody_90_corner_out_len_n2
+BOOLEAN varbody_model_n2_len_wid NOT varbody_90_corner_out_len_n2 TEMP = poss_varbody_len_wid_n2
+SIZE poss_varbody_len_wid_n2 { OVERSIZE = 0.01 }                  TEMP = poss_varbody_len_wid_n2_os 
+SELECT poss_varbody_len_wid_n2_os INTERACT varbody_90_corner_out_len_n2 { RANGE = [1,1] } TEMP = varbody_wid_n2
+SELECT_EDGE varbody_model_n2 TOUCHING varbody_wid_n2              TEMP = varbody_wid_n2_edge
+
+/* Rule 5.10 */
+LENGTH varbody_wid_n2_edge {
+      COMMENT = "5.10 : Minimum width (for NVAR2 device) >= 1.5"
+      SPACING < 1.5
+      } (100)
+
+/* Rule 5.14 */
+LENGTH varbody_wid_n2_edge {
+      COMMENT = "5.14 : Maximum width (for NVAR2 device) <= 50"
+      SPACING > 50
+      } (100)
+
+LEVEL varbody_model_p1 TEMP = lvl
+POLYGON_FEATURES lvl_varbody_model_p1 {
+        VERTICES [ 
+                ANGLES  = [90]
+                PLACE  = CENTERED
+                SIZE   = 0.01
+                STYLE  = SQUARE ]
+  } TEMP = gate_90_corner_p1
+SELECT gate_90_corner_p1 OUTSIDE varbody_model_p1_len             TEMP = varbody_90_corner_out_len_p1
+BOOLEAN varbody_model_p1_len_wid NOT varbody_90_corner_out_len_p1 TEMP = poss_varbody_len_wid_p1
+SIZE poss_varbody_len_wid_p1 { OVERSIZE = 0.01 }                  TEMP = poss_varbody_len_wid_p1_os 
+SELECT poss_varbody_len_wid_p1_os INTERACT varbody_90_corner_out_len_p1 { RANGE = [1,1] } TEMP = varbody_wid_p1
+SELECT_EDGE varbody_model_p1 TOUCHING varbody_wid_p1              TEMP = varbody_wid_p1_edge
+
+/* Rule 5.11 */
+LENGTH varbody_wid_p1_edge {
+      COMMENT = "5.11 : Minimum width (for PVAR1 device) >= 0.5"
+      SPACING < 0.5
+      } (100)
+
+/* Rule 5.15 */
+LENGTH varbody_wid_p1_edge {
+      COMMENT = "5.15 : Maximum width (for PVAR1 device) <= 50"
+      SPACING > 50
+      } (100)
+     
+LEVEL varbody_model_p2 TEMP = lvl
+POLYGON_FEATURES lvl_varbody_model_p2 {
+        VERTICES [ 
+                ANGLES  = [90]
+                PLACE  = CENTERED
+                SIZE   = 0.01
+                STYLE  = SQUARE ]
+  } TEMP = gate_90_corner_p2
+SELECT gate_90_corner_p2 OUTSIDE varbody_model_p2_len             TEMP = varbody_90_corner_out_len_p2
+BOOLEAN varbody_model_p2_len_wid NOT varbody_90_corner_out_len_p2 TEMP = poss_varbody_len_wid_p2
+SIZE poss_varbody_len_wid_p2 { OVERSIZE = 0.01 }                  TEMP = poss_varbody_len_wid_p2_os 
+SELECT poss_varbody_len_wid_p2_os INTERACT varbody_90_corner_out_len_p2 { RANGE = [1,1] } TEMP = varbody_wid_p2
+SELECT_EDGE varbody_model_p2 TOUCHING varbody_wid_p2              TEMP = varbody_wid_p2_edge
+
+/* Rule 5.12 */
+LENGTH varbody_wid_p2_edge {
+      COMMENT = "5.12 : Minimum width (for PVAR2 device) >= 1.5"
+      SPACING < 1.5
+      } (100)
+
+/* Rule 5.16 */
+LENGTH varbody_wid_p2_edge {
+      COMMENT = "5.16 : Maximum width (for PVAR2 device) <= 50"
+      SPACING > 50
+      } (100)
+
+/* Rule 5.17 */
+SELECT POLS INTERACT VARMARKER TEMP = poly_var
+BOOLEAN CONTS AND poly_var     TEMP = var_poly_cont
+BOOLEAN CONTS AND var_diff     TEMP = var_diff_cont 
+
+EXTERNAL var_poly_cont var_diff  {
+    COMMENT = "5.17: Minimum Poly contact to Diffusion >= 0.12"
+    SPACING < 0.12
+    TOUCH
+    OVERLAP
+    } (100)
+
+/* Rule 5.18 */      
+ENCLOSE DIFN BY VARMARKER {
+    COMMENT = "5.18: Minimum Enclosure of Diffusion within VARMARKER layer >= 0.22"
+    SPACING < 0.22
+    TOUCH
+    OVERLAP 
+    } (101)
+
+/* Rule 5.20 */
+EXTERNAL var_diff_cont varbody_model_n1{
+    COMMENT = "5.20: Minimum Diffusion contact to poly (for NVAR1 device) >= 0.08"
+    SPACING < 0.08
+    TOUCH
+    OVERLAP
+    } (100)
+
+/* Rule 5.21 */      
+EXTERNAL var_diff_cont varbody_model_n2{
+    COMMENT = "5.21: Minimum Diffusion contact to poly (for NVAR2 device) >= 0.13"
+    SPACING < 0.13
+    TOUCH
+    OVERLAP
+    } (100)
+
+/* Rule 5.22 */      
+EXTERNAL var_diff_cont varbody_model_p1 {
+    COMMENT = "5.22: Minimum Diffusion contact to poly (for PVAR1 device) >= 0.13"
+    SPACING < 0.13
+    TOUCH
+    OVERLAP
+    } (100)
+
+/* Rule 5.23 */      
+EXTERNAL var_diff_cont varbody_model_p2 {
+    COMMENT = "5.23: Minimum Diffusion contact to poly (for PVAR2 device) >= 0.13"
+    SPACING < 0.13
+    TOUCH
+    OVERLAP
+    } (100)
+    
+/* Rules 5.24 till 5.35 comes from Hspice model doc. Hence need not be coded */
+/* For Junction varactors 5.59 till 5.62 come from Hspice doc*/
+
+/*******************************************/
+/**********  6.INDUCTOR Design Rules *******/
+/*******************************************/
+
+/* Rules 6.1 through Rules 6.12 */
+/* Guideline to designers, need not be coded */
+
+
+
+IF (OPTION == 4) {
+
+/* Rule 6.13 , 6.14 */
+BOOLEAN M4S AND DUM_INDS { }			TEMP = m4_ind
+EXTERNAL m4_ind {
+	COMMENT = "6.13: M4 to M4 (under DUM_INDS) >= 1.5 "
+	SPACING < 1.5
+	NON_PARALLEL = TRUE
+	TOUCH
+	} (103)
+
+EXTERNAL m4_ind {
+	SPACING = [5.005, 46.5] 
+	NON_PARALLEL = TRUE
+	TOUCH
+	} TEMP = m4_err_all
+BOOLEAN m4_err_all NOT DUM_INDS	{
+	COMMENT = "6.14: M4 to M4 (under DUM_INDS)  <= 5"
+	}(103)
+
+/* Rule 6.15 */
+
+SELECT DUM_INDS INTERACT m4_ind { }			TEMP = check_inddmy
+SELECT m4_ind INTERACT check_inddmy {
+	POINT_TOUCH = FALSE
+	LINE_TOUCH = FALSE 
+	}						TEMP = met4_inddmy
+SIZE check_inddmy {UNDERSIZE = 44.999}			TEMP = small_inddmy
+BOOLEAN met4_inddmy NOT small_inddmy { }		TEMP = indDmyEnclose_Error
+INTERNAL indDmyEnclose_Error {
+	COMMENT = "6.15: Enclosure of Inductor device (Metal) within Inductor Dummy layer >= 45"
+	DIMENSION
+	} (103)
+
+/* Rule 6.16, 6.17 */
+BOOLEAN V3S AND DUM_INDS { } 			TEMP = v3_ind
+BOOLEAN M4S AND DUM_INDS { } 			TEMP = m4_ind
+
+ENCLOSE v3_ind BY m4_ind {
+	COMMENT = "6.16: Minimum enclosure of Via within Top Metal >= 0.3"
+	SPACING < 0.3
+        OVERLAP
+        TOUCH
+	} (102)
+ENCLOSE v3_ind BY m4_ind {
+	COMMENT = " 6.16/6.17: Minimum enclosure of via within Top Metal >= 0.30; Minimum end of Line enclosure of via within Top Metal >= 0.45"
+	RULE = [SPACING < 0.45 ADJ_SPACING < 0.45 PARALLEL VIOLATIONS >= 2 ] 
+	} (102)  
+
+}
+
+/* 6.55 till 6.62 are special recommendations for dummy island pattern.  */
+
+/*************************************************/
+/*     Section 7: Mask Layers Design Rules       */
+/*************************************************/ 
+
+/* Rule 7.1 */
+INTERNAL NWELL {
+	COMMENT = "7.1: Minimum width for Nwell >= 0.55"
+	SPACING < 0.55
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+/* Rule 7.2 */
+EXTERNAL NWELL {
+	COMMENT = "7.2: Minimum spacing for Nwell >= 0.55"
+	SPACING < 0.55
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.3 */
+AREA NWELL {
+	COMMENT = "7.3: Minimum area of Nwell >= 1.2"
+	RANGE = [0.001, 1.1999]
+	} (101)
+
+/* Rule 7.4 */
+SELECT NWELL INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_nwell
+AREA encl_nwell {
+	COMMENT = "7.4: Minimum Enclosed area of Nwell >= 1.2"
+	RANGE = [0.001, 1.1999]
+	} (101)
+
+/* Rule 7.5 */
+INTERNAL DIFN {
+	COMMENT = "7.5: Minimum width for Diffusion >= 0.09"
+	SPACING < 0.09
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+/* Rule 7.6 */
+EXTERNAL DIFN {
+	COMMENT = "7.6: Minimum spacing for Diffusion >= 0.09"
+	SPACING < 0.09
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.7 */
+AREA DIFN {
+	COMMENT = "7.7: Minimum area of Diffusion >= 0.05"
+	RANGE = [0.001, 0.0499]
+	} (101)
+
+/* Rule 7.8 */
+SELECT DIFN INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_diff
+AREA encl_diff {
+	COMMENT = "7.8: Minimum Enclosed area of Diffusion >= 0.065"
+	RANGE = [0.001, 0.0649]
+	} (101)
+
+/* Rule 7.9 */
+INTERNAL POLS {
+	COMMENT = "7.9: Minimum width for Polysilicon >= 0.09"
+	SPACING < 0.09
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+/* Rule 7.10 */
+EXTERNAL POLS {
+	COMMENT = "7.10: Minimum spacing for Polysilicon >= 0.09"
+	SPACING < 0.09
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.11 */
+AREA POLS {
+	COMMENT = "7.11: Minimum area of Polysilicon >= 0.05"
+	RANGE = [0.001, 0.0499]
+	} (101)
+
+/* Rule 7.12 */
+SELECT POLS INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_poly
+AREA encl_poly {
+	COMMENT = "7.12: Minimum Enclosed area of Polysilicon >= 0.09"
+	RANGE = [0.0001, 0.0899]
+	} (101)
+
+/* Rule 7.13 */
+INTERNAL PPS {
+	COMMENT = "7.13: Minimum width for P+ Material >= 0.2"
+	SPACING < 0.2
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+/* Rule 7.14 */
+EXTERNAL PPS {
+	COMMENT = "7.14: Minimum spacing for P+ Material >= 0.1"
+	SPACING < 0.1
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.15 */
+AREA PPS {
+	COMMENT = "7.15: Minimum area of P+ Material >= 0.08"
+	RANGE = [0.001, 0.0799]
+	} (101)
+
+/* Rule 7.16 */
+SELECT PPS INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_pps
+AREA encl_pps {
+	COMMENT = "7.16: Minimum Enclosed area of P+ Material >= 0.11"
+	RANGE = [0.0001, 0.1099]
+	} (101)
+
+/* Rule 7.17 */
+INTERNAL NPS {
+	COMMENT = "7.17: Minimum width for N+ Material >= 0.2"
+	SPACING < 0.2
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+/* Rule 7.18 */
+EXTERNAL NPS {
+	COMMENT = "7.18: Minimum spacing for N+ Material >= 0.1"
+	SPACING < 0.1
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.19 */
+AREA NPS {
+	COMMENT = "7.19: Minimum area of N+ Material >= 0.08"
+	RANGE = [0.001, 0.0799]
+	} (101)
+
+/* Rule 7.20 */
+SELECT NPS INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_nps
+AREA encl_nps {
+	COMMENT = "7.20: Minimum Enclosed area of N+ Material >= 0.11"
+	RANGE = [0.0001, 0.1099]
+	} (101)
+
+/* Rule 7.21 */
+INTERNAL SAB {
+	COMMENT = "7.21: Minimum width for Poly-Resist oxide >= 0.34"
+	SPACING < 0.34
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+/* Rule 7.22 */
+EXTERNAL SAB {
+	COMMENT = "7.22: Minimum spacing for Poly-Resist oxide >= 0.34"
+	SPACING < 0.34
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.23 */
+AREA SAB {
+	COMMENT = "7.23: Minimum area of Poly-Resist oxide >= 0.85"
+	RANGE = [0.001, 0.8499]
+	} (101)
+
+/* Rule 7.24 */
+SELECT SAB INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}	TEMP = encl_rpols
+AREA encl_rpols {
+	COMMENT = "7.24: Minimum Enclosed area of Poly-Resist oxide >= 0.85"
+	RANGE = [0.0001, 0.8499]
+	} (101)
+
+/* Rule 7.25 */
+INTERNAL CONTS {
+	COMMENT = "7.25: Contact width != 0.09"
+	DIMENSIONS = [0.09,0.09]
+	} (101)
+
+/* Rule 7.26 */
+EXTERNAL CONTS {
+	COMMENT = "7.26: Minimum spacing for contact >= 0.10"
+	SPACING < 0.10
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.27 */
+INTERNAL M1S {
+	COMMENT = "7.27: Minimum width for Metal 1 >= 0.1"
+	SPACING < 0.1
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+/* Rule 7.28 */
+/*SIZE M1S {
+	COMMENT = "7.28: Maximum width for Metal 1 <= 1000"
+	UNDER_OVER = 500
+	} (101)
+*/
+/* Rule 7.29 */
+EXTERNAL M1S {
+	COMMENT = "7.29: Minimum spacing for Metal 1 >= 0.1"
+	SPACING < 0.1
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.30 */
+AREA M1S {
+	COMMENT = "7.30: Minimum area of Metal 1 >= 0.04"
+	RANGE = [0.001, 0.0399]
+	} (101)
+
+/* Rule 7.31 */
+SELECT M1S INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_m1s
+AREA encl_m1s {
+	COMMENT = "7.31: Minimum Enclosed area of Metal 1 >= 0.3"
+	RANGE = [0.001, 0.299]
+	} (101)
+
+/* Rule 7.32 */
+INTERNAL M2S {
+	COMMENT = "7.32: Minimum width for Metal 2 >= 0.15"
+	SPACING < 0.15
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+/* Rule 7.33 */
+/*SIZE M2S {
+	COMMENT = "7.33: Maximum width for Metal 2 <= 1000"
+	UNDER_OVER = 500
+	} (101)
+*/
+/* Rule 7.34 */
+EXTERNAL M2S {
+	COMMENT = "7.34: Minimum spacing for Metal 2 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.35 */
+AREA M2S {
+	COMMENT = "7.35: Minimum area of Metal 2 >= 0.06"
+	RANGE = [0.001, 0.0599]
+	} (101)
+
+/* Rule 7.36 */
+SELECT M2S INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_m2s
+AREA encl_m2s {
+	COMMENT = "7.36: Minimum Enclosed area of Metal 2 >= 0.3"
+	RANGE = [0.0001, 0.299]
+	} (101)
+
+
+/* M3   Rule 7.37 */
+INTERNAL M3S {
+	COMMENT = "7.37: Minimum width for Metal 3 >= 0.15"
+	SPACING < 0.15
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+
+EXTERNAL M3S {
+	COMMENT = "7.39: Minimum spacing for Metal 3 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.40 */
+AREA M3S {
+	COMMENT = "7.40: Minimum area of Metal 3 >= 0.06"
+	RANGE = [0.001, 0.0599]
+	} (101)
+
+/* Rule 7.41 */
+SELECT M3S INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_m3s
+AREA encl_m3s {
+	COMMENT = "7.41: Minimum Enclosed area of Metal 3 >= 0.3"
+	RANGE = [0.0001, 0.299]
+	} (101)
+
+
+/* M4  ***************************************   */
+
+/* M4   Rule 7.37 */
+INTERNAL M4S {
+	COMMENT = "7.37: Minimum width for Metal 4 >= 0.15"
+	SPACING < 0.15
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+
+EXTERNAL M4S {
+	COMMENT = "7.39: Minimum spacing for Metal 4 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.40 */
+AREA M4S {
+	COMMENT = "7.40: Minimum area of Metal 4 >= 0.06"
+	RANGE = [0.001, 0.0599]
+	} (101)
+
+/* Rule 7.41 */
+SELECT M4S INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_m4s
+AREA encl_m4s {
+	COMMENT = "7.41: Minimum Enclosed area of Metal 4 >= 0.3"
+	RANGE = [0.0001, 0.299]
+	} (101)
+
+
+
+/* M5  ***************************************   */
+
+/* M5   Rule 7.37 */
+INTERNAL M5S {
+	COMMENT = "7.37: Minimum width for Metal 5 >= 0.15"
+	SPACING < 0.15
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+
+EXTERNAL M5S {
+	COMMENT = "7.39: Minimum spacing for Metal 5 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.50 */
+AREA M5S {
+	COMMENT = "7.50: Minimum area of Metal 5 >= 0.06"
+	RANGE = [0.001, 0.0599]
+	} (101)
+
+/* Rule 7.51 */
+SELECT M5S INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_m5s
+AREA encl_m5s {
+	COMMENT = "7.51: Minimum Enclosed area of Metal 5 >= 0.3"
+	RANGE = [0.0001, 0.299]
+	} (101)
+
+/* M6  ***************************************   */
+
+/* M6   Rule 7.37 */
+INTERNAL M6S {
+	COMMENT = "7.37: Minimum width for Metal 6 >= 0.15"
+	SPACING < 0.15
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+
+EXTERNAL M6S {
+	COMMENT = "7.39: Minimum spacing for Metal 6 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.50 */
+AREA M6S {
+	COMMENT = "7.60: Minimum area of Metal 6 >= 0.06"
+	RANGE = [0.001, 0.0599]
+	} (101)
+
+/* Rule 7.51 */
+SELECT M6S INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_m6s
+AREA encl_m6s {
+	COMMENT = "7.51: Minimum Enclosed area of Metal 6 >= 0.3"
+	RANGE = [0.0001, 0.299]
+	} (101)
+
+
+
+/* M7  ***************************************   */
+
+/* M7   Rule 7.37 */
+INTERNAL M7S {
+	COMMENT = "7.37: Minimum width for Metal 7 >= 0.15"
+	SPACING < 0.15
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+
+EXTERNAL M7S {
+	COMMENT = "7.39: Minimum spacing for Metal 7 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.50 */
+AREA M7S {
+	COMMENT = "7.60: Minimum area of Metal 7 >= 0.06"
+	RANGE = [0.001, 0.0599]
+	} (101)
+
+/* Rule 7.51 */
+SELECT M7S INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_m7s
+AREA encl_m7s {
+	COMMENT = "7.51: Minimum Enclosed area of Metal 7 >= 0.3"
+	RANGE = [0.0001, 0.299]
+	} (101)
+
+
+	
+/* M8  ***************************************   */
+
+/* M8   Rule 7.37 */
+INTERNAL M8S {
+	COMMENT = "7.37: Minimum width for Metal 8 >= 0.15"
+	SPACING < 0.15
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+
+EXTERNAL M8S {
+	COMMENT = "7.39: Minimum spacing for Metal 8 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.50 */
+AREA M8S {
+	COMMENT = "8.60: Minimum area of Metal 8 >= 0.06"
+	RANGE = [0.001, 0.0599]
+	} (101)
+
+/* Rule 7.51 */
+SELECT M8S INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_m8s
+AREA encl_m8s {
+	COMMENT = "7.51: Minimum Enclosed area of Metal 8 >= 0.3"
+	RANGE = [0.0001, 0.299]
+	} (101)
+
+/* M9  ***************************************   */
+
+
+/* Rule 7.42 */
+INTERNAL M9S {
+	COMMENT = "7.42: Minimum width for Metal 9 >= 0.15"
+	SPACING < 0.15
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+
+EXTERNAL M9S {
+	COMMENT = "7.44: Minimum spacing for Metal 9 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+/* Rule 7.45 */
+AREA M9S {
+	COMMENT = "7.45: Minimum area of Metal 9 >= 0.06"
+	RANGE = [0.001, 0.0599]
+	} (101)
+
+/* Rule 7.46 */
+SELECT M9S INSIDE_HOLE {INNER_HOLE_ONLY = TRUE}		TEMP = encl_m9s
+AREA encl_m9s {
+	COMMENT = "7.46: Minimum Enclosed area of Metal 9 >= 0.3"
+	RANGE = [0.0001, 0.299]
+	} (101)
+
+
+
+
+
+/* Rule 7.47 */
+INTERNAL V1S {
+	COMMENT = "7.47: Dimension of Via 1 != 0.13"
+	DIMENSIONS = [0.13,0.13]
+	} (101)
+
+/* Rule 7.48 */
+EXTERNAL V1S {
+	COMMENT = "7.48: Minimum spacing for Via 1 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+
+
+
+/* Rule 7.47 */
+INTERNAL V2S {
+	COMMENT = "7.47: Dimension of Via 2 != 0.13"
+	DIMENSIONS = [0.13,0.13]
+	} (101)
+
+/* Rule 7.48 */
+EXTERNAL V2S {
+	COMMENT = "7.48: Minimum spacing for Via 2 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+
+
+/* Rule 7.47 */
+INTERNAL V3S {
+	COMMENT = "7.47: Dimension of Via 3 != 0.13"
+	DIMENSIONS = [0.13,0.13]
+	} (101)
+
+/* Rule 7.48 */
+EXTERNAL V3S {
+	COMMENT = "7.48: Minimum spacing for Via 3 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+
+/* Rule 7.47 */
+INTERNAL V4S {
+	COMMENT = "7.47: Dimension of Via 4 != 0.13"
+	DIMENSIONS = [0.13,0.13]
+	} (101)
+
+/* Rule 7.48 */
+EXTERNAL V4S {
+	COMMENT = "7.48: Minimum spacing for Via 4 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+
+
+/* Rule 7.47 */
+INTERNAL V5S {
+	COMMENT = "7.47: Dimension of Via 5 != 0.13"
+	DIMENSIONS = [0.13,0.13]
+	} (101)
+
+/* Rule 7.48 */
+EXTERNAL V5S {
+	COMMENT = "7.48: Minimum spacing for Via 5 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+
+
+
+/* Rule 7.47 */
+INTERNAL V6S {
+	COMMENT = "7.47: Dimension of Via 6 != 0.13"
+	DIMENSIONS = [0.13,0.13]
+	} (101)
+
+/* Rule 7.48 */
+EXTERNAL V6S {
+	COMMENT = "7.48: Minimum spacing for Via 6 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+
+
+
+
+
+
+/* Rule 7.49 */
+INTERNAL V7S {
+	COMMENT = "7.49: Dimension of Via 7 != 0.13"
+	DIMENSIONS = [ 0.13,0.13]
+	} (101)
+
+/* Rule 7.50 */
+BOOLEAN V7S NOT CAP_MIMS TEMP = v7s_not_cap
+EXTERNAL v7s_not_cap {
+	COMMENT = "7.50: Minimum spacing for Via 7 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+
+
+/* Rule 7.51 */
+INTERNAL V8S {
+	COMMENT = "7.51: Dimension of Via 8 != 0.13"
+        DIMENSIONS = [0.13,0.13]
+	} (101)
+
+/* Rule 7.52 */
+
+BOOLEAN V8S NOT CAP_MIMS TEMP = v8s_not_cap
+EXTERNAL v8s_not_cap {
+	COMMENT = "7.52: Minimum spacing for Via 8 >= 0.15"
+	SPACING < 0.15
+	NON_PARALLEL
+	TOUCH
+	CHECK_SAME_POLYGON
+	} (101)
+
+
+
+
+
+
+
+/* Rule 7.55 */
+EXTERNAL NWELL DIFN {
+	COMMENT = "7.55: Minimum spacing from Nwell to Diffusion >= 0.22"	
+	SPACING < 0.22
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.56 */
+ENCLOSE DIFN BY NWELL {
+	COMMENT = "7.56: Minimum enclosure of Diffusion within Nwell >= 0.23"
+	SPACING < 0.23
+	} (102)
+
+/* Rule 7.57 */
+ENCLOSE POLS BY SAB {
+	COMMENT = "7.57: Minimum enclosure of Polysilicon within SAB >= 0.22"
+	SPACING < 0.22
+	} (102)
+
+/* Rule 7.58 */
+EXTERNAL CONTS SAB {
+	COMMENT = "7.58: Minimum spacing from Contact to SAB >= 0.22"	
+	SPACING < 0.22
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.59 */
+ENCLOSE NWELL BY NWDMY {
+	COMMENT = "7.59: Minimum enclosure of Nwell within NW Resistor (NWDMY) >= 0.2"
+	SPACING < 0.2
+	} (102)
+
+/* Rule 7.61 */
+EXTERNAL POLS DIFN {
+	COMMENT = "7.61: Minimum spacing from Polysilicon to Diffusion >= 0.045"
+	SPACING < 0.045
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.62 */
+ENCLOSE plain_diff BY POLS {
+	COMMENT = "7.62: Minimum enclosure of Diffusion within Polysilicon >= 0.13"
+	SPACING < 0.13
+	} (102)
+
+/* Rule 7.621 */
+ENCLOSE othervt_diff BY POLS { 
+	COMMENT = "7.621: Minimum enclosure of Diffusion within Polysilicon >= 0.16"
+	SPACING < 0.16
+	} (102)
+
+/* Rule 7.622 */
+ENCLOSE voltage_diff BY POLS { 
+	COMMENT = "7.622: Minimum enclosure of Diffusion within Polysilicon >= 0.22"
+	SPACING < 0.22
+	} (102)
+
+
+
+/* Rule 7.63 */
+EXTERNAL DIFN CONTS {
+	COMMENT = "7.63: Minimum spacing from Diffusion to Contact >= 0.1"	
+	SPACING < 0.1
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.64 */
+ENCLOSE CONTS BY DIFN {
+	COMMENT = "7.64: Minimum enclosure of Contact within Diffusion >= 0.05"
+	SPACING < 0.05
+	TOUCH = TRUE
+	} (102)
+
+/* Rule 7.65 */
+EXTERNAL POLS CONTS {
+	COMMENT = "7.65: Minimum spacing from Polysilicon to Contact >= 0.08"	
+	SPACING < 0.08
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.66 */
+ENCLOSE CONTS BY POLS {
+	COMMENT = "7.66: Minimum enclosure of Contact within Polysilicon >= 0.05"
+	SPACING < 0.05
+	TOUCH = TRUE
+	} (102)
+
+/* Rule 7.67 */
+ENCLOSE CONTS BY PPS {
+	COMMENT = "7.67: Minimum enclosure of Contact within P+ Material >= 0.06"
+	SPACING < 0.06
+	TOUCH = TRUE
+	} (102)
+
+/* Rule 7.68 */
+ENCLOSE CONTS BY NPS {
+	COMMENT = "7.68: Minimum enclosure of Contact within N+ Material >= 0.06"
+	SPACING < 0.06
+	TOUCH = TRUE
+	} (102)
+
+/* Rule 7.69 */
+BOOLEAN PPS AND NPS {
+	COMMENT = "P+ Material should not overlap N+ Material"
+	} (102)
+
+/* Rule 7.70 */
+ENCLOSE CONTS BY M1S {
+	COMMENT = "7.70: Minimum enclosure of Contact within Metal 1 >= 0.005"
+	SPACING < 0.005
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.70/7.71*/	
+ENCLOSE CONTS BY M1S {
+	COMMENT = "7.70/7.71: Minimum enclosure of Contact within Metal 1 >= 0.005; Minimum end of Line enclosure of contact within M1 >= 0.04"
+	RULE = [SPACING < 0.04 PARALLEL ADJ_SPACING < 0.04 VIOLATIONS >= 2  ] 
+	} (102)
+
+/* Rule 7.72 */
+ENCLOSE V1S BY M1S {
+	COMMENT = " 7.72: Minimum enclosure of Via1 within Metal 1 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.72/7.73 */
+ENCLOSE V1S BY M1S {
+	COMMENT = "7.72/7.73: Minimum enclosure of via1 within Metal 1 >= 0.01; Minimum end of Line enclosure of via1 within Metal 1 >= 0.04"
+	RULE = [SPACING < 0.04 PARALLEL ADJ_SPACING < 0.04 VIOLATIONS >= 2  ] 
+	} (102)
+
+/* Rule 7.74 */
+ENCLOSE V1S BY M2S {
+	COMMENT = "7.74: Minimum enclosure of Via1 within Metal 2 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.74/7.75 */
+ENCLOSE V1S BY M2S {
+	COMMENT = " 7.74/7.75: Minimum enclosure of via1 within Metal 2 >= 0.01; Minimum end of Line enclosure of via1 within Metal 2 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+
+/* Rule 7.76 */
+ENCLOSE V2S BY M2S {
+	COMMENT = "7.76: Minimum enclosure of Via2 within Metal 2 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.76/7.77 */
+ENCLOSE V2S BY M2S {
+	COMMENT = " 7.76/7.77: Minimum enclosure of via2 within Metal 2 >= 0.01; Minimum end of Line enclosure of via2 within Metal 2 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+/* Rule 7.78 */
+ENCLOSE V2S BY M3S {
+	COMMENT = "7.78: Minimum enclosure of Via2 within Metal 3 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.78/7.79 */
+ENCLOSE V2S BY M3S {
+	COMMENT = " 7.78/7.79: Minimum enclosure of via2 within Metal 3 >= 0.01; Minimum end of Line enclosure of via2 within Metal 3 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+
+
+/* Rule 7.80 */
+ENCLOSE V3S BY M3S {
+	COMMENT = "7.80: Minimum enclosure of Via3 within Metal 3 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.80/7.81 */
+ENCLOSE V3S BY M3S {
+	COMMENT = " 7.80/7.81: Minimum enclosure of via3 within Metal 3 >= 0.01; Minimum end of Line enclosure of via3 within Metal 3 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+/* Rule 7.82 */
+ENCLOSE V3S BY M4S {
+	COMMENT = "7.82: Minimum enclosure of Via3 within Metal 3 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.82/7.83 */
+ENCLOSE V3S BY M4S {
+	COMMENT = " 7.83/7.84: Minimum enclosure of via3 within Metal 4 >= 0.01; Minimum end of Line enclosure of via3 within Metal 4 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+	 
+
+
+/* Rule 7.80 */
+ENCLOSE V4S BY M4S {
+	COMMENT = "7.80: Minimum enclosure of Via4 within Metal 4 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.80/7.81 */
+ENCLOSE V4S BY M4S {
+	COMMENT = " 7.80/7.81: Minimum enclosure of via4 within Metal 4 >= 0.01; Minimum end of Line enclosure of via4 within Metal 4 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+/* Rule 7.82 */
+ENCLOSE V4S BY M5S {
+	COMMENT = "7.82: Minimum enclosure of Via4 within Metal 5 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.82/7.84 */
+ENCLOSE V4S BY M5S {
+	COMMENT = " 7.84/7.84: Minimum enclosure of via4 within Metal 5 >= 0.01; Minimum end of Line enclosure of via4 within Metal 5 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+	 
+
+
+
+/* Rule 7.80 */
+ENCLOSE V5S BY M5S {
+	COMMENT = "7.80: Minimum enclosure of Via5 within Metal 5 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.80/7.81 */
+ENCLOSE V5S BY M5S {
+	COMMENT = " 7.80/7.81: Minimum enclosure of via5 within Metal 5 >= 0.01; Minimum end of Line enclosure of via5 within Metal 5 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+/* Rule 7.82 */
+ENCLOSE V5S BY M6S {
+	COMMENT = "7.82: Minimum enclosure of Via5 within Metal 6 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.82/7.84 */
+ENCLOSE V5S BY M6S {
+	COMMENT = " 7.84/7.84: Minimum enclosure of via5 within Metal 6 >= 0.01; Minimum end of Line enclosure of via5 within Metal 6 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+	 
+
+
+
+/* Rule 7.80 */
+ENCLOSE V6S BY M6S {
+	COMMENT = "7.80: Minimum enclosure of Via6 within Metal 6 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.80/7.81 */
+ENCLOSE V6S BY M6S {
+	COMMENT = " 7.80/7.81: Minimum enclosure of via6 within Metal 6 >= 0.01; Minimum end of Line enclosure of via6 within Metal 6 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+/* Rule 7.82 */
+ENCLOSE V6S BY M7S {
+	COMMENT = "7.82: Minimum enclosure of Via6 within Metal 7 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.82/7.84 */
+ENCLOSE V6S BY M7S {
+	COMMENT = " 7.84/7.84: Minimum enclosure of via6 within Metal 7 >= 0.01; Minimum end of Line enclosure of via6 within Metal 7 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+	 
+
+
+
+
+/* Rule 7.80 */
+ENCLOSE V7S BY M7S {
+	COMMENT = "7.80: Minimum enclosure of Via7 within Metal 7 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.80/7.81 */
+ENCLOSE V7S BY M7S {
+	COMMENT = " 7.80/7.81: Minimum enclosure of via7 within Metal 7 >= 0.01; Minimum end of Line enclosure of via7 within Metal 7 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+/* Rule 7.82 */
+ENCLOSE V7S BY M8S {
+	COMMENT = "7.82: Minimum enclosure of Via7 within Metal 8 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.82/7.84 */
+ENCLOSE V7S BY M8S {
+	COMMENT = " 7.84/7.84: Minimum enclosure of via7 within Metal 8 >= 0.01; Minimum end of Line enclosure of via7 within Metal 8 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+	 
+
+
+
+/* Rule 7.80 */
+ENCLOSE V8S BY M8S {
+	COMMENT = "7.80: Minimum enclosure of Via8 within Metal 8 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.80/7.81 */
+ENCLOSE V8S BY M8S {
+	COMMENT = " 7.80/7.81: Minimum enclosure of via8 within Metal 8 >= 0.01; Minimum end of Line enclosure of via8 within Metal 8 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+/* Rule 7.82 */
+ENCLOSE V8S BY M9S {
+	COMMENT = "7.82: Minimum enclosure of Via8 within Metal 9 >= 0.01"
+	SPACING < 0.01
+        OVERLAP
+        TOUCH
+	} (102)
+/* Rule 7.82/7.84 */
+ENCLOSE V8S BY M9S {
+	COMMENT = " 7.84/7.84: Minimum enclosure of via8 within Metal 9 >= 0.01; Minimum end of Line enclosure of via8 within Metal 9 >= 0.04"
+	RULE = [SPACING < 0.04 ADJ_SPACING < 0.04 VIOLATIONS >= 2 ] 
+	} (102)
+
+	 
+
+
+
+
+
+
+
+	 
+/* Rule 7.84 */
+EXTERNAL SAB POLS {
+	COMMENT = "7.84: Minimum spacing from RPOLY to Polysilicon >= 0.22"	
+	SPACING < 0.22
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.85 */
+ENCLOSE POLS BY SAB {
+	COMMENT = "7.85: Minimum enclosure of Polysilicon within RPOLY >= 0.22"	
+	SPACING < 0.22
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.86 */
+EXTERNAL CONTS SAB {
+	COMMENT = "7.86: Minimum spacing of Contact to RPOLY >= 0.22"	
+	SPACING < 0.22
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.87 */
+EXTERNAL SAB DIFN {
+	COMMENT = "7.87: Minimum spacing from RPOLY to Diffusion >= 0.22"	
+	SPACING < 0.22
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.88 */
+ENCLOSE DIFN BY SAB {
+	COMMENT = "7.88: Minimum enclosure of Diffusion within RPOLY >= 0.22"	
+	SPACING < 0.22
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.89/1.25 DAC change from 0.13 to 0.02*/
+EXTERNAL PPS DIFN {
+	COMMENT = "7.89/1.25: Minimum spacing of P+ Material to Diffusion >= 0.02"	
+	SPACING < 0.02
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+BOOLEAN all_ndiff NOT welltie TEMP = all_nactive 
+BOOLEAN all_pdiff NOT subtie TEMP = all_pactive 
+
+/* Rule 7.90 */
+ENCLOSE  all_nactive BY PPS {
+	COMMENT = "7.90: Minimum enclosure of Diffusion within P+ Material >= 0.13"	
+	SPACING < 0.13
+	TOUCH
+	NON_PARALLEL
+	} (102)
+/* Rule 1.896 */
+ENCLOSE subtie BY PPS {
+	COMMENT = "1.896: Minimum enclosure of Diffusion within P+ Material >= 0.02"	
+	SPACING < 0.02
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.91/1.26 DAC change from 0.13 to 0.02*/
+EXTERNAL NPS DIFN {
+	COMMENT = "7.91/1.26: Minimum spacing of N+ Material to Diffusion >= 0.02"	
+	SPACING < 0.02
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.92 */
+ENCLOSE all_pactive BY NPS {
+	COMMENT = "7.92: Minimum enclosure of Diffusion within N+ Material >= 0.13"	
+	SPACING < 0.13
+	TOUCH
+	NON_PARALLEL
+	} (102)
+
+/* Rule 7.96 */
+SIZE V1S   { 
+  	OVER_UNDER = 0.18 / 2    } TEMP=V1S_Merge /*  space <= 0.18 um treated as array */
+SIZE V2S   { 
+  	OVER_UNDER = 0.18 / 2    } TEMP=V2S_Merge /*  space <= 0.18 um treated as array */
+SIZE V3S   { 
+  	OVER_UNDER = 0.18 / 2    } TEMP=V3S_Merge /*  space <= 0.18 um treated as array */
+SIZE V4S   { 
+  	OVER_UNDER = 0.18 / 2    } TEMP=V4S_Merge /*  space <= 0.18 um treated as array */
+SIZE V5S   { 
+  	OVER_UNDER = 0.18 / 2    } TEMP=V5S_Merge /*  space <= 0.18 um treated as array */
+SIZE V6S   { 
+  	OVER_UNDER = 0.18 / 2    } TEMP=V6S_Merge /*  space <= 0.18 um treated as array */
+SIZE V7S   { 
+  	OVER_UNDER = 0.18 / 2    } TEMP=V7S_Merge /*  space <= 0.18 um treated as array */
+SIZE V8S   { 
+  	OVER_UNDER = 0.18 / 2    } TEMP=V8S_Merge /*  space <= 0.18 um treated as array */
+
+	
+SIZE V1S_Merge   { 
+  	UNDER_OVER = ( ( 3 - 1 ) * 0.13 + ( 3 - 2 ) * 0.18 ) / 2
+	LEVEL_NON_ORTHOGONAL = TRUE   } TEMP=V1S_MinArray
+SIZE V2S_Merge   { 
+  	UNDER_OVER = ( ( 3 - 1 ) * 0.13 + ( 3 - 2 ) * 0.18 ) / 2
+	LEVEL_NON_ORTHOGONAL = TRUE   } TEMP=V2S_MinArray
+SIZE V3S_Merge   { 
+  	UNDER_OVER = ( ( 3 - 1 ) * 0.13 + ( 3 - 2 ) * 0.18 ) / 2
+	LEVEL_NON_ORTHOGONAL = TRUE   } TEMP=V3S_MinArray
+SIZE V4S_Merge   { 
+  	UNDER_OVER = ( ( 3 - 1 ) * 0.13 + ( 3 - 2 ) * 0.18 ) / 2
+	LEVEL_NON_ORTHOGONAL = TRUE   } TEMP=V4S_MinArray
+SIZE V5S_Merge   { 
+  	UNDER_OVER = ( ( 3 - 1 ) * 0.13 + ( 3 - 2 ) * 0.18 ) / 2
+	LEVEL_NON_ORTHOGONAL = TRUE   } TEMP=V5S_MinArray
+SIZE V6S_Merge   { 
+  	UNDER_OVER = ( ( 3 - 1 ) * 0.13 + ( 3 - 2 ) * 0.18 ) / 2
+	LEVEL_NON_ORTHOGONAL = TRUE   } TEMP=V6S_MinArray
+SIZE V7S_Merge   { 
+  	UNDER_OVER = ( ( 3 - 1 ) * 0.13 + ( 3 - 2 ) * 0.18 ) / 2
+	LEVEL_NON_ORTHOGONAL = TRUE   } TEMP=V7S_MinArray
+SIZE V8S_Merge   { 
+  	UNDER_OVER = ( ( 3 - 1 ) * 0.13 + ( 3 - 2 ) * 0.18 ) / 2
+	LEVEL_NON_ORTHOGONAL = TRUE   } TEMP=V8S_MinArray	
+	
+/*  get array larger than or equal to 3 x 3  */
+SELECT V1S_MinArray INTERACT V1S {  	RANGE = [3 * 3, 9999999999] } TEMP=V1S_COArray
+SELECT V2S_MinArray INTERACT V2S {  	RANGE = [3 * 3, 9999999999] } TEMP=V2S_COArray
+SELECT V3S_MinArray INTERACT V3S {  	RANGE = [3 * 3, 9999999999] } TEMP=V3S_COArray
+SELECT V4S_MinArray INTERACT V4S {  	RANGE = [3 * 3, 9999999999] } TEMP=V4S_COArray
+SELECT V5S_MinArray INTERACT V5S {  	RANGE = [3 * 3, 9999999999] } TEMP=V5S_COArray
+SELECT V6S_MinArray INTERACT V6S {  	RANGE = [3 * 3, 9999999999] } TEMP=V6S_COArray
+SELECT V7S_MinArray INTERACT V7S {  	RANGE = [3 * 3, 9999999999] } TEMP=V7S_COArray
+SELECT V8S_MinArray INTERACT V8S {  	RANGE = [3 * 3, 9999999999] } TEMP=V8S_COArray
+
+SELECT V1S INTERACT V1S_COArray {   } TEMP=V1SArray
+SELECT V2S INTERACT V2S_COArray {   } TEMP=V2SArray
+SELECT V3S INTERACT V3S_COArray {   } TEMP=V3SArray
+SELECT V4S INTERACT V4S_COArray {   } TEMP=V4SArray
+SELECT V5S INTERACT V5S_COArray {   } TEMP=V5SArray
+SELECT V6S INTERACT V6S_COArray {   } TEMP=V6SArray
+SELECT V7S INTERACT V7S_COArray {   } TEMP=V7SArray
+SELECT V8S INTERACT V8S_COArray {   } TEMP=V8SArray
+EXTERNAL V1SArray   {
+COMMENT = "7.96 Spacing between via1s when there is an array of vias: 3 x 3 (row and column >= 3) with space <=0.18 um] >= 0.17 "
+	SPACING < 0.17
+	CHECK_SAME_POLYGON = TRUE
+	NON_PARALLEL = TRUE
+ } (163)
+EXTERNAL V2SArray   {
+COMMENT = "7.96 Spacing between via2s when there is an array of vias:3 x 3 (row and column >= 3) with space <=0.18 um] >= 0.17 "
+	SPACING < 0.17
+	CHECK_SAME_POLYGON = TRUE
+	NON_PARALLEL = TRUE
+ } (163)
+EXTERNAL V3SArray   {
+COMMENT = "7.96 Spacing between via3s when there is an array of vias:3 x 3 (row and column >= 3) with space <=0.18 um] >= 0.17 "
+	SPACING < 0.17
+	CHECK_SAME_POLYGON = TRUE
+	NON_PARALLEL = TRUE
+ } (163)
+EXTERNAL V4SArray   {
+COMMENT = "7.96 Spacing between via4s when there is an array of vias:3 x 3 (row and column >= 3) with space <=0.18 um] >= 0.17 "
+	SPACING < 0.17
+	CHECK_SAME_POLYGON = TRUE
+	NON_PARALLEL = TRUE
+ } (163)
+EXTERNAL V5SArray   {
+COMMENT = "7.96 Spacing between via5s when there is an array of vias:3 x 3 (row and column >= 3) with space <=0.18 um] >= 0.17 "
+	SPACING < 0.17
+	CHECK_SAME_POLYGON = TRUE
+	NON_PARALLEL = TRUE
+ } (163)
+EXTERNAL V6SArray   {
+COMMENT = "7.96 Spacing between via6s when there is an array of vias:3 x 3 (row and column >= 3) with space <=0.18 um] >= 0.17 "
+	SPACING < 0.17
+	CHECK_SAME_POLYGON = TRUE
+	NON_PARALLEL = TRUE
+ } (163)
+
+EXTERNAL V7SArray   {
+COMMENT = "7.96 Spacing between via7s when there is an array of vias:3 x 3 (row and column >= 3) with space <=0.18 um] >= 0.17 "
+	SPACING < 0.17
+	CHECK_SAME_POLYGON = TRUE
+	NON_PARALLEL = TRUE
+ } (163)
+EXTERNAL V8SArray   {
+COMMENT = "7.96 Spacing between via8s when there is an array of vias:3 x 3 (row and column >= 3) with space <=0.18 um] >= 0.17 "
+	SPACING < 0.17
+	CHECK_SAME_POLYGON = TRUE
+	NON_PARALLEL = TRUE
+ } (163)
+
+
+ 
+/* Rule 7.97 */	
+SIZE CONTS   { 
+  	OVER_UNDER = 0.16 / 2    } TEMP=COS2_COMerge /*  space <= 0.16 um treated as array */
+/*  ( ( 3 - 1 ) * 0.09 + ( 3 - 2 ) * 0.16 ) / 2 ) = MinArray */
+SIZE COS2_COMerge   { 
+  	UNDER_OVER = ( ( 3 - 1 ) * 0.09 + ( 3 - 2 ) * 0.16 ) / 2
+	LEVEL_NON_ORTHOGONAL = TRUE   } TEMP=COS21_MinArray
+/*  get array larger than or equal to 3 x 3  */
+SELECT COS21_MinArray INTERACT CONTS {  	RANGE = [3 * 3, 9999999999] } TEMP=COS22_COArray
+SELECT CONTS INTERACT COS22_COArray {   } TEMP=COS23_COInArray
+EXTERNAL COS23_COInArray   {
+COMMENT = "7.97 Spacing between contacts when there is an array of vias:3 x 3 (row and column >= 3) with space <=0.16 um] >= 0.15 "
+	SPACING < 0.15
+	CHECK_SAME_POLYGON = TRUE
+	NON_PARALLEL = TRUE
+ } (163)
+/* Rule 7.98 */
+MULTI_RULE_ENCLOSE CONTS BY POLS {
+    OUTPUT_OPTIONS = { 
+COMMENT = "7.98  Enclosure by POLY [at least two opposite sides] >= 0.07 "
+ }
+    RULE = {
+        PRIMARY_ERRORS = {
+        	SPACING < 0.07
+			EDGE_45 < 0.001	
+        	NON_PARALLEL = TRUE
+        	SET_CORNERS_TO_SPACING = FALSE
+			ORTHO_SPACING = TRUE
+        	PARALLEL_POINT_PROJECTION = FALSE
+        }
+        ADJACENT_ERRORS = { 
+        	SPACING < 0.07
+			EDGE_45 < 0.001	
+        	NON_PARALLEL = TRUE
+        	SET_CORNERS_TO_SPACING = FALSE
+			ORTHO_SPACING = TRUE
+        	PARALLEL_POINT_PROJECTION = FALSE
+		}
+    }       
+} (163)
+/* Rule 1.897 */
+ENCLOSE welltie BY NPS {
+	COMMENT = "1.897: Minimum enclosure of Diffusion within N+ Material >= 0.02"	
+	SPACING < 0.02
+	NON_PARALLEL
+	} (102)
+
+
+/**********************/
+/*    DNWELL Rules    */
+/**********************/
+
+/* Rule 8.1 */
+INTERNAL DNWELL {
+	COMMENT = "8.1: Minimum width of DNWELL >= 2.80"
+	SPACING < 2.80
+	NON_PARALLEL
+	} (121)
+
+/* Rule 8.2 */
+INTERNAL DNWELL { 
+	SEGMENT > 0 
+	OUTPUT_EDGES = TRUE 
+	} 					TEMP = vect_dnw
+BOOLEAN vect_dnw NOT NWELL {
+   	COMMENT = "8.2: All DNWELL edges must be covered by NWELL"
+   	} (121)
+
+/* Rule 8.3 */
+EXTERNAL DNWELL {
+	COMMENT = "8.3: DNWELL spacing to DNWELL >= 4.40"
+	SPACING < 4.40
+	CHECK_SAME_POLYGON
+	TOUCH
+	NON_PARALLEL
+	} (121)
+
+/* Rule 8.4 */
+INSIDE_EDGE NWELL TO DNWELL {
+	COMMENT = "8.4: Overlap of the inner-edge of NWELL by DNWELL >= 0.8"
+	SPACING < 0.8
+	STAY_INSIDE_LAYER1 = FALSE
+	STAY_INSIDE_LAYER2 = FALSE
+	STAY_INSIDE_NEITHER = FALSE
+	} (121)
+	
+/* Rule 8.5 */
+ENCLOSE DNWELL BY NWELL {
+	COMMENT = "8.5: Extension of NWELL over DNWELL >= 1.40"
+	SPACING < 1.40
+	TOUCH = TRUE
+	} (121)
+
+/* Rule 8.6 */
+BOOLEAN all_pdiff AND DNWELL AND NWELL { }			TEMP = pplus_od
+ENCLOSE pplus_od BY DNWELL {
+	COMMENT = "8.6: Extension of DNWELL over (P+ diffusion inside DNWELL) >= 0.25" 
+	SPACING < 0.25
+	TOUCH = TRUE
+	} (121)
+
+/* Rule 8.7 */
+BOOLEAN (all_ndiff AND DNWELL) NOT NWELL { }		TEMP = nplus_od
+EXTERNAL nplus_od NWELL {
+	COMMENT = "8.7: (N+ diffusion inside DNWELL) spacing to NWELL >= 0.2" 
+	SPACING < 0.2
+	TOUCH
+	NON_PARALLEL
+	} (121)
+
+
+/*
+/* Rule 1.89/1.90/1.93/1.94 */
+MOSCHECK ndnwgate allndnw_srcdrn allndnw_srcdrn {
+       	COMMENT = "1.89/1.90/1.93/1.94: Minimum Width (of NDNW model Device) >= 0.12;Maximum Width (of NDNW model Device) <= 900; Minimum length (of NDNW model Device) >= 0.1;Maximum length (of NDNW model Device) <= 900"
+       	EQUATIONS {
+             IF(EV_WMIN < 0.12)  EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.1)   EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 900)   EV_ERROR_LMAX=EV_LMAX;
+             }
+	} (121)
+
+
+/* Rule 1.91/1.92/1.95/1.96 */
+MOSCHECK ndnw25gate allndnw25_srcdrn allndnw25_srcdrn {
+       	COMMENT = "8.9: Minimum Width (of NDNW25 model Device) >= 0.4;Maximum Width (of NDNW25 model Device) <= 900; Minimum length (of NDNW25 model Device) >= 0.28;Maximum length (of NDNW25 model Device) <= 900"
+       	EQUATIONS {
+             IF(EV_WMIN < 0.4)   EV_ERROR_WMIN=EV_WMIN;
+             IF(EV_WMAX > 900)   EV_ERROR_WMAX=EV_WMAX;
+             IF(EV_LMIN < 0.28)  EV_ERROR_LMIN=EV_LMIN;
+             IF(EV_LMAX > 900)   EV_ERROR_LMAX=EV_LMAX;
+             }
+	} (121)
+
+*/
+
+
+
+/*----------------------new mimcap rules---------------------*/
+BOOLEAN CAP_MIMS AND CTM_DMY TEMP = cap_mims_ctm
+BOOLEAN V6S AND CTM_DMY TEMP = v6s_ctm
+BOOLEAN V7S AND CTM_DMY TEMP = v7s_ctm
+BOOLEAN V8S AND CTM_DMY TEMP = v8s_ctm
+
+
+SELECT v6s_ctm OUTSIDE cap_mims_ctm {} TEMP = v6s_no_ctm
+SELECT v7s_ctm OUTSIDE cap_mims_ctm {} TEMP = v7s_no_ctm
+SELECT v8s_ctm OUTSIDE cap_mims_ctm {} TEMP = v8s_no_ctm
+
+
+/*Rule 4.17*/
+/*Rule 4.17*/
+
+IF (OPTION == 9) {
+EXTERNAL v8s_no_ctm cap_mims_ctm {
+	COMMENT = "4.17: Via8 to CTM Space > 0.3"
+	SPACING < 0.3
+	TOUCH = TRUE
+	NON_PARALLEL = TRUE
+	POINT_TOUCH = TRUE
+	OVERLAP = TRUE } (100)
+
+BOOLEAN cap_mims_ctm and V8S TEMP = v8s_onctm
+EXTERNAL v8s_onctm {
+	COMMENT = "4.17: Via8 Spacing on CTM plate > 0.3"
+	SPACING < 0.3
+	TOUCH = TRUE
+	NON_PARALLEL = TRUE
+	POINT_TOUCH = TRUE } (100)
+}
+
+BOOLEAN v8s_ctm AND MBCAP TEMP = v8s_cap_cbm
+SELECT v8s_cap_cbm OUTSIDE cap_mims_ctm TEMP = v8s_cap_cbm_noctm
+
+
+BOOLEAN v7s_ctm AND MBCAP TEMP = v7s_cap_cbm
+SELECT v7s_cap_cbm OUTSIDE cap_mims_ctm TEMP = v7s_cap_cbm_noctm
+
+
+BOOLEAN v6s_ctm AND MBCAP TEMP = v6s_cap_cbm
+SELECT v6s_cap_cbm OUTSIDE cap_mims_ctm TEMP = v6s_cap_cbm_noctm
+/*Rule 4.18*/
+
+IF (OPTION == 9) {
+EXTERNAL v8s_cap_cbm_noctm {
+	COMMENT = "4.18: Via8 Spacing on bottom plate > 0.8"
+	SPACING < 0.8
+	TOUCH = TRUE
+	NON_PARALLEL = TRUE
+	POINT_TOUCH = TRUE } (100)
+}
+/*Rule 4.14*/
+ENCLOSE MBCAP BY CTM_DMY { 
+        COMMENT = "4.14: Enclosure of MBCAP within CTM_DMY >= 0.1"
+        SPACING < 0.1
+        TOUCH
+        OVERLAP
+        } (100)
+
+/*----------------------medvtn rules ---------------------*/
+
+
+BOOLEAN POLS AND medvtn         { } TEMP=polymvn
+SELECT polymvn ENCLOSING allgate   { } TEMP=polymvngates
+
+
+SELECT polymvngates VERTEX {
+       RANGE=[4,4] } TEMP=polymvn4edge
+BOOLEAN polymvngates NOT polymvn4edge {
+       COMMENT = " A Bent Gate Poly is not allowed to put in medvtn region"
+       VERBOSE=TRUE } (121)
+
+
+/*----------------------medvtp rules ---------------------*/
+
+
+BOOLEAN POLS AND medvtp         { } TEMP=polymvp
+SELECT polymvp ENCLOSING allgate   { } TEMP=polymvpgates
+
+
+SELECT polymvpgates VERTEX {
+       RANGE=[4,4] } TEMP=polymvp4edge
+BOOLEAN polymvpgates NOT polymvp4edge {
+       COMMENT = " A Bent Gate Poly is not allowed to put in medvtp region"
+       VERBOSE=TRUE } (121)
+
+
+
+/* Rule 4.9 Capacitor Via Minimum Width */
+INTERNAL v8s_ctm {  
+	DIMENSION = [ 0.13, 0.13 ] } TEMP=VIA8W1_A 
+POLYGON_FEATURES v8s_ctm { 
+    EQUATIONS {
+	x1=EV_VXCOORD_IN[0];
+	y1=EV_VYCOORD_IN[0];
+	x2=EV_VXCOORD_IN[1];
+	y2=EV_VYCOORD_IN[1];
+	if( x1 != x2 && y1 != y2) {
+	    for( i = 0; i < EV_VNUM_IN; i++ ) {
+		EV_VXCOORD_OUT[i]=EV_VXCOORD_IN[i];
+		EV_VYCOORD_OUT[i]=EV_VYCOORD_IN[i];
+	    }
+	    EV_save_polygon();
+	}
+    }
+} TEMP=VIA8W1_A_1 
+BOOLEAN VIA8W1_A OR VIA8W1_A_1 { 
+COMMENT = "Rule 4.9 CapVia Width (square) (maximum = minimum) = 0.13"
+ } (163) 
+
+
+
+
+/* Rule 4.10 Top Metal width inside CTM */
+SELECT M9S INSIDE CAP_MIMS {} TEMP = cap_m9
+INTERNAL cap_m9 {
+	COMMENT = "4.10 : Minimum width of M9 in CTM  >= 0.33"
+	SPACING < 0.33
+	POINT_TOUCH
+	NON_PARALLEL
+	} (101)
+/* Rule 4.11 */
+EXTERNAL cap_m9 {
+	COMMENT = "4.11: Top metal spacing in CTM >= 0.15"
+	SPACING < 0.15
+	CHECK_SAME_POLYGON = TRUE
+	} (100)
+
+/* Rule 4.15 cbm enclose ctm */
+ENCLOSE CAP_MIMS BY MBCAP { 
+        COMMENT = "4.15/4.19: Enclosure of CTM by CBM >= 0.24"
+        SPACING < 0.24
+        TOUCH
+        OVERLAP
+        } (100)
+
+/* Rule 4.16 ctm spacing */
+EXTERNAL CAP_MIMS { 
+	COMMENT = "4.16: CTM Min Spacing >= 0.8"
+	SPACING < 0.8
+	} (100)
+
+
+/* Rule 2.301 Serp Res . Min Width */
+SELECT POLS INTERACT RTERMMARKER { } TEMP = serp_poly
+INTERNAL serp_poly {
+    COMMENT = " 2.301 Minimum width of serpentine resistor = 0.09 "
+    SPACING < 0.09
+    NON_PARALLEL=TRUE
+    FLAG_ADJACENT_EDGES=TRUE
+    POINT_TOUCH 
+    } (200)
+
+
+INTERNAL POLS {
+    DIMENSION
+    }	TEMP = bent_poly
+
+SELECT bent_poly INTERACT HRIMP { } TEMP = serp_hrpoly
+INTERNAL serp_hrpoly {
+    COMMENT = "2.301 Minimum width of serpentine resistor = 0.09"
+    SPACING < 0.09
+    NON_PARALLEL=TRUE
+    FLAG_ADJACENT_EDGES=TRUE
+    POINT_TOUCH 
+    } (200)
+
+
+
+
+
+/* Poly to Diff Spacing */
+
+BOOLEAN POLS AND DIFN {  } TEMP=GATE
+ENCLOSE POLS BY GATE {  
+	SPACING < 0.001
+	FLAG_ACUTE_ANGLE = FALSE
+	TOUCH = TRUE
+	OUTPUT_EDGES = TRUE } TEMP=GATE_W
+	
+INTERNAL GATE_W {
+        SEGMENT < 100 
+	OUTPUT_EDGES = TRUE
+	FLAG_ACUTE_ANGLE = FALSE } TEMP=S_GATE_W1
+
+SIZE S_GATE_W1 {  
+	VSIZE_INSIDE = 0.005
+	VSIZE_TAIL = 0.12
+	VSIZE_HEAD = 0.12
+	VSIZE_EDGE = TRUE } TEMP=EX_GATEW_EDGE 
+
+ENCLOSE EX_GATEW_EDGE BY POLS {  
+	SPACING < 0.001
+	FLAG_ACUTE_ANGLE = FALSE
+	TOUCH = TRUE
+	OUTPUT_EDGES = TRUE } TEMP=EX_GATEW_EDGE_T 
+
+	
+SELECT EX_GATEW_EDGE_T INTERACT ngate TEMP = EX_GATEW_EDGE_T_ngate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_ngate { 
+COMMENT = "1.12  Poly to Diffusion Spacing N mosfet >= 0.10 " 
+	SPACING < 0.10
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163)    
+
+
+SELECT EX_GATEW_EDGE_T INTERACT nlgate TEMP = EX_GATEW_EDGE_T_nlgate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_nlgate { 
+COMMENT = "1.12  Poly to Diffusion Spacing NL Mosfet >= 0.10 " 
+	SPACING < 0.10
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163)   
+
+
+SELECT EX_GATEW_EDGE_T INTERACT nmgate TEMP = EX_GATEW_EDGE_T_nmgate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_nmgate { 
+COMMENT = "1.12  Poly to Diffusion Spacing NM Mosfet >= 0.10 " 
+	SPACING < 0.10
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163)   
+
+SELECT EX_GATEW_EDGE_T INTERACT nangate TEMP = EX_GATEW_EDGE_T_nangate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_nangate { 
+COMMENT = "1.13  Poly to Diffusion Spacing NA Mosfet >= 0.15 " 
+	SPACING < 0.15
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163)   
+
+
+SELECT EX_GATEW_EDGE_T INTERACT n18gate TEMP = EX_GATEW_EDGE_T_n18gate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_n18gate { 
+COMMENT = "1.14  Poly to Diffusion Spacing N18 Mosfet >= 0.15 " 
+	SPACING < 0.15
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163)   
+
+
+SELECT EX_GATEW_EDGE_T INTERACT n25gate TEMP = EX_GATEW_EDGE_T_n25gate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_n25gate { 
+COMMENT = "1.14  Poly to Diffusion Spacing N25 & NM25 Mosfet >= 0.15 " 
+	SPACING < 0.15
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163) 
+
+
+SELECT EX_GATEW_EDGE_T INTERACT n33gate TEMP = EX_GATEW_EDGE_T_n33gate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_n33gate { 
+COMMENT = "1.14  Poly to Diffusion Spacing N33 Mosfet >= 0.15 " 
+	SPACING < 0.15
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163) 
+
+
+SELECT EX_GATEW_EDGE_T INTERACT na25ngate TEMP = EX_GATEW_EDGE_T_na25ngate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_na25ngate { 
+COMMENT = "1.15  Poly to Diffusion Spacing NA25 Mosfet >= 0.15 " 
+	SPACING < 0.15
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163) 
+
+
+SELECT EX_GATEW_EDGE_T INTERACT pgate TEMP = EX_GATEW_EDGE_T_pgate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_pgate { 
+COMMENT = "1.17  Poly to Diffusion Spacing P Mosfet >= 0.1 " 
+	SPACING < 0.1
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163) 
+
+
+
+SELECT EX_GATEW_EDGE_T INTERACT plgate TEMP = EX_GATEW_EDGE_T_plgate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_plgate { 
+COMMENT = "1.17  Poly to Diffusion Spacing PL Mosfet >= 0.10 " 
+	SPACING < 0.10
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163) 
+
+
+
+SELECT EX_GATEW_EDGE_T INTERACT p18gate TEMP = EX_GATEW_EDGE_T_p18gate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_p18gate { 
+COMMENT = "1.16  Poly to Diffusion Spacing P18 Mosfet >= 0.15 " 
+	SPACING < 0.15
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163) 
+
+SELECT EX_GATEW_EDGE_T INTERACT p25gate TEMP = EX_GATEW_EDGE_T_p25gate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_p25gate { 
+COMMENT = "1.16  Poly to Diffusion Spacing P25 Mosfet >= 0.15 " 
+	SPACING < 0.15
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163) 
+
+SELECT EX_GATEW_EDGE_T INTERACT p33gate TEMP = EX_GATEW_EDGE_T_p33gate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_p33gate { 
+COMMENT = "1.16  Poly to Diffusion Spacing P33 Mosfet >= 0.15 " 
+	SPACING < 0.15
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163) 
+
+SELECT EX_GATEW_EDGE_T INTERACT phgate TEMP = EX_GATEW_EDGE_T_phgate 
+EXTERNAL DIFN  EX_GATEW_EDGE_T_phgate { 
+COMMENT = "1.17.1  Poly to Diffusion Spacing PH Mosfet >= 0.11 " 
+	SPACING < 0.11
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163) 
+
+
+SELECT EX_GATEW_EDGE_T INTERACT pmgate TEMP = EX_GATEW_EDGE_T_pmgate
+EXTERNAL DIFN  EX_GATEW_EDGE_T_pmgate { 
+COMMENT = "1.17.1  Poly to Diffusion Spacing PM Mosfet >= 0.11 " 
+	SPACING < 0.11
+	SET_CORNERS_TO_SPACING = FALSE
+	PARALLEL_POINT_PROJECTION = FALSE
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+	POINT_TOUCH = FALSE
+ } (163) 
+
+
+
+/* RPOLY to SAB > 0.18  2.118 */
+SELECT NWELL INTERACT NWDMY {   } TEMP=RNWEL
+SELECT RNWEL INTERACT SAB {   } TEMP=NWRES 
+EXTERNAL NWRES  SAB { 
+COMMENT = "2.118  NWELL Space to RPO >= 0.18 " 
+	SPACING < 0.18
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+} (163)
+
+
+/* Nplus enclse Nwell > 0.6    2.119  */
+ENCLOSE NWRES BY diff_nwres { 
+COMMENT = "2.119 NW Enclosure by OD >= 0.6 " 
+	SPACING < 0.6
+	NON_PARALLEL = TRUE
+	SHADOW_OTHER_LAYER = TRUE
+	TOUCH = TRUE
+ } (163)    
+SELECT NWRES CUTTING diff_nwres { 
+COMMENT = "2.119 NW Enclosure by OD >= 0.6  "
+  } (163) 
+
+
+
+
+

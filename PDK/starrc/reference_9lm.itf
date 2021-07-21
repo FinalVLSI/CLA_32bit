@@ -1,0 +1,88 @@
+TECHNOLOGY=reference_90nm_9lm_typ_cbm
+
+$/**************************************************************************/
+$/*  Copyright (c), 2009-2010 Synopsys, Inc.  All rights reserved.         */
+$/*  This Techfile and the associated documentation are confidential       */
+$/*  and proprietary to Synopsys, Inc.                                     */
+$/*------------------------------------------------------------------------*/
+$/*  DISCLAIMER                                                            */
+$/*  The information contained herein is provided by Synopsys, Inc. on     */
+$/*  an "AS IS" basis without any warranty, and Synopsys has no obligation */
+$/*  to support or otherwise maintain the information.                     */
+$/*                                                                        */
+$/*  Synopsys, Inc. disclaims any representation that the information      */
+$/*  does not infringe any intellectual property rights or proprietary     */
+$/*  rights of any third parties.  There are no other warranties given by  */
+$/*  Synopsys, whether express, implied or statutory, including, without   */
+$/*  limitation, implied warranties of merchantability and fitness for a   */
+$/*  particular purpose.                                                   */
+$/*                                                                        */
+$/*  Synopsys, Inc. reserves the right to make changes to the information  */
+$/*  at any time and without notice.                                       */
+$/**************************************************************************/
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$	Change Log:
+$	
+$	19 Dec   07 - Added CBM 
+$		    - Updated M4 RPSQ
+$		    - Updated min spacing and min width rules
+$	25 April 05 - Added MIM_TOP plate, electrode plate
+$	05 April 05 - First Release
+$
+$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+
+DIELECTRIC SiN    { THICKNESS=0.33   MEASURED_FROM=TOP_OF_CHIP  SW_T=0.231  TW_T=0.33  ER=7.0 }
+DIELECTRIC TEOS   { THICKNESS=0.98   MEASURED_FROM=TOP_OF_CHIP  SW_T=0.616  TW_T=0.88  ER=3.81 }
+CONDUCTOR  M9  { THICKNESS=0.756  WMIN=0.15  SMIN=0.15  RPSQ=0.07 }
+
+DIELECTRIC diel9b { THICKNESS=0.202  ER=3.81 }
+CONDUCTOR  MIM_TOP    { THICKNESS=0.186  WMIN=1.0 SMIN=0.2 RPSQ=0.14 }
+DIELECTRIC diel9a { THICKNESS=0.388  ER=3.81 }
+CONDUCTOR  MIM_BOT  { THICKNESS=0.186  WMIN=1.0 SMIN=0.2 RPSQ=0.14 }
+CONDUCTOR  M8     { THICKNESS=0.186  WMIN=0.15 SMIN=0.15 RPSQ=0.14 }
+
+DIELECTRIC diel8a { THICKNESS=0.202  ER=3.91 }
+CONDUCTOR  M7     { THICKNESS=0.186  WMIN=0.15 SMIN=0.15 RPSQ=0.14 }
+
+DIELECTRIC diel7a { THICKNESS=0.202  ER=3.91 }
+CONDUCTOR  M6     { THICKNESS=0.186  WMIN=0.15 SMIN=0.15 RPSQ=0.14 }
+
+DIELECTRIC diel6a { THICKNESS=0.202  ER=3.91 }
+CONDUCTOR  M5     { THICKNESS=0.186  WMIN=0.15 SMIN=0.15 RPSQ=0.14 }
+
+DIELECTRIC diel5a { THICKNESS=0.202  ER=3.91 }
+CONDUCTOR  M4     { THICKNESS=0.186  WMIN=0.15 SMIN=0.15 RPSQ=0.14 }
+
+DIELECTRIC diel4a { THICKNESS=0.202  ER=3.91 }
+CONDUCTOR  M3     { THICKNESS=0.186  WMIN=0.15 SMIN=0.15 RPSQ=0.14 }
+
+DIELECTRIC diel3a { THICKNESS=0.202  ER=3.91 }
+CONDUCTOR  M2     { THICKNESS=0.186  WMIN=0.15 SMIN=0.15 RPSQ=0.14 }
+
+DIELECTRIC diel2a { THICKNESS=0.202  ER=3.91 }
+CONDUCTOR  M1     { THICKNESS=0.186  WMIN=0.1 SMIN=0.1 RPSQ=0.14 }
+
+DIELECTRIC diel1a  { THICKNESS=0.237 ER=4.7 }
+CONDUCTOR  POLY    { THICKNESS=0.18  WMIN=0.09 SMIN=0.09 RPSQ=9 }
+DIELECTRIC diel1b  { THICKNESS=0.023 ER=4.7 }
+CONDUCTOR  GATE    { IS_GATE THICKNESS=0.18 WMIN=0.09 SMIN=0.09 RPSQ=9 }
+DIELECTRIC STI_TOP { THICKNESS=0.2925 ER=4.5 }
+CONDUCTOR  ACTIVE  { IS_DIFF THICKNESS = 0.2885 WMIN=0.09 SMIN=0.09 RPSQ= 12 } 
+DIELECTRIC STI_BOT { THICKNESS=0.2925 ER=4.5 }
+
+VIA V8      { FROM=M8 TO=M9 RPV=2.0 AREA=0.0169 }
+VIA V7      { FROM=M7 TO=M8 RPV=2.0 AREA=0.0169 }
+VIA V6      { FROM=M6 TO=M7 RPV=2.0 AREA=0.0169 }
+VIA V5      { FROM=M5 TO=M6 RPV=2.0 AREA=0.0169 }
+VIA V4      { FROM=M4 TO=M5 RPV=2.0 AREA=0.0169 }
+VIA V3      { FROM=M3 TO=M4 RPV=2.0 AREA=0.0169 }
+VIA V2      { FROM=M2 TO=M3 RPV=2.0 AREA=0.0169 }
+VIA V1      { FROM=M1 TO=M2 RPV=2.0 AREA=0.0169 }
+VIA CS_GC   { FROM=POLY TO=M1 RPV=18.0 AREA=0.0081 }
+VIA CS_AA   { FROM=ACTIVE TO=M1 RPV=18.0 AREA=0.0081 }
+VIA CS_SCON { FROM=SUBSTRATE TO=ACTIVE RPV=0.00001 AREA=0.0081 }
+
+

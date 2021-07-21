@@ -1,0 +1,44 @@
+<netlister tool="auCdl" >
+<procedures>
+<procedure command="nl::spiceAllowNameMap" ID="0" />
+<procedure command="nl::cdlIsTextModule" ID="1" />
+<procedure command="nl::isModuleUpToDate" ID="2" />
+<procedure command="nl::saveModuleState" ID="3" />
+</procedures>
+<events>
+<event command="nl::netlistMainHandler" ID="0" />
+<event command="nl::cdlNetlistBegin" ID="1" />
+<event command="nl::netlistBodyHandler" ID="2" />
+<event command="nl::cdlTextModule" ID="3" />
+<event command="nl::moduleHandler" ID="4" />
+<event command="nl::modulePreprocessHandler" ID="5" />
+<event command="nl::spiceModuleHeader" ID="6" />
+<event command="nl::moduleBodyHandler" ID="7" />
+<event command="nl::nlPrintCdlInstance" ID="8" />
+<event command="nl::instHeaderHandler" ID="9" />
+<event command="nl::cdlModuleFooter" ID="10" />
+<event command="nl::cdlNetlistEnd" ID="11" />
+</events>
+<attributes>
+<attribute nameMapProc="nl::internal::createCaseSensitiveNameMap" />
+<attribute supportsFeedthroughs="0" />
+<attribute collectGlobals="1" />
+<attribute instOrder="0" />
+<attribute scalarizeTerminals="1" />
+<attribute scalarizeInsts="1" />
+<attribute instHeaderOrder="0" />
+<attribute commentPrefix="*" />
+<attribute indentDepth="2" />
+<attribute lineMaxLength="80" />
+<attribute lineWrapSuffix="" />
+</attributes>
+<validationProcs/>
+<expressionsMapping>
+<valueProc name="nl::hspiceValue" />
+<designVarProc name="" />
+<unaryOperatorProc name="nl::hspiceUnaryOperator" />
+<binaryOperatorProc name="" />
+<ternaryOperatorProc name="nl::hspiceTernaryOperator" />
+<functionProc name="" />
+</expressionsMapping>
+</netlister>
